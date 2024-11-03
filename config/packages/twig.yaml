@@ -3,7 +3,7 @@ twig:
     paths:
         'assets/images': images
     form_themes:
-        # Add here form themes
+        - '@IceVichUploader/Form/fields.html.twig'
     globals:
         contact_email: '%contact_email%'
         site_name: '%site_name%'
