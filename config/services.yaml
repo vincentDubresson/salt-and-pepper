@@ -10,6 +10,9 @@ parameters:
     developer_email: '%env(CONTACT_EMAIL)%'
     site_name: 'Salt and Pepper'
 
+imports:
+    - { resource: '../vendor/ice/vich-uploader-bundle/Resources/config/config.yml' }
+
 services:
     # default configuration for services in *this* file
     _defaults:

@@ -6,12 +6,13 @@
     "require": {
         "php": ">=8.2",
         "ext-ctype": "*",
-        "ext-iconv": "*",
         "ext-dom": "*",
+        "ext-iconv": "*",
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.13",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.3",
+        "ice/vich-uploader-bundle": "^7.2",
         "nelmio/security-bundle": "^3.4",
         "symfony/apache-pack": "^1.0",
         "symfony/console": "6.4.*",
@@ -20,8 +21,11 @@
         "symfony/framework-bundle": "6.4.*",
         "symfony/mailer": "6.4.*",
         "symfony/monolog-bundle": "^3.10",
+        "symfony/rate-limiter": "6.4.*",
         "symfony/runtime": "6.4.*",
+        "symfony/security-bundle": "6.4.*",
         "symfony/twig-bundle": "6.4.*",
+        "symfony/validator": "6.4.*",
         "symfony/yaml": "6.4.*",
         "twig/cssinliner-extra": "^3.13",
         "twig/extra-bundle": "^3.13",
@@ -88,5 +92,11 @@
             "allow-contrib": false,
             "require": "6.4.*"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://satis.ice-dev.com:446/" 
+        }
+    ]
 }
