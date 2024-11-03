@@ -15,7 +15,11 @@
         "symfony/mailer": "6.4.*",
         "symfony/monolog-bundle": "^3.10",
         "symfony/runtime": "6.4.*",
-        "symfony/yaml": "6.4.*"
+        "symfony/twig-bundle": "6.4.*",
+        "symfony/yaml": "6.4.*",
+        "twig/cssinliner-extra": "^3.13",
+        "twig/extra-bundle": "^3.13",
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "symfony/debug-bundle": "6.4.*",
