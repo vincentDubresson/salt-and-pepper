@@ -1,0 +1,38 @@
+monolog:
+    channels:
+        - deprecation # Deprecations are logged in the dedicated "deprecation" channel when it exists
+
+    handlers:
+        main:
+            type: fingers_crossed
+            action_level: error
+            handler: grouped
+            excluded_http_codes: [403, 404, 405]
+            buffer_size: 50 # How many messages should be saved? Prevent memory leaks
+        grouped:
+            type: group
+            members:
+                - rotated
+                - deduplicated
+        rotated:
+            type: rotating_file
+            path: '%kernel.logs_dir%/%kernel.environment%.log'
+            level: error
+            max_files: 30
+            date_format: 'Y-m'
+            channels: ['!event']
+        deduplicated:
+            type: deduplication
+            handler: mailed
+        mailed:
+            type: symfony_mailer
+            from_email: '%contact_email%'
+            to_email: '%developer_email%'
+            level: error
+            subject: Erreur critique
+            formatter: monolog.formatter.html
+            content_type: text/html
+        console:
+            type: console
+            process_psr_3_messages: false
+            channels: ['!event', '!doctrine']
