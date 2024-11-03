@@ -1,0 +1,63 @@
+nelmio_security:
+    # prevents framing of the entire site
+    clickjacking:
+        paths:
+            '^/.*': DENY
+
+    # prevents redirections outside the website's domain
+    external_redirects:
+        abort: true
+        log: true
+
+    # prevents inline scripts, unsafe eval, external scripts/images/styles/frames, etc
+    csp:
+        hosts: []
+        content_types: []
+        enforce:
+            level1_fallback: false
+            browser_adaptive:
+                enabled: false
+            # CSP headers in alphabetical order.
+            base-uri:
+                - 'self'
+            block-all-mixed-content: true # defaults to false, blocks HTTP content over HTTPS transport
+            connect-src:
+                - 'self'
+            default-src:
+                - 'none'
+            font-src:
+                - 'self'
+            form-action:
+                - 'self'
+            frame-ancestors:
+                - 'none'
+            img-src:
+                - 'self'
+            object-src:
+                - 'none'
+            script-src:
+                - 'self'
+            style-src:
+                - 'self'
+                - 'unsafe-inline'
+            upgrade-insecure-requests: true # defaults to false, upgrades HTTP requests to HTTPS transport
+
+    # disables content type sniffing for script resources
+    content_type:
+        nosniff: true
+
+    # forces Microsoft's XSS-Protection with
+    # its block mode
+    xss_protection:
+        enabled: true
+        mode_block: true
+
+    # Send a full URL in the `Referer` header when performing a same-origin request,
+    # only send the origin of the document to secure destination (HTTPS->HTTPS),
+    # and send no header to a less secure destination (HTTPS->HTTP).
+    # If `strict-origin-when-cross-origin` is not supported, use `no-referrer` policy,
+    # no referrer information is sent along with requests.
+    referrer_policy:
+        enabled: true
+        policies:
+            - 'strict-origin-when-cross-origin'
