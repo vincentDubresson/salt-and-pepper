@@ -40,17 +40,11 @@ nelmio_security:
             style-src:
                 - 'self'
                 - 'unsafe-inline'
-            upgrade-insecure-requests: true # defaults to false, upgrades HTTP requests to HTTPS transport
+            upgrade-insecure-requests: false # defaults to false, upgrades HTTP requests to HTTPS transport
 
     # disables content type sniffing for script resources
     content_type:
         nosniff: true
-
-    # forces Microsoft's XSS-Protection with
-    # its block mode
-    xss_protection:
-        enabled: true
-        mode_block: true
 
     # Send a full URL in the `Referer` header when performing a same-origin request,
     # only send the origin of the document to secure destination (HTTPS->HTTPS),
