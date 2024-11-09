@@ -18,14 +18,13 @@ security:
             provider: app_user_provider
             custom_authenticators:
                 - App\Security\LoginFormAuthenticator
-#            form_login:
-#                login_path: app_security_login
-#                check_path: app_security_login
-#                enable_csrf: true
             logout:
                 path: app_logout
                 # where to redirect after logout
                 # target: app_login
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
         secured_area:
             form_login:
                 enable_csrf: true
