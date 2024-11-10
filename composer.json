@@ -45,6 +45,7 @@
         "phpstan/phpstan": "^1.12",
         "phpstan/phpstan-doctrine": "^1.5",
         "phpstan/phpstan-symfony": "^1.4",
+        "povils/phpmnd": "^3.5",
         "symfony/debug-bundle": "6.4.*",
         "symfony/maker-bundle": "^1.61",
         "symfony/stopwatch": "6.4.*",
