@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\ChangePasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -27,6 +28,7 @@ class ResetPasswordController extends AbstractController
     public function __construct(
         private readonly ResetPasswordHelperInterface $resetPasswordHelper,
         private readonly EntityManagerInterface $entityManager,
+        private readonly LoggerInterface $passwordLogger,
     ) {
     }
 
@@ -42,6 +44,14 @@ class ResetPasswordController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var string $email */
             $email = $form->get('email')->getData();
+            $ip = $request->getClientIp();
+            $userAgent = $request->headers->get('User-Agent');
+
+            $this->passwordLogger->info('Authentication attempt', [
+                'ip' => $ip,
+                'email' => $email,
+                'user_agent' => $userAgent,
+            ]);
 
             return $this->processSendingPasswordResetEmail($email, $mailer
             );
