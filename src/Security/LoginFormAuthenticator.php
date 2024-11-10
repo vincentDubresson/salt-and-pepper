@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Repository\UserRepository;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,13 +27,11 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator implements A
 
     public const LOGIN_ROUTE = 'app_security_login';
 
-    private UserRepository $userRepository;
-    private RouterInterface $router;
-
-    public function __construct(UserRepository $userRepository, RouterInterface $router)
-    {
-        $this->userRepository = $userRepository;
-        $this->router = $router;
+    public function __construct(
+        private readonly UserRepository $userRepository,
+        private readonly RouterInterface $router,
+        private readonly LoggerInterface $loginLogger,
+    ) {
     }
 
     public function supports(Request $request): bool
@@ -43,14 +42,21 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator implements A
 
     public function authenticate(Request $request): Passport
     {
-        // dd($request);
         $email = $request->request->get('_username');
         $password = $request->request->get('_password');
         $csrfToken = $request->request->get('_csrf_token');
+        $ip = $request->getClientIp();
+        $userAgent = $request->headers->get('User-Agent');
 
         if (!is_string($email) || !is_string($password) || !is_string($csrfToken)) {
             throw new UserNotFoundException();
         }
+
+        $this->loginLogger->info('Authentication attempt', [
+            'ip' => $ip,
+            'email' => $email,
+            'user_agent' => $userAgent,
+        ]);
 
         return new Passport(
             new UserBadge($email, function ($userIdentifier) {

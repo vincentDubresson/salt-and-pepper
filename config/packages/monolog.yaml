@@ -1,6 +1,8 @@
 monolog:
     channels:
         - deprecation # Deprecations are logged in the dedicated "deprecation" channel when it exists
+        - login
+        - password
 
     handlers:
         main:
@@ -36,3 +38,17 @@ monolog:
             type: console
             process_psr_3_messages: false
             channels: ['!event', '!doctrine']
+        rotating_file_login:
+            type: rotating_file
+            path: '%kernel.logs_dir%/login/login_attempts.log'
+            level: info
+            channels: [ 'login' ]
+            max_files: 30
+            date_format: 'Y-m'
+        rotating_file_password_request:
+            type: rotating_file
+            path: '%kernel.logs_dir%/password_request/password_request_attempts.log'
+            level: info
+            channels: [ 'password' ]
+            max_files: 30
+            date_format: 'Y-m'
