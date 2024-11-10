@@ -16,4 +16,5 @@ return [
     Liip\ImagineBundle\LiipImagineBundle::class => ['all' => true],
     Ice\VichUploaderBundle\IceVichUploaderBundle::class => ['all' => true],
     SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle::class => ['all' => true],
+    Symfonycasts\TailwindBundle\SymfonycastsTailwindBundle::class => ['all' => true],
 ];

@@ -269,6 +269,9 @@
             "config/packages/reset_password.yaml"
         ]
     },
+    "symfonycasts/tailwind-bundle": {
+        "version": "v0.6.0"
+    },
     "twig/extra-bundle": {
         "version": "v3.13.0"
     },
