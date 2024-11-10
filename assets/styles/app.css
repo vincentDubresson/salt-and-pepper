@@ -3,7 +3,3 @@
 @tailwind components;
 @tailwind utilities;
 /* stylelint-enable */
-
-body {
-    background-color: skyblue;
-}

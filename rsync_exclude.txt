@@ -32,6 +32,7 @@ yarn-error.log
 /public/media
 /src/Controller/TestController.php
 /src/TwigCs
+/ssl
 /tests
 /tmp/phpstan
 /var/*
