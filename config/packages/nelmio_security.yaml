@@ -37,6 +37,8 @@ nelmio_security:
                 - 'none'
             script-src:
                 - 'self'
+                - 'unsafe-inline'
+                - 'strict-dynamic'
             style-src:
                 - 'self'
                 - 'unsafe-inline'
