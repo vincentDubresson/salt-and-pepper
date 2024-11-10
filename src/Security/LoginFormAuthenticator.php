@@ -38,13 +38,12 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator implements A
     public function supports(Request $request): bool
     {
         return self::LOGIN_ROUTE === $request->attributes->get('_route')
-            && $request->isMethod('POST')
-            ;
+            && $request->isMethod('POST');
     }
 
     public function authenticate(Request $request): Passport
     {
-        //dd($request);
+        // dd($request);
         $email = $request->request->get('_username');
         $password = $request->request->get('_password');
         $csrfToken = $request->request->get('_csrf_token');
