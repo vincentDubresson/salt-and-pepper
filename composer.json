@@ -91,6 +91,33 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "security_checker": [
+            "./bin/local-php-security-checker"
+        ],
+        "yamllint": [
+            "php bin/console lint:yaml config"
+        ],
+        "twiglint": [
+            "php bin/console lint:twig templates"
+        ],
+        "twigcs": [
+            "vendor/bin/twigcs templates --ansi"
+        ],
+        "phpstan": [
+            "vendor/bin/phpstan analyse src -vvv --no-progress --ansi --level=9"
+        ],
+        "phpmnd": [
+            "vendor/bin/phpmnd src"
+        ],
+        "csfixer:dryrun": [
+            "vendor/bin/php-cs-fixer fix --using-cache=no -vvv --diff --ansi --dry-run"
+        ],
+        "csfixer:fix": [
+            "vendor/bin/php-cs-fixer fix --using-cache=no -vvv --diff --ansi"
+        ],
+        "execute:ci": [
+            "./executeCiTasks.sh"
         ]
     },
     "conflict": {

@@ -2,6 +2,7 @@
 .buildpath
 .DS_Store
 .git
+.github
 .gitignore
 .gitkeep
 .htpasswd
@@ -9,6 +10,7 @@
 .project
 .settings
 .travis.yml
+executeCiTasks.sh
 nbproject
 npm-debug.log
 Thumbs.db
