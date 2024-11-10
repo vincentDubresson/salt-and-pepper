@@ -12,6 +12,7 @@ phpstan.neon
 /public/bundles/
 /public/media/cache/
 /assets/vendor/
+ssl
 /tmp/phpstan/
 /var/
 /vendor/
