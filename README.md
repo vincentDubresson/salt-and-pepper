@@ -2,8 +2,9 @@
 
 ## Builds
 
-- SASS
+- Run Tailwind builder:
 
 ```bash
-php bin/console sass:build --watch
+bin/console tailwind:build --watch
 ```
+
