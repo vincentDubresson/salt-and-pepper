@@ -1,31 +1,17 @@
 .git
 .idea
-
-###> symfony/framework-bundle ###
+.php-cs-fixer.php
+.php-cs-fixer.cache
+phpstan.neon
 /.env.local
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
+/node_modules/
+/public/assets/
 /public/bundles/
+/public/media/cache/
+/assets/vendor/
 /tmp/phpstan/
 /var/
 /vendor/
-###< symfony/framework-bundle ###
-
-###> phpstan/phpstan ###
-phpstan.neon
-###< phpstan/phpstan ###
-
-###> friendsofphp/php-cs-fixer ###
-/.php-cs-fixer.php
-/.php-cs-fixer.cache
-###< friendsofphp/php-cs-fixer ###
-
-###> liip/imagine-bundle ###
-/public/media/cache/
-###< liip/imagine-bundle ###
-
-###> symfony/asset-mapper ###
-/public/assets/
-/assets/vendor/
-###< symfony/asset-mapper ###
