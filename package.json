@@ -1,0 +1,20 @@
+{
+  "name": "Salt and Pepper",
+  "version": "1.0.0",
+  "description": "Lint",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.14.0",
+    "eslint": "^9.14.0",
+    "eslint-plugin-dollar-sign": "^1.0.2",
+    "globals": "^15.12.0"
+  }
+}
