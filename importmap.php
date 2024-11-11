@@ -16,4 +16,8 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
+    'sonata' => [
+        'path' => './assets/sonata.js',
+        'entrypoint' => true,
+    ],
 ];

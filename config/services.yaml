@@ -8,7 +8,9 @@ parameters:
     .container.dumper.inline_factories: true
     contact_email: '%env(CONTACT_EMAIL)%'
     developer_email: '%env(CONTACT_EMAIL)%'
-    site_name: 'Salt and Pepper'
+    site_name: '%env(SITE_NAME)%'
+    site_url: '%env(SITE_URL)%'
+    site_logo_path: '%env(SITE_LOGO_PATH)%'
 
 imports:
     - { resource: '../vendor/ice/vich-uploader-bundle/Resources/config/config.yml' }
@@ -28,5 +30,17 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\EventListener\UserActivationListener:
+        arguments:
+            $tokenStorage: '@security.token_storage'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 0 }
+
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    admin.user:
+        class: App\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\User, manager_type: orm, label: common.users }
+

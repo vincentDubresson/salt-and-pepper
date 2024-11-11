@@ -40,6 +40,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
+    private string $roleAsString = 'Utilisateur';
+
     /**
      * @var string The hashed password
      */
@@ -52,9 +54,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     ])]
     protected ?string $rawPassword = null;
 
+    #[ORM\Column(type: Types::BOOLEAN, nullable: false)]
+    private bool $enabled = false;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function __toString(): string
+    {
+        // TODO: Implement __toString() method.
+        return $this->email;
     }
 
     public function getEmail(): ?string
@@ -103,6 +114,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function setRoleAsString(string $roleAsString): static
+    {
+        $this->roleAsString = $roleAsString;
+
+        return $this;
+    }
+
+    public function getRoleAsString(): ?string
+    {
+        return in_array('ROLE_SONATA_ADMIN', $this->roles) ? 'Administrateur' : $this->roleAsString;
+    }
+
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -137,5 +160,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): static
+    {
+        $this->enabled = $enabled;
+
+        return $this;
     }
 }
