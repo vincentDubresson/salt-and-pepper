@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20241109163110 extends AbstractMigration
+final class Version20241111195955 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,12 @@ final class Version20241109163110 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('INSERT INTO `user` (`id`, `email`, `roles`, `password`, `created_at`, `updated_at`) VALUES (1, "vincent.dubresson@live.fr", \'["ROLE_SONATA_ADMIN", "ROLE_ADMIN", "ROLE_USER"]\', "$2y$13$gnGS9J6O38UJncLZ5/3K3OuZgpKc/aw2E9s59r8meedvgR9GidNCW", NOW(), NOW())');
+        $this->addSql('ALTER TABLE user ADD enabled TINYINT(1) NOT NULL DEFAULT 0 AFTER `password`');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-
+        $this->addSql('ALTER TABLE `user` DROP enabled');
     }
 }

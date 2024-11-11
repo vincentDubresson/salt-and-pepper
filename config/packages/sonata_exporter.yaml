@@ -1,0 +1,8 @@
+sonata_exporter:
+  exporter:
+    default_writers:
+      - csv
+  writers:
+    csv:
+      delimiter: ';'
+      with_bom: true

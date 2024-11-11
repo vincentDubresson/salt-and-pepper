@@ -60,8 +60,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator implements A
 
         return new Passport(
             new UserBadge($email, function ($userIdentifier) {
-                // Todo : Ajouter ici les vérifications complémentaires sur les utilisateurs (actif...)
-                $user = $this->userRepository->findOneBy(['email' => $userIdentifier]);
+                // Todo : Ajouter ici les vérifications complémentaires sur les utilisateurs si besoin
+                $user = $this->userRepository->findOneBy(['email' => $userIdentifier, 'enabled' => true]);
 
                 if (!$user) {
                     throw new UserNotFoundException();
@@ -87,7 +87,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator implements A
         }
 
         // Todo : Changer la redirection une fois que la page sera développée.
-        return new RedirectResponse($this->router->generate('app_security_login'));
+        return new RedirectResponse($this->router->generate('app_home'));
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response

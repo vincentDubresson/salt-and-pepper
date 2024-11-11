@@ -1,0 +1,38 @@
+sonata_admin:
+    persist_filters: true
+    title: '%site_name%'
+    title_logo: '%site_logo_path%'
+    search: false
+    show_mosaic_button: false
+    # À adapter selon vos besoins
+    security:
+        handler: sonata.admin.security.handler.role
+        # Define the name of the admin role, needed to be able to see the user block.
+        role_admin: ROLE_SONATA_ADMIN
+    dashboard:
+        blocks:
+            # Ici, affiche la liste des admins sur le dashboard. Supprimer si vous souhaitez un écran vide.
+            - { type: sonata.admin.block.admin_list, position: left }
+
+        groups:
+            common.users:
+                items:
+                    - admin.user
+        #     common.lab_manager:
+        #        items:
+        #            - admin.lab_manager
+    options:
+        # Sort the menu items alphabetically.
+        sort_admins: false
+        html5_validate: false
+    templates:
+        layout: 'base_sonata.html.twig'
+        user_block: 'admin/includes/user_block.html.twig'
+    assets:
+        extra_stylesheets:
+            - 'bundles/icevichuploader/css/vich.css'
+sonata_block:
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]

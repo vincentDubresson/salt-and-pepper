@@ -1,0 +1,11 @@
+common:
+  actions: Actions
+  infos_1: Informations principales
+  users: Utilisateurs
+  email: E-mail
+  role: Rôle
+  created_at: Créé le
+  updated_at: Modifié le
+
+'User List': Utilisateurs
+'User Create': Création
