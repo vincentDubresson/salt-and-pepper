@@ -13,8 +13,11 @@ class Alert
     public function getIcon(): string
     {
         return match ($this->type) {
+            'information' => 'lucide:info',
             'success' => 'lucide:circle-check',
-            'danger' => 'lucide:circle-alert',
+            'caution' => 'lucide:circle-alert',
+            'error' => 'lucide:circle-x',
+            default => 'lucide:circle',
         };
     }
 }

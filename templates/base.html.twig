@@ -6,9 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Votre plus belle description ici.">
         {# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>"> #}
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
-        {% endblock %}
+
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -18,10 +16,9 @@
         {# Toast #}
         <div class="fixed bottom-4 right-4 flex flex-col space-y-4 max-w-[500px]">
             {% for label, messages in app.flashes %}
-                {% set type = label == 'success' ? 'success' : 'danger' %}
                 {% for message in messages %}
                     <twig:Alert
-                            type="{{ type }}"
+                            type="{{ label }}"
                             message="{{ message }}"
                     />
                 {% endfor %}
@@ -30,26 +27,4 @@
 
         {% block body %}{% endblock %}
     </body>
-    <script>
-        // Fonction pour gérer l'affichage et la disparition des alertes
-        document.addEventListener("DOMContentLoaded", function() {
-            // Sélectionne toutes les alertes
-            const alerts = document.querySelectorAll('.fade-in');
-
-            alerts.forEach(alert => {
-                // Démarre le fondu en sortie après 3 secondes
-                setTimeout(() => {
-                    alert.classList.remove("fade-in");
-                    alert.classList.add("fade-out");
-                }, 3000);
-
-                // Lorsque l'animation de disparition est terminée, supprime l'alerte
-                alert.addEventListener("animationend", function(event) {
-                    if (event.animationName === "fadeOut") {
-                        event.target.remove(); // Supprime l'alerte
-                    }
-                });
-            });
-        });
-    </script>
 </html>

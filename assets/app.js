@@ -4,4 +4,9 @@
  * This file will be included onto the page via the importmap() Twig function,
  * which should already be in your base.html.twig.
  */
+import 'jquery';
+import './scripts/components/toast.js';
+
 import './styles/app.css';
+import './styles/globals/font.css';
+import './styles/components/toast.css';

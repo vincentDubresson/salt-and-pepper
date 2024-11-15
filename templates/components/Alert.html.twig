@@ -1,9 +1,16 @@
 <div class="
-    min-w-[300px] max-w-[500px] p-4 rounded-lg text-white font-medium text-sm shadow-lg fade-in
-    {{ type == 'success' ? 'bg-green-500 border-2 border-green-700' : '' }}
-    {{ type == 'danger' ? 'bg-red-500 border-2 border-red-700' : '' }}
+    min-w-[300px] max-w-[500px] p-4 rounded-md font-satoshi-regular text-md shadow-lg fade-in
+    {% if type == 'information' %} bg-information {% endif %}
+    {% if type == 'success' %} bg-success {% endif %}
+    {% if type == 'caution' %} bg-caution {% endif %}
+    {% if type == 'error' %} bg-error {% endif %}
 " role="alert">
-    <div class="flex items-center">
+    <div class="flex items-center
+    {% if type == 'information' %} text-white {% endif %}
+    {% if type == 'success' %} text-black {% endif %}
+    {% if type == 'caution' %} text-black {% endif %}
+    {% if type == 'error' %} text-white {% endif %}
+">
         <twig:ux:icon name="{{ this.getIcon() }}" class="mr-2 h-5 w-5" />
         <span>{{ message }}</span>
     </div>
