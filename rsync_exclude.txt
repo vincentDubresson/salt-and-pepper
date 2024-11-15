@@ -16,6 +16,7 @@ npm-debug.log
 Thumbs.db
 yarn-error.log
 
+/_sql
 /assets/fonts
 /assets/js
 /assets/styles

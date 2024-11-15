@@ -14,6 +14,8 @@
     }],
     "no-descending-specificity": null,
     "no-invalid-double-slash-comments": true,
-    "scss/no-global-function-names": null
+    "scss/no-global-function-names": null,
+    "no-empty-source": null,
+    "media-feature-range-notation": null
   }
 }

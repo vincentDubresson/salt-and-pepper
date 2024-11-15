@@ -20,4 +20,7 @@ return [
         'path' => './assets/sonata.js',
         'entrypoint' => true,
     ],
+    'jquery' => [
+        'version' => '3.7.1',
+    ],
 ];
