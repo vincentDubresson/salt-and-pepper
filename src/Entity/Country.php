@@ -16,10 +16,10 @@ class Country
     private ?int $id = null;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
-    private ?string $label = null;
+    private string $label;
 
     #[ORM\Column(type: Types::STRING, length: 3)]
-    private ?string $code = null;
+    private string $code;
 
     public function getId(): ?int
     {

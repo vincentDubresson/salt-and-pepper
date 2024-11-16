@@ -16,13 +16,13 @@ class City
     private ?int $id = null;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
-    private ?string $label = null;
+    private string $label;
 
     #[ORM\Column(type: Types::STRING, length: 5)]
-    private ?string $postalCode = null;
+    private string $postalCode;
 
     #[ORM\Column(type: Types::STRING, length: 5)]
-    private ?string $cityCode = null;
+    private string $cityCode;
 
     public function getId(): ?int
     {

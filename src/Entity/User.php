@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\SluggableTrait;
 use App\Entity\Trait\TimestampableTrait;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
@@ -19,11 +20,30 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use TimestampableTrait;
+    use SluggableTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER, unique: true)]
     private ?int $id = null;
+
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Assert\NotBlank(message: 'Le prénom est obligatoire.')]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le prénom ne peut pas dépasser 255 caractères.',
+    )]
+    #[Assert\NoSuspiciousCharacters]
+    private string $firstname;
+
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Assert\NotBlank(message: 'Le nom est obligatoire.')]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le nom ne peut pas dépasser 255 caractères.',
+    )]
+    #[Assert\NoSuspiciousCharacters]
+    private string $lastname;
 
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
     #[Assert\NotBlank(message: 'Une adresse email est obligatoire.')]
@@ -33,14 +53,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     #[Assert\Email(message: "Cette adresse email n'est pas au bon format.")]
     private string $email;
-
-    /**
-     * @var list<string> The user roles
-     */
-    #[ORM\Column(type: Types::JSON)]
-    private array $roles = [];
-
-    private string $roleAsString = 'Utilisateur';
 
     /**
      * @var string The hashed password
@@ -54,8 +66,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     ])]
     protected ?string $rawPassword = null;
 
-    #[ORM\Column(type: Types::BOOLEAN, nullable: false)]
-    private bool $enabled = false;
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column(type: Types::JSON)]
+    private array $roles = [];
+
+    private string $roleAsString = 'Utilisateur';
+
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    #[Assert\NoSuspiciousCharacters]
+    private ?string $address1 = null;
+
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    #[Assert\NoSuspiciousCharacters]
+    private ?string $address2 = null;
 
     #[ORM\ManyToOne(targetEntity: City::class)]
     #[ORM\JoinColumn(name: 'city_id', referencedColumnName: 'id')]
@@ -65,6 +90,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(name: 'country_id', referencedColumnName: 'id')]
     private ?Country $country = null;
 
+    #[ORM\Column(type: Types::BOOLEAN, nullable: false)]
+    private bool $enabled = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -72,8 +100,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __toString(): string
     {
-        // TODO: Implement __toString() method.
-        return $this->email;
+        return "$this->firstname $this->lastname";
+    }
+
+    protected function getSlugSource(): string
+    {
+        return "$this->firstname $this->lastname";
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): static
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): static
+    {
+        $this->lastname = $lastname;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -170,14 +226,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function isEnabled(): bool
+    public function getAddress1(): ?string
     {
-        return $this->enabled;
+        return $this->address1;
     }
 
-    public function setEnabled(bool $enabled): static
+    public function setAddress1(?string $address1): static
     {
-        $this->enabled = $enabled;
+        $this->address1 = $address1;
+
+        return $this;
+    }
+
+    public function getAddress2(): ?string
+    {
+        return $this->address2;
+    }
+
+    public function setAddress2(?string $address2): static
+    {
+        $this->address2 = $address2;
 
         return $this;
     }
@@ -202,6 +270,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCountry(?Country $country): static
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): static
+    {
+        $this->enabled = $enabled;
 
         return $this;
     }
