@@ -1,0 +1,43 @@
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* stylelint-enable */
+
+html {
+    @apply font-satoshi-regular
+}
+
+/**
+    TITLES
+ */
+h1 {
+    @apply text-h1 sm:text-h1-sm md:text-h1-md lg:text-h1-lg xl:text-h1-xl;
+}
+
+h2 {
+    @apply text-h2 sm:text-h2-sm md:text-h2-md lg:text-h2-lg xl:text-h2-xl;
+}
+
+h3 {
+    @apply text-h3 sm:text-h3-sm md:text-h3-md lg:text-h3-lg xl:text-h3-xl;
+}
+
+h4 {
+    @apply text-h4 sm:text-h4-sm md:text-h4-md lg:text-h4-lg xl:text-h4-xl;
+}
+
+h5 {
+    @apply text-h5 sm:text-h5-sm md:text-h5-md lg:text-h5-lg xl:text-h5-xl;
+}
+
+h6 {
+    @apply text-h6 sm:text-h6-sm md:text-h6-md lg:text-h6-lg xl:text-h6-xl;
+}
+
+/**
+    TEXTS
+ */
+p {
+    @apply text-p sm:text-p-sm md:text-p-md lg:text-p-lg xl:text-p-xl;
+}
