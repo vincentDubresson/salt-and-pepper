@@ -41,3 +41,10 @@ h6 {
 p {
     @apply text-p sm:text-p-sm md:text-p-md lg:text-p-lg xl:text-p-xl;
 }
+
+/**
+    LOGOS
+ */
+.logo-big {
+    @apply w-44 sm:w-52 md:w-60 lg:w-72 xl:w-80;
+}
