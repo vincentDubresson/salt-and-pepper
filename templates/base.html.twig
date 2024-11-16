@@ -17,10 +17,7 @@
         <div class="fixed bottom-4 right-4 flex flex-col space-y-4 max-w-[500px]">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
-                    <twig:Alert
-                            type="{{ label }}"
-                            message="{{ message }}"
-                    />
+                    {{ component('Alert', {type: label, message: message}) }}
                 {% endfor %}
             {% endfor %}
         </div>
