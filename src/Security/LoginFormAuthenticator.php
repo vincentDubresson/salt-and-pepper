@@ -42,9 +42,14 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator implements A
 
     public function authenticate(Request $request): Passport
     {
-        $email = $request->request->get('_username');
-        $password = $request->request->get('_password');
+        $requestParams = $request->request->all();
+        /** @var array<mixed> $loginForm */
+        $loginForm = $requestParams['login_form'];
+        $email = $loginForm['_username'];
+        $password = $loginForm['_password'];
+
         $csrfToken = $request->request->get('_csrf_token');
+
         $ip = $request->getClientIp();
         $userAgent = $request->headers->get('User-Agent');
 
