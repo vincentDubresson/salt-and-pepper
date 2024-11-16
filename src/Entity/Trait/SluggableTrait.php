@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\HasLifecycleCallbacks]
 trait SluggableTrait
 {
-    #[ORM\Column(type: 'string', length: 160)]
+    #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank]
     protected string $slug;
 
