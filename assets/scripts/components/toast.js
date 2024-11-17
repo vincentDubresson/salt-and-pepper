@@ -8,7 +8,7 @@ $(document).ready(function() {
 
         setTimeout(function() {
             alert.removeClass('fade-in').addClass('fade-out');
-        }, 2500);
+        }, 4000);
 
         alert.on('animationend', function(event) {
             if (event.originalEvent.animationName === "fadeOut") {
