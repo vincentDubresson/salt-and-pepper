@@ -16,7 +16,8 @@
     {% endif %}
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+    {{ component('Form/Email', {data: form._username}) }}
+        {{ form_row(form._password) }}
         <input type="hidden" name="_csrf_token"
                value="{{ csrf_token('authenticate') }}"
         >
@@ -29,6 +30,6 @@
             Sign in
         </button>
 
-    {{ form_end(form) }}
+    {{ form_end(form, {'render_rest': false}) }}
 
 {% endblock %}

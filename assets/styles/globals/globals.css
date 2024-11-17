@@ -38,7 +38,8 @@ h6 {
 /**
     TEXTS
  */
-p {
+p,
+label {
     @apply text-p sm:text-p-sm md:text-p-md lg:text-p-lg xl:text-p-xl;
 }
 

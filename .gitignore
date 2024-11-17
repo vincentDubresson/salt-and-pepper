@@ -1,6 +1,6 @@
 .git
 .idea
-_sql
+_sql/user.sql
 .php-cs-fixer.php
 .php-cs-fixer.cache
 phpstan.neon
