@@ -5,7 +5,8 @@
 /* stylelint-enable */
 
 html {
-    @apply font-satoshi-regular
+    font-size: 16px;
+    @apply font-satoshi-regular text-gray-900
 }
 
 /**
@@ -39,8 +40,28 @@ h6 {
     TEXTS
  */
 p,
-label {
+label,
+input {
     @apply text-p sm:text-p-sm md:text-p-md lg:text-p-lg xl:text-p-xl;
+}
+
+label {
+    @apply font-semibold
+}
+
+.form-error {
+    @apply text-red-500 text-xs md:text-sm font-semibold
+}
+
+/**
+    INPUTS
+ */
+input {
+    @apply focus:outline-none
+}
+
+input[type='email'] {
+    @apply bg-gray-50 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500
 }
 
 /**
