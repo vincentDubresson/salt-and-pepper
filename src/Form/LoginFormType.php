@@ -30,8 +30,13 @@ class LoginFormType extends AbstractType
                     new NotBlank(message: 'Merci de renseigner votre mot de passe.'),
                 ],
                 'always_empty' => false,
+                'toggle' => true,
             ])
         ;
+
+        $builder->setAttributes([
+            'class' => 'max-w-[500px]',
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
