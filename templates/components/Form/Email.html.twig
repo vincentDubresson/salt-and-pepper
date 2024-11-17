@@ -1,14 +1,21 @@
-{{ dump(data.vars) }}
 <div class="mb-6 mt-5">
-    <label class="block font-medium text-gray-900 required" for="{{ data.vars.id }}">Email</label>
-{#    <input class="border" id="{{ data.vars.id }}" name="{{ data.vars.full_name }}" required="required" class="mt-1 w-full">#}
-    <div class="relative mb-6">
+    <label class="block" for="{{ data.vars.id }}">Email</label>
+    <div class="relative">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
-                <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
-                <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
-            </svg>
+            <twig:ux:icon name="lucide:mail" class="w-4 h-4 text-gray-500" />
         </div>
-        <input type="email" name="{{ data.vars.full_name }}" required="required" id="{{ data.vars.id }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Saisissez votre adresse email">
+        <input
+                type="email"
+                name="{{ data.vars.full_name }}"
+                required="{{ data.vars.required }}"
+                id="{{ data.vars.id }}"
+                class="block w-full ps-10 p-2.5"
+                placeholder="Saisissez votre adresse email"
+        >
     </div>
+    {% if data.vars.errors is defined and data.vars.errors is not empty %}
+        {% for error in data.vars.errors %}
+            <p class="form-error">{{ error.message }}</p>
+        {% endfor %}
+    {% endif %}
 </div>
