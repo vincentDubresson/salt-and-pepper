@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    #[Route(path: '/login', name: 'app_security_login')]
+    #[Route(path: '/se-connecter', name: 'app_security_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $user = $this->getUser();

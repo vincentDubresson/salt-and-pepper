@@ -23,13 +23,11 @@
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
-    <div>
-        <button class="btn btn-lg btn-primary" type="submit">
-            Se connecter
-        </button>
-        <button class="btn btn-lg btn-primary" type="submit">
-            Créer un compte
-        </button>
+    <div class="flex flex-col justify-center items-center gap-3 mt-5">
+        {{ component('Button', {type: 'button', action: 'login', style: 'primary', content: 'Se connecter'}) }}
+        <span>ou</span>
+        {# Todo : Modifier le lien vers création de compte #}
+        {{ component('Button', {type: 'link', action: 'signin', style: 'secondary', content: 'Créer un compte', route: 'app_home'}) }}
     </div>
 
     {{ form_end(form, {'render_rest': false}) }}

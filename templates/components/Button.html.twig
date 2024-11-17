@@ -1,0 +1,19 @@
+{% if type is same as 'button' %}
+    <button class="shadow-md rounded-md
+        {% if style == 'primary' %} button-primary {% endif %}
+        {% if style == 'secondary' %} button-secondary {% endif %}
+    " type="submit">
+        <twig:ux:icon name="{{ this.getIcon() }}" class="mr-2 h-5 w-5" />
+        <span>{{ content }}</span>
+    </button>
+{% endif %}
+
+{% if type is same as 'link' %}
+    <a class="
+        {% if style == 'primary' %} button-primary {% endif %}
+        {% if style == 'secondary' %} button-secondary {% endif %}
+    " href="{{ path(route) }}">
+        <twig:ux:icon name="{{ this.getIcon() }}" class="mr-2 h-5 w-5" />
+        <span>{{ content }}</span>
+    </a>
+{% endif %}
