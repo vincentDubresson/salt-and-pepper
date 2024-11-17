@@ -1,0 +1,21 @@
+<div class="mb-6 mt-5">
+    <label class="block" for="{{ data.vars.id }}">Email</label>
+    <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+            <twig:ux:icon name="lucide:mail" class="w-4 h-4 text-gray-500" />
+        </div>
+        <input
+                type="email"
+                name="{{ data.vars.full_name }}"
+                required="{{ data.vars.required }}"
+                id="{{ data.vars.id }}"
+                class="block w-full ps-10 p-2.5"
+                placeholder="Saisissez votre adresse email"
+        >
+    </div>
+    {% if data.vars.errors is defined and data.vars.errors is not empty %}
+        {% for error in data.vars.errors %}
+            <p class="form-error">{{ error.message }}</p>
+        {% endfor %}
+    {% endif %}
+</div>

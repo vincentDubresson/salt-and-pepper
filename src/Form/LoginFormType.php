@@ -18,14 +18,14 @@ class LoginFormType extends AbstractType
     {
         $builder
             ->add('_username', EmailType::class, [
-                'label' => 'Email',
+                'label' => 'common.email',
                 'constraints' => [
                     new NotBlank(message: 'Merci de renseigner votre adresse email.'),
                     new Email(message: "Cette adresse email n'est pas au bon format."),
                 ],
             ])
             ->add('_password', PasswordType::class, [
-                'label' => 'Mot de passe',
+                'label' => 'common.password',
                 'constraints' => [
                     new NotBlank(message: 'Merci de renseigner votre mot de passe.'),
                 ],

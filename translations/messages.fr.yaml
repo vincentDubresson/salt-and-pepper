@@ -2,7 +2,8 @@ common:
   actions: Actions
   infos_1: Informations principales
   users: Utilisateurs
-  email: E-mail
+  email: Email
+  password: Mot de passe
   role: Rôle
   created_at: Créé le
   updated_at: Modifié le
