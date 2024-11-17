@@ -59,6 +59,10 @@ label {
     @apply text-red-500 text-xs md:text-sm font-semibold
 }
 
+.form-help {
+    @apply text-gray-400 text-xs md:text-sm font-semibold
+}
+
 /**
     INPUTS
  */

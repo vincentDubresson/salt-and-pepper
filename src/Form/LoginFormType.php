@@ -19,6 +19,7 @@ class LoginFormType extends AbstractType
         $builder
             ->add('_username', EmailType::class, [
                 'label' => 'common.email',
+                'attr' => ['autocomplete' => 'email'],
                 'constraints' => [
                     new NotBlank(message: 'Merci de renseigner votre adresse email.'),
                     new Email(message: "Cette adresse email n'est pas au bon format."),
@@ -33,10 +34,6 @@ class LoginFormType extends AbstractType
                 'toggle' => true,
             ])
         ;
-
-        $builder->setAttributes([
-            'class' => 'max-w-[500px]',
-        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

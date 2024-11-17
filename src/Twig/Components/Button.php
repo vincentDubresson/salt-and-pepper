@@ -16,8 +16,9 @@ class Button
     public function getIcon(): string
     {
         return match ($this->action) {
-            'login' => 'lucide:log-in',
-            'signin' => 'lucide:user-round-plus',
+            'log-in' => 'lucide:log-in',
+            'sign-in' => 'lucide:user-round-plus',
+            'send' => 'lucide:send',
             default => 'lucide:circle',
         };
     }

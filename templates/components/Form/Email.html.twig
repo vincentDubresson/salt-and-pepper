@@ -13,6 +13,9 @@
                 placeholder="Saisissez votre adresse email"
         >
     </div>
+    {% if data.vars.help is defined and data.vars.help is not empty %}
+        <p class="form-help">{{ data.vars.help }}</p>
+    {% endif %}
     {% if data.vars.errors is defined and data.vars.errors is not empty %}
         {% for error in data.vars.errors %}
             <p class="form-error">{{ error.message }}</p>
