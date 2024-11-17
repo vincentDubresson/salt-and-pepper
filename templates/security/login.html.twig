@@ -5,31 +5,33 @@
 {% block body %}
 <div class="flex flex-col justify-start items-center w-11/12 sm:w-4/5 lg:w-2/3 mx-auto">
     {{ component('LogoBig') }}
-    <h4 class="mb-3 font-weight-normal">Se connecter</h4>
+    <h4 class="mb-3">Se connecter</h4>
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_security_logout') }}">Logout</a>
-        </div>
-    {% endif %}
-
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'class': 'w-full max-w-lg'}}) }}
     {{ component('Form/Email', {data: form._username}) }}
-        {{ form_row(form._password) }}
+    {{ component('Form/Password', {data: form._password}) }}
+    <div class="flex justify-between">
         <div class="checkbox mb-3">
             <input type="checkbox" name="_remember_me" id="_remember_me">
-            <label for="_remember_me">Remember me</label>
+            <label for="_remember_me">Se souvenir de moi</label>
         </div>
         <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
+    </div>
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
+    <div>
         <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
+            Se connecter
         </button>
+        <button class="btn btn-lg btn-primary" type="submit">
+            Créer un compte
+        </button>
+    </div>
+
     {{ form_end(form, {'render_rest': false}) }}
 </div>
 {% endblock %}
