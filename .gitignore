@@ -13,6 +13,7 @@ phpstan.neon
 /public/bundles/
 /public/media/cache/
 /assets/vendor/
+/src/controller/TestController.php
 ssl
 /tmp/phpstan/
 /var/

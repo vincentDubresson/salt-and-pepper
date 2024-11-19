@@ -1,0 +1,46 @@
+{% apply inline_css %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block email_title %}Email{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .email-container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .logo { max-width: 200px; height: auto; }
+        .content-cell { background-color: #f4f4f4; padding: 20px; }
+        .footer-cell { text-align: center; font-size: 0.8em; color: #666; }
+    </style>
+</head>
+<body>
+<table width="600" cellspacing="0" cellpadding="0" class="email-container" style="max-width: 600px;">
+    <tr>
+        <td align="center">
+            {% block email_logo %}
+                <img src="{{ email.image('@images/logos/salt_and_pepper_logo.png') }}" alt="Logo" class="logo">
+            {% endblock %}
+        </td>
+    </tr>
+
+    <tr>
+        <td class="content-cell">
+            {% block email_content %}{% endblock %}
+        </td>
+    </tr>
+
+    <tr>
+        <td class="footer-cell">
+            {% block email_footer %}
+                <p>{{ "now"|date('Y') }} Salt & Pepper. Tous droits réservés.</p>
+            {% endblock %}
+        </td>
+    </tr>
+</table>
+</body>
+</html>
+{% endapply %}
