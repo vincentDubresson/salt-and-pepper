@@ -38,9 +38,13 @@ class ChangePasswordFormType extends AbstractType
                         new NotCompromisedPassword(message: 'Ce mot de passe est compromis. Merci de choisir un autre mot de passe.'),
                     ],
                     'label' => 'New password',
+                    'always_empty' => false,
+                    'toggle' => true,
                 ],
                 'second_options' => [
                     'label' => 'Repeat Password',
+                    'always_empty' => false,
+                    'toggle' => true,
                 ],
                 'invalid_message' => 'Les mots de passe ne correspondent pas.',
                 'mapped' => false,
