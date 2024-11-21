@@ -20,6 +20,7 @@ class Button
             'sign-in' => 'lucide:user-round-plus',
             'send' => 'lucide:send',
             'update' => 'radix-icons:update',
+            'log-out' => 'lucide:log-out',
             default => 'lucide:circle',
         };
     }
