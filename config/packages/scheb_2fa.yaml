@@ -1,0 +1,21 @@
+# See the configuration reference at https://symfony.com/bundles/SchebTwoFactorBundle/6.x/configuration.html
+scheb_two_factor:
+    email:
+        enabled: true
+        sender_email: contact@vdub-dev.com
+        sender_name: Salt and Pepper
+        digits: 8
+        template: security/2fa_form.html.twig
+        mailer: App\Mailer\TwoFactorAuthCodeMailer
+    trusted_device:
+        enabled: true
+        lifetime: 5184000
+        extend_lifetime: true
+        cookie_name: __SAP-TRUSTED
+        cookie_secure: false
+        cookie_same_site: "lax"
+        cookie_domain: "%env(TWO_FA_COOKIE_DOMAIN)%"
+        cookie_path: "/"
+    security_tokens:
+        - Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
+        - Symfony\Component\Security\Http\Authenticator\Token\PostAuthenticationToken

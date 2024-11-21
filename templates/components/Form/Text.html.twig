@@ -1,0 +1,24 @@
+<div class="mb-3">
+    <label class="block" for="{{ data.vars.id }}">{{ label }}</label>
+    <div class="relative">
+        <input
+                type="text"
+                name="{{ data.vars.full_name }}"
+                required="{{ data.vars.required }}"
+                id="{{ data.vars.id }}"
+                class="block w-full ps-3.5 p-2.5"
+                placeholder="{{ placeholder }}"
+                inputmode="{{ inputmode }}"
+                pattern="{{ pattern }}"
+                autofocus="{{ autofocus }}"
+        >
+    </div>
+    {% if data.vars.help is defined and data.vars.help is not empty %}
+        <p class="form-help">{{ data.vars.help }}</p>
+    {% endif %}
+    {% if data.vars.errors is defined and data.vars.errors is not empty %}
+        {% for error in data.vars.errors %}
+            <p class="form-error">{{ error.message }}</p>
+        {% endfor %}
+    {% endif %}
+</div>

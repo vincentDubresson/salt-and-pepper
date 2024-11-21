@@ -7,6 +7,8 @@ use App\Entity\Trait\TimestampableTrait;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
+use Scheb\TwoFactorBundle\Model\TrustedDeviceInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,7 +19,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[Vich\Uploadable]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFactorInterface, TrustedDeviceInterface
 {
     use TimestampableTrait;
     use SluggableTrait;
@@ -53,6 +55,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     #[Assert\Email(message: "Cette adresse email n'est pas au bon format.")]
     private string $email;
+
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private ?string $authCode;
+
+    #[ORM\Column(type: Types::INTEGER)]
+    private int $trustedVersion = 0;
 
     /**
      * @var string The hashed password
@@ -284,5 +292,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->enabled = $enabled;
 
         return $this;
+    }
+
+    public function isEmailAuthEnabled(): bool
+    {
+        return true;
+    }
+
+    public function getEmailAuthRecipient(): string
+    {
+        return $this->email;
+    }
+
+    public function getEmailAuthCode(): ?string
+    {
+        if (null === $this->authCode) {
+            throw new \LogicException('The email authentication code was not set');
+        }
+
+        return $this->authCode;
+    }
+
+    public function setEmailAuthCode(string $authCode): void
+    {
+        $this->authCode = $authCode;
+    }
+
+    public function getTrustedVersion(): int
+    {
+        return $this->trustedVersion;
+    }
+
+    public function setTrustedVersion(int $trustedVersion): void
+    {
+        $this->trustedVersion = $trustedVersion;
+    }
+
+    public function getTrustedTokenVersion(): int
+    {
+        return $this->trustedVersion;
     }
 }

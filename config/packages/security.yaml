@@ -14,6 +14,10 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            two_factor:
+                auth_form_path: 2fa_login
+                check_path: 2fa_login_check
+                trusted_parameter_name: _trusted
             login_throttling:
                 max_attempts: 5
                 interval: '5 minutes'
@@ -24,10 +28,11 @@ security:
             logout:
                 path: app_security_logout
                 # where to redirect after logout
-                # target: app_login
+                target: app_security_login
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800
+                name: __SAP-REMEMBER
         secured_area:
             form_login:
                 enable_csrf: true

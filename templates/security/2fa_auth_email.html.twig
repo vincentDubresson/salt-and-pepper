@@ -1,0 +1,36 @@
+{% extends 'base_email.html.twig' %}
+
+{% block email_content %}
+    <h1>Bonjour,</h1>
+    <p>Voici votre code d'authentification à deux facteurs :</p>
+
+    <table align="center" style="margin: 20px auto; text-align: center;">
+        <tr>
+            <td style="
+                background-color: #f8f9fa;
+                border: 2px solid #e9ecef;
+                border-radius: 8px;
+                padding: 20px;
+                display: inline-block;
+                text-align: center;
+            ">
+                <span style="
+                    font-size: 32px;
+                    font-weight: bold;
+                    color: #9F1455ff;
+                    letter-spacing: 4px;
+                    font-family: monospace;
+                ">{{ authCode }}</span>
+            </td>
+        </tr>
+    </table>
+
+    <p>
+        Si vous n'avez pas demandé ce code, veuillez ignorer cet email.
+    </p>
+{% endblock %}
+
+{% block email_footer %}
+    <p>Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</p>
+    {{ parent() }}
+{% endblock %}
