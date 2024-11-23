@@ -20,6 +20,10 @@ return [
         'path' => './assets/sonata.js',
         'entrypoint' => true,
     ],
+    'error' => [
+        'path' => './assets/error.js',
+        'entrypoint' => true,
+    ],
     'jquery' => [
         'version' => '3.7.1',
     ],
