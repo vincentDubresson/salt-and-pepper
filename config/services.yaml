@@ -41,7 +41,7 @@ services:
     admin.user:
         class: App\Admin\UserAdmin
         tags:
-            - { name: sonata.admin, model_class: App\Entity\User, manager_type: orm, label: common.users }
+            - { name: sonata.admin, model_class: App\Entity\User, controller: App\Controller\Admin\UserAdminCRUDController,  manager_type: orm, label: common.users }
 
     admin.city:
         class: App\Admin\CityAdmin
