@@ -47,3 +47,8 @@ services:
         class: App\Admin\CityAdmin
         tags:
             - { name: sonata.admin, model_class: App\Entity\City, manager_type: orm }
+
+    admin.difficulty:
+        class: App\Admin\DifficultyAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Difficulty,  manager_type: orm, label: common.difficulties }

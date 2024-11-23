@@ -18,9 +18,9 @@ sonata_admin:
             common.users:
                 items:
                     - admin.user
-        #     common.lab_manager:
-        #        items:
-        #            - admin.lab_manager
+            common.parameters:
+                items:
+                    - admin.difficulty
     options:
         # Sort the menu items alphabetically.
         sort_admins: false

@@ -59,6 +59,9 @@ security:
 
             - ROLE_ADMIN_CITY_LIST
 
+            - ROLE_ADMIN_DIFFICULTY_LIST
+            - ROLE_ADMIN_DIFFICULTY_EXPORT
+
 when@test:
     security:
         password_hashers:

@@ -4,7 +4,6 @@ namespace App\Entity\Trait;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\String\Slugger\AsciiSlugger;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Adds slug to an entity. Requires that entities are
@@ -14,7 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait SluggableTrait
 {
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank]
     protected string $slug;
 
     #[ORM\PrePersist]
