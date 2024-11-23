@@ -38,6 +38,7 @@ class ChangePasswordFormType extends AbstractType
                         new NotCompromisedPassword(message: 'Ce mot de passe est compromis. Merci de choisir un autre mot de passe.'),
                     ],
                     'label' => 'New password',
+                    'help' => 'Votre mot de passe doit comporter au minimum 12 caractères. Nous vous recommandons une mot de passe contenant au moins 1 majuscule, 1 chiffre et 1 caractère spécial.',
                     'always_empty' => false,
                     'toggle' => true,
                 ],

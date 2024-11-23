@@ -24,6 +24,11 @@ class City
     #[ORM\Column(type: Types::STRING, length: 5)]
     private string $cityCode;
 
+    public function __toString(): string
+    {
+        return $this->postalCode . ' ' . $this->label;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

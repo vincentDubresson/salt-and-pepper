@@ -36,6 +36,7 @@
         "symfony/runtime": "6.4.*",
         "symfony/security-bundle": "6.4.*",
         "symfony/twig-bundle": "6.4.*",
+        "symfony/ux-autocomplete": "^2.21",
         "symfony/ux-icons": "^2.21",
         "symfony/ux-live-component": "^2.21",
         "symfony/ux-toggle-password": "^2.21",

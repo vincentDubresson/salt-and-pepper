@@ -43,3 +43,7 @@ services:
         tags:
             - { name: sonata.admin, model_class: App\Entity\User, manager_type: orm, label: common.users }
 
+    admin.city:
+        class: App\Admin\CityAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\City, manager_type: orm }
