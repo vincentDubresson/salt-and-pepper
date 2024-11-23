@@ -62,6 +62,9 @@ security:
             - ROLE_ADMIN_DIFFICULTY_LIST
             - ROLE_ADMIN_DIFFICULTY_EXPORT
 
+            - ROLE_ADMIN_COST_LIST
+            - ROLE_ADMIN_COST_EXPORT
+
 when@test:
     security:
         password_hashers:

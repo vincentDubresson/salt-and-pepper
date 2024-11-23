@@ -20,6 +20,7 @@ sonata_admin:
                     - admin.user
             common.parameters:
                 items:
+                    - admin.cost
                     - admin.difficulty
     options:
         # Sort the menu items alphabetically.

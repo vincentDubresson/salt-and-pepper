@@ -22,11 +22,14 @@ common:
   sort: Ordre
   parameters: Paramètres
   difficulties: Difficultés
+  costs: Budgets
 
 'User List': Utilisateurs
 'User Create': Création
 'Difficulty List': Difficultés
 'Difficulty Create': Création
+'Cost List': Budgets
+'Cost Create': Création
 
 Hide: Cacher
 Show: Voir
