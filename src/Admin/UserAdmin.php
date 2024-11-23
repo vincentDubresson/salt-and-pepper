@@ -134,7 +134,6 @@ class UserAdmin extends AbstractAdmin
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'label' => 'common.actions',
                 'actions' => [
-                    // Todo : Ne pas pouvoir éditer ou supprimer l'ID 1
                     'edit' => [],
                     'delete' => [],
                 ],
