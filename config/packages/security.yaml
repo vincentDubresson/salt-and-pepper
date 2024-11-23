@@ -57,6 +57,8 @@ security:
             - ROLE_ADMIN_USER_DELETE
             - ROLE_ADMIN_USER_EXPORT
 
+            - ROLE_ADMIN_CITY_LIST
+
 when@test:
     security:
         password_hashers:

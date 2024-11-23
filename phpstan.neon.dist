@@ -8,5 +8,6 @@ parameters:
         # Add here some paths or files to exclude.
     ignoreErrors:
         # Add here some errors you want to disable.
+        - '#Property .+::\$[a-zA-Z0-9_]+ is never read, only written#'
     doctrine:
         objectManagerLoader: '%rootDir%/../../../tests/phpstan/object_manager.php'

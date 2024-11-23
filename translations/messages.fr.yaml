@@ -1,10 +1,20 @@
 common:
   actions: Actions
   infos_1: Informations principales
+  infos_2: Informations complémentaires
   users: Utilisateurs
+  firstname: Prénom
+  lastname: Nom
   email: Email
+  admin: Administrateur
+  address1: Adresse
+  address2: Complément d'adresse
+  postal_code: Code postal
+  city: Ville
+  country: Pays
   password: Mot de passe
   role: Rôle
+  enabled: Actif
   created_at: Créé le
   updated_at: Modifié le
 

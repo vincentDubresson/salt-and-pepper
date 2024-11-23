@@ -21,6 +21,11 @@ class Country
     #[ORM\Column(type: Types::STRING, length: 3)]
     private string $code;
 
+    public function __toString(): string
+    {
+        return $this->label;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

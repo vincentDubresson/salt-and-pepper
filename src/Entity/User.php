@@ -24,6 +24,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     use TimestampableTrait;
     use SluggableTrait;
 
+    public const ADMIN_ID = 1;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER, unique: true)]
@@ -101,6 +103,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column(type: Types::BOOLEAN, nullable: false)]
     private bool $enabled = false;
 
+    private bool $admin = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -116,7 +120,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return "$this->firstname $this->lastname";
     }
 
-    public function getFirstname(): ?string
+    public function getFirstname(): string
     {
         return $this->firstname;
     }
@@ -128,7 +132,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return $this;
     }
 
-    public function getLastname(): ?string
+    public function getLastname(): string
     {
         return $this->lastname;
     }
@@ -140,7 +144,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -169,11 +173,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
     /**
@@ -181,7 +181,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      */
     public function setRoles(array $roles): static
     {
-        $this->roles = $roles;
+        $this->roles = !empty($roles) ? $roles : ['ROLE_USER'];
 
         return $this;
     }
@@ -290,6 +290,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function setEnabled(bool $enabled): static
     {
         $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    public function isAdmin(): bool
+    {
+        return in_array('ROLE_SONATA_ADMIN', $this->roles);
+    }
+
+    public function setAdmin(bool $admin): static
+    {
+        $this->admin = $admin;
+
+        $admin ? $this->setRoles(['ROLE_SONATA_ADMIN', 'ROLE_ADMIN', 'ROLE_USER']) : $this->setRoles(['ROLE_USER']);
 
         return $this;
     }
