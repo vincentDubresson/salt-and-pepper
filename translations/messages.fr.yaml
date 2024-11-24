@@ -26,6 +26,10 @@ common:
   cooking_types: Types de cuisson
   units: Unités de mesure
   abbreviation: Abréviation
+  categories: Catégories
+  category: Catégorie
+  subcategories: Sous-catégories
+  subcategory: Sous-catégorie
 
 'User List': Utilisateurs
 'User Create': Création
@@ -37,6 +41,10 @@ common:
 'CookingType Create': Création
 'Unit List': Unités de mesure
 'Unit Create': Création
+'Category List': Catégories
+'Category Create': Création
+'Subcategory List': Sous-catégories
+'Subcategory Create': Création
 
 Hide: Cacher
 Show: Voir

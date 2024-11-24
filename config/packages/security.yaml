@@ -74,6 +74,18 @@ security:
             - ROLE_ADMIN_UNIT_DELETE
             - ROLE_ADMIN_UNIT_EXPORT
 
+            - ROLE_ADMIN_CATEGORY_LIST
+            - ROLE_ADMIN_CATEGORY_CREATE
+            - ROLE_ADMIN_CATEGORY_EDIT
+            - ROLE_ADMIN_CATEGORY_DELETE
+            - ROLE_ADMIN_CATEGORY_EXPORT
+
+            - ROLE_ADMIN_SUBCATEGORY_LIST
+            - ROLE_ADMIN_SUBCATEGORY_CREATE
+            - ROLE_ADMIN_SUBCATEGORY_EDIT
+            - ROLE_ADMIN_SUBCATEGORY_DELETE
+            - ROLE_ADMIN_SUBCATEGORY_EXPORT
+
 when@test:
     security:
         password_hashers:
