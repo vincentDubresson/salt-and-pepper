@@ -22,6 +22,7 @@ sonata_admin:
                 items:
                     - admin.cost
                     - admin.difficulty
+                    - admin.cooking_type
     options:
         # Sort the menu items alphabetically.
         sort_admins: false

@@ -65,6 +65,9 @@ security:
             - ROLE_ADMIN_COST_LIST
             - ROLE_ADMIN_COST_EXPORT
 
+            - ROLE_ADMIN_COOKING_TYPE_LIST
+            - ROLE_ADMIN_COOKING_TYPE_EXPORT
+
 when@test:
     security:
         password_hashers:

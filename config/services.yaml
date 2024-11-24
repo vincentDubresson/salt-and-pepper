@@ -57,3 +57,8 @@ services:
         class: App\Admin\CostAdmin
         tags:
             - { name: sonata.admin, model_class: App\Entity\Cost,  manager_type: orm, label: common.costs }
+
+    admin.cooking_type:
+        class: App\Admin\CookingTypeAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\CookingType,  manager_type: orm, label: common.cooking_types }
