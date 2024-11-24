@@ -2,7 +2,7 @@
 
 namespace App\Admin;
 
-use App\Entity\Unit;
+use App\Entity\Category;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -10,17 +10,21 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
+use Sonata\DoctrineORMAdminBundle\Filter\NumberFilter;
 use Sonata\DoctrineORMAdminBundle\Filter\StringFilter;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * @extends AbstractAdmin<Unit>
+ * @extends AbstractAdmin<Category>
  */
-class UnitAdmin extends AbstractAdmin
+class SubcategoryAdmin extends AbstractAdmin
 {
     protected function configureDefaultSortValues(array &$sortValues): void
     {
-        $sortValues[DatagridInterface::SORT_BY] = 'sort';
+        $sortValues[DatagridInterface::SORT_BY] = 'category';
         $sortValues[DatagridInterface::SORT_ORDER] = 'ASC';
     }
 
@@ -33,8 +37,15 @@ class UnitAdmin extends AbstractAdmin
                 'empty_data' => '',
                 'required' => true,
             ])
-            ->add('abbreviation', TextType::class, [
-                'label' => 'common.abbreviation',
+            ->add('category', EntityType::class, [
+                'label' => 'common.category',
+                'class' => Category::class,
+                'placeholder' => 'Choisir une catégorie',
+                'autocomplete' => true,
+                'required' => true,
+            ])
+            ->add('sort', NumberType::class, [
+                'label' => 'common.sort',
                 'empty_data' => '',
                 'required' => true,
             ])
@@ -49,8 +60,17 @@ class UnitAdmin extends AbstractAdmin
                 'label' => 'common.label',
                 'show_filter' => true,
             ])
-            ->add('abbreviation', StringFilter::class, [
-                'label' => 'common.abbreviation',
+            ->add('category', ModelFilter::class, [
+                'label' => 'common.category',
+                'field_type' => EntityType::class,
+                'field_options' => [
+                    'class' => Category::class,
+                    'autocomplete' => true,
+                ],
+                'show_filter' => true,
+            ])
+            ->add('sort', NumberFilter::class, [
+                'label' => 'common.sort',
                 'show_filter' => true,
             ])
         ;
@@ -62,8 +82,14 @@ class UnitAdmin extends AbstractAdmin
             ->add('label', FieldDescriptionInterface::TYPE_STRING, [
                 'label' => 'common.label',
             ])
-            ->add('abbreviation', FieldDescriptionInterface::TYPE_STRING, [
-                'label' => 'common.abbreviation',
+            ->add('category', FieldDescriptionInterface::TYPE_STRING, [
+                'label' => 'common.category',
+                'associated_property' => 'id',
+            ])
+            ->add('sort', FieldDescriptionInterface::TYPE_FLOAT, [
+                'label' => 'common.sort',
+                'scale' => 2,
+                'editable' => true,
             ])
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'label' => 'common.actions',
@@ -85,7 +111,7 @@ class UnitAdmin extends AbstractAdmin
         return [
             'ID' => 'id',
             'LIBELLE' => 'label',
-            'ABREVIATION' => 'abbreviation',
+            'ORDRE' => 'sort',
             'CRÉÉ LE' => 'createdAt',
             'MODIFIÉ LE' => 'updatedAt',
         ];

@@ -67,3 +67,13 @@ services:
         class: App\Admin\UnitAdmin
         tags:
             - { name: sonata.admin, model_class: App\Entity\Unit,  manager_type: orm, label: common.units }
+
+    admin.category:
+        class: App\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Category,  manager_type: orm, label: common.categories }
+
+    admin.subcategory:
+        class: App\Admin\SubcategoryAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Subcategory,  manager_type: orm, label: common.subcategories }

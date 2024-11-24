@@ -22,7 +22,6 @@ class CostAdmin extends AbstractAdmin
             ->add('sort', FieldDescriptionInterface::TYPE_FLOAT, [
                 'label' => 'common.sort',
                 'scale' => 2,
-                'editable' => true,
             ])
         ;
     }

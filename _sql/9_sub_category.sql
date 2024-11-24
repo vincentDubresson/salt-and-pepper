@@ -1,4 +1,4 @@
-INSERT INTO `sub_category` (`id`, `category_id`, `label`, `sort`, `slug`, `created_at`, `updated_at`) VALUES
+INSERT INTO `subcategory` (`id`, `category_id`, `label`, `sort`, `slug`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Assaisonnement', 1, 'assaisonnement', NOW(), NOW()),
 (2, 1, 'Béchamel', 2, 'bechamel', NOW(), NOW()),
 (3, 1, 'Confits', 3, 'confits', NOW(), NOW()),

@@ -20,6 +20,8 @@ sonata_admin:
                     - admin.user
             common.editable_parameters:
                 items:
+                    - admin.category
+                    - admin.subcategory
                     - admin.unit
             common.non_editable_parameters:
                 items:
