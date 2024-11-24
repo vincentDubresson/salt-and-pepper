@@ -1,3 +1,4 @@
 common:
   users: Utilisateurs
-  parameters: Paramètres
+  non_editable_parameters: Paramètres non modifiables
+  editable_parameters: Paramètres modifiables

@@ -18,7 +18,10 @@ sonata_admin:
             common.users:
                 items:
                     - admin.user
-            common.parameters:
+            common.editable_parameters:
+                items:
+                    - admin.unit
+            common.non_editable_parameters:
                 items:
                     - admin.cost
                     - admin.difficulty
