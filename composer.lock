@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b1edc9eba1d818af59b7fb652fdd595",
+    "content-hash": "8e6568fbff09db402f05743028cf386e",
     "packages": [
         {
             "name": "amphp/amp",
@@ -3555,6 +3555,278 @@
             "time": "2024-09-10T13:22:26+00:00"
         },
         {
+            "name": "portphp/csv",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/portphp/csv.git",
+                "reference": "707d0fb44dc1aa2e3add976a57114a2de9d97ca3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/portphp/csv/zipball/707d0fb44dc1aa2e3add976a57114a2de9d97ca3",
+                "reference": "707d0fb44dc1aa2e3add976a57114a2de9d97ca3",
+                "shasum": ""
+            },
+            "require": {
+                "portphp/portphp": "^1.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Port\\Csv\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David de Boer",
+                    "email": "david@ddeboer.nl"
+                },
+                {
+                    "name": "Markus Bachmann",
+                    "email": "markus.bachmann@bachi.biz"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/portphp/csv/graphs/contributors"
+                }
+            ],
+            "description": "CSV reader and writer for Port",
+            "homepage": "https://github.com/portphp",
+            "support": {
+                "docs": "https://portphp.readthedocs.org",
+                "issues": "https://github.com/portphp/portphp/issues",
+                "source": "https://github.com/portphp/csv"
+            },
+            "time": "2022-03-06T11:18:49+00:00"
+        },
+        {
+            "name": "portphp/doctrine",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/portphp/doctrine.git",
+                "reference": "6dfec00093fed23e7aab71a03a6696eb32170414"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/portphp/doctrine/zipball/6dfec00093fed23e7aab71a03a6696eb32170414",
+                "reference": "6dfec00093fed23e7aab71a03a6696eb32170414",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "^2.13 || ^3.0",
+                "php": ">=7.4",
+                "portphp/portphp": "^1.0.0"
+            },
+            "require-dev": {
+                "doctrine/cache": "^1.11",
+                "doctrine/mongodb-odm": "^2.0",
+                "doctrine/orm": "^2.8",
+                "ext-sqlite3": "*",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Port\\Doctrine\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David de Boer",
+                    "email": "david@ddeboer.nl"
+                },
+                {
+                    "name": "Markus Bachmann",
+                    "email": "markus.bachmann@bachi.biz"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/portphp/doctrine/graphs/contributors"
+                }
+            ],
+            "description": "Doctrine ORM/ODM reader and writer for Port",
+            "homepage": "https://github.com/portphp",
+            "support": {
+                "docs": "https://portphp.readthedocs.org",
+                "issues": "https://github.com/portphp/portphp/issues",
+                "source": "https://github.com/portphp/doctrine"
+            },
+            "time": "2022-08-16T09:21:00+00:00"
+        },
+        {
+            "name": "portphp/portphp",
+            "version": "1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/portphp/portphp.git",
+                "reference": "686aaba59919460649c750268237c322804d8e12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/portphp/portphp/zipball/686aaba59919460649c750268237c322804d8e12",
+                "reference": "686aaba59919460649c750268237c322804d8e12",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "symfony/property-access": "^4.4 || ^5.4 || ^6.0 || ^7.0",
+                "symfony/validator": "^4.4 || ^5.4 || ^6.0 || ^7.0"
+            },
+            "require-dev": {
+                "doctrine/common": "^2.7 || ^3.0",
+                "doctrine/instantiator": "^1.0.5",
+                "ext-iconv": "*",
+                "ext-mbstring": "*",
+                "phpspec/phpspec": "^7.2",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Port\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David de Boer",
+                    "email": "david@ddeboer.nl"
+                },
+                {
+                    "name": "Markus Bachmann",
+                    "email": "markus.bachmann@bachi.biz"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/portphp/portphp/graphs/contributors"
+                }
+            ],
+            "description": "Data import/export workflow",
+            "homepage": "https://github.com/portphp",
+            "keywords": [
+                "csv",
+                "data",
+                "doctrine",
+                "excel",
+                "export",
+                "import"
+            ],
+            "support": {
+                "docs": "https://portphp.readthedocs.org",
+                "issues": "https://github.com/portphp/portphp/issues",
+                "source": "https://github.com/portphp/portphp"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ddeboer",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-11-18T19:28:41+00:00"
+        },
+        {
+            "name": "portphp/steps",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/portphp/steps.git",
+                "reference": "642c6e0d0c0ef0c0d32e7331479112867ad13956"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/portphp/steps/zipball/642c6e0d0c0ef0c0d32e7331479112867ad13956",
+                "reference": "642c6e0d0c0ef0c0d32e7331479112867ad13956",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0",
+                "portphp/portphp": "^1.0.0",
+                "psr/log": "^1.0 || ^2.0 || ^3.0",
+                "seld/signal-handler": "^1.0 || ^2.0",
+                "symfony/property-access": "^2.3 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
+                "symfony/validator": "^2.5 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "conflict": {
+                "symfony/validator": "<2.5"
+            },
+            "require-dev": {
+                "friends-of-phpspec/phpspec-code-coverage": "^6.1",
+                "phpspec/phpspec": "^7.2"
+            },
+            "suggest": {
+                "symfony/property-access": "Used in MappingStep",
+                "symfony/validator": "Used in ValidatorStep"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Port\\Steps\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David de Boer",
+                    "email": "david@ddeboer.nl"
+                },
+                {
+                    "name": "Markus Bachmann",
+                    "email": "markus.bachmann@bachi.biz"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/portphp/boilerplate/graphs/contributors"
+                }
+            ],
+            "description": "Step aggregator for Port",
+            "homepage": "https://github.com/portphp",
+            "support": {
+                "docs": "https://portphp.readthedocs.org",
+                "issues": "https://github.com/portphp/portphp/issues",
+                "source": "https://github.com/portphp/boilerplate"
+            },
+            "time": "2024-08-23T09:09:23+00:00"
+        },
+        {
             "name": "psr/cache",
             "version": "3.0.0",
             "source": {
@@ -4078,6 +4350,67 @@
                 "source": "https://github.com/scheb/2fa-trusted-device/tree/v7.6.0"
             },
             "time": "2024-10-20T10:14:58+00:00"
+        },
+        {
+            "name": "seld/signal-handler",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/signal-handler.git",
+                "reference": "04a6112e883ad76c0ada8e4a9f7520bbfdb6bb98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Seldaek/signal-handler/zipball/04a6112e883ad76c0ada8e4a9f7520bbfdb6bb98",
+                "reference": "04a6112e883ad76c0ada8e4a9f7520bbfdb6bb98",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1",
+                "phpstan/phpstan-strict-rules": "^1.3",
+                "phpunit/phpunit": "^7.5.20 || ^8.5.23",
+                "psr/log": "^1 || ^2 || ^3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Seld\\Signal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Simple unix signal handler that silently fails where signals are not supported for easy cross-platform development",
+            "keywords": [
+                "posix",
+                "sigint",
+                "signal",
+                "sigterm",
+                "unix"
+            ],
+            "support": {
+                "issues": "https://github.com/Seldaek/signal-handler/issues",
+                "source": "https://github.com/Seldaek/signal-handler/tree/2.0.2"
+            },
+            "time": "2023-09-03T09:24:00+00:00"
         },
         {
             "name": "sonata-project/admin-bundle",
