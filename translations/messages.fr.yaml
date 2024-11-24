@@ -24,6 +24,8 @@ common:
   difficulties: Difficultés
   costs: Budgets
   cooking_types: Types de cuisson
+  units: Unités de mesure
+  abbreviation: Abréviation
 
 'User List': Utilisateurs
 'User Create': Création

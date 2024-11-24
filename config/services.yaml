@@ -62,3 +62,8 @@ services:
         class: App\Admin\CookingTypeAdmin
         tags:
             - { name: sonata.admin, model_class: App\Entity\CookingType,  manager_type: orm, label: common.cooking_types }
+
+    admin.unit:
+        class: App\Admin\UnitAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Unit,  manager_type: orm, label: common.units }
