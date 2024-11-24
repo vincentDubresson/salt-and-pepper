@@ -77,3 +77,8 @@ services:
         class: App\Admin\SubcategoryAdmin
         tags:
             - { name: sonata.admin, model_class: App\Entity\Subcategory,  manager_type: orm, label: common.subcategories }
+
+    admin.ingredient:
+        class: App\Admin\IngredientAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Ingredient,  manager_type: orm, label: common.ingredients }
