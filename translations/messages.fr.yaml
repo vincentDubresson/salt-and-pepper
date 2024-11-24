@@ -35,6 +35,8 @@ common:
 'Cost Create': Création
 'CookingType list': Types de cuisson
 'CookingType Create': Création
+'Unit List': Unités de mesure
+'Unit Create': Création
 
 Hide: Cacher
 Show: Voir
