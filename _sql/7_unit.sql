@@ -57,4 +57,6 @@ INSERT INTO `unit` (`id`, `label`, `abbreviation`, `created_at`, `updated_at`) V
 (56, 'Demi', '1/2', NOW(), NOW()),
 (57, 'Trois quart', '3/4', NOW(), NOW()),
 (58, 'Douzaine', 'dz', NOW(), NOW()),
-(59, 'Demie douzaine', '1/2 dz', NOW(), NOW());
+(59, 'Demie douzaine', '1/2 dz', NOW(), NOW()),
+(60, 'Filet', 'filet', NOW(), NOW()),
+(61, 'Zeste', 'zeste', NOW(), NOW());

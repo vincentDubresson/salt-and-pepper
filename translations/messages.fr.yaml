@@ -30,6 +30,8 @@ common:
   category: Catégorie
   subcategories: Sous-catégories
   subcategory: Sous-catégorie
+  ingredients: Ingrédients
+  ingredient: Ingrédient
 
 'User List': Utilisateurs
 'User Create': Création
@@ -45,6 +47,8 @@ common:
 'Category Create': Création
 'Subcategory List': Sous-catégories
 'Subcategory Create': Création
+'Ingredient List': Ingrédients
+'Ingrédient Create': Création
 
 Hide: Cacher
 Show: Voir

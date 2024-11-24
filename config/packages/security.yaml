@@ -86,6 +86,12 @@ security:
             - ROLE_ADMIN_SUBCATEGORY_DELETE
             - ROLE_ADMIN_SUBCATEGORY_EXPORT
 
+            - ROLE_ADMIN_INGREDIENT_LIST
+            - ROLE_ADMIN_INGREDIENT_CREATE
+            - ROLE_ADMIN_INGREDIENT_EDIT
+            - ROLE_ADMIN_INGREDIENT_DELETE
+            - ROLE_ADMIN_INGREDIENT_EXPORT
+
 when@test:
     security:
         password_hashers:
