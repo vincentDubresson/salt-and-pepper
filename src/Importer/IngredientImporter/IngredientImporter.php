@@ -5,12 +5,11 @@ namespace App\Importer\IngredientImporter;
 use App\Entity\Ingredient;
 use App\Importer\AbstractImporter;
 use App\Importer\IngredientImporter\Writer\IngredientImporterWriterStep;
-use App\Service\ImporterService;
+use App\Service\IngredientImporterService;
 use Doctrine\ORM\EntityManagerInterface;
 use Port\Csv\CsvReader;
 use Port\Doctrine\DoctrineWriter;
 use Port\Exception;
-use Port\Result;
 use Port\Steps\Step;
 use Port\Steps\StepAggregator as Workflow;
 
@@ -24,15 +23,10 @@ class IngredientImporter extends AbstractImporter
     public function __construct(
         private readonly string $projectDir,
         private readonly EntityManagerInterface $entityManager,
-        private readonly ImporterService $importerService,
-    )
-    {
+    ) {
     }
 
-    /**
-     * @throws Exception
-     */
-    public function import(): bool
+    public function import(IngredientImporterService $importerService): void
     {
         $file = $this->projectDir . self::IMPORT_DIR . self::IMPORT_FILENAME;
 
@@ -45,8 +39,7 @@ class IngredientImporter extends AbstractImporter
         $csvReader->setStrict(true);
 
         $ingredientImportDoctrineWriter = $this->IngredientImportDoctrineWriter($this->entityManager);
-        $ingredientImportWriterStep = $this->IngredientImportWriter($this->entityManager, $this->importerService);
-
+        $ingredientImportWriterStep = $this->IngredientImportWriter($this->entityManager, $importerService);
 
         $workflow = new Workflow($csvReader);
 
@@ -59,31 +52,17 @@ class IngredientImporter extends AbstractImporter
         $this->entityManager->beginTransaction();
 
         try {
-            $result = $workflow->process();
-            $this->entityManager->commit();
+            $workflow->process();
+
             rename($file, $this->projectDir . self::ARCHIVE_DIR . self::IMPORT_FILENAME);
 
-            $exceptions = $result->getExceptions();
-
-            if (!empty($exceptions)) {
-                $html = '<ul>';
-                foreach ($exceptions as $exception) {
-                    $html .= "<li>{$exception->getMessage()}</li>";
-                }
-                $html .= '</ul>';
-
-                // Todo : On balance un email avec les erreurs de doublon
-
-                return false;
-            }
-
+            $this->entityManager->commit();
         } catch (Exception $exception) {
             $this->entityManager->rollback();
             rename($file, $this->projectDir . self::ERROR_DIR . self::IMPORT_FILENAME);
+
             throw $exception;
         }
-
-        return true;
     }
 
     private function IngredientImportDoctrineWriter(EntityManagerInterface $entityManager): DoctrineWriter
@@ -94,7 +73,7 @@ class IngredientImporter extends AbstractImporter
         return $doctrineWriter;
     }
 
-    private function IngredientImportWriter(EntityManagerInterface $entityManager, ImporterService $importerService): Step
+    private function IngredientImportWriter(EntityManagerInterface $entityManager, IngredientImporterService $importerService): Step
     {
         return new IngredientImporterWriterStep($entityManager, $importerService);
     }
