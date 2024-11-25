@@ -3,7 +3,6 @@
 namespace App\Admin;
 
 use App\Entity\Ingredient;
-use App\Entity\Unit;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
