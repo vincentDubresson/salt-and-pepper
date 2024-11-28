@@ -66,6 +66,14 @@ class IngredientAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['list', 'create', 'edit', 'delete', 'export']);
+        $collection->add('import');
+    }
+
+    protected function configureActionButtons(array $buttonList, string $action, ?object $object = null): array
+    {
+        $buttonList['import'] = ['template' => 'admin/ingredient/button/import_button.html.twig'];
+
+        return $buttonList;
     }
 
     protected function configureExportFields(): array

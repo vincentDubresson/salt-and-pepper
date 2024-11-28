@@ -82,5 +82,7 @@ services:
 
     admin.ingredient:
         class: App\Admin\IngredientAdmin
+        calls:
+            - [setTemplate, ['layout', 'admin/ingredient/layout.html.twig']]
         tags:
-            - { name: sonata.admin, model_class: App\Entity\Ingredient,  manager_type: orm, label: common.ingredients }
+            - { name: sonata.admin, model_class: App\Entity\Ingredient, controller: App\Controller\Admin\IngredientAdminCRUDController,  manager_type: orm, label: common.ingredients }

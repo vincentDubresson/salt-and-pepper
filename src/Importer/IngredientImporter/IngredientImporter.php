@@ -15,22 +15,18 @@ use Port\Steps\StepAggregator as Workflow;
 
 class IngredientImporter extends AbstractImporter
 {
-    private const IMPORT_DIR = '/_import/ingredient/';
-    private const ERROR_DIR = '/_import/ingredient/error/';
-    private const ARCHIVE_DIR = '/_import/ingredient/archive/';
-    private const IMPORT_FILENAME = 'ingredient.csv';
-
     public function __construct(
-        private readonly string $projectDir,
         private readonly EntityManagerInterface $entityManager,
     ) {
     }
 
-    public function import(IngredientImporterService $importerService): void
+    public function import(IngredientImporterService $importerService, string $file): void
     {
-        $file = $this->projectDir . self::IMPORT_DIR . self::IMPORT_FILENAME;
-
         $this->checkFile($file);
+
+        if (!$this->isHeaderLabelOnly($file)) {
+            throw new \RuntimeException('Le nom de la colonne est non valide.');
+        }
 
         $importFile = new \SplFileObject($file);
         $csvReader = new CsvReader($importFile, ';', '"', '"');
@@ -54,12 +50,12 @@ class IngredientImporter extends AbstractImporter
         try {
             $workflow->process();
 
-            rename($file, $this->projectDir . self::ARCHIVE_DIR . self::IMPORT_FILENAME);
+            unlink($file);
 
             $this->entityManager->commit();
         } catch (Exception $exception) {
             $this->entityManager->rollback();
-            rename($file, $this->projectDir . self::ERROR_DIR . self::IMPORT_FILENAME);
+            unlink($file);
 
             throw $exception;
         }
@@ -76,5 +72,16 @@ class IngredientImporter extends AbstractImporter
     private function IngredientImportWriter(EntityManagerInterface $entityManager, IngredientImporterService $importerService): Step
     {
         return new IngredientImporterWriterStep($entityManager, $importerService);
+    }
+
+    private function isHeaderLabelOnly(string $file): bool
+    {
+        /** @var resource $handle */
+        $handle = fopen($file, 'r');
+
+        $header = fgetcsv($handle);
+        fclose($handle);
+
+        return is_array($header) && count($header) === 1 && $header[0] === 'label';
     }
 }

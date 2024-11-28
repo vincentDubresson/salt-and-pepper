@@ -1,0 +1,43 @@
+{% extends 'base_sonata.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/admin/ingredient/ingredient.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('scripts/admin/ingredient/ingredient.js') }}"></script>
+{% endblock %}
+
+{% block sonata_header %}
+    <div class="import-box content js_ingredient_import_box">
+        <div class="row box box-primary import-modal">
+            <div class="box-header">
+                <h4 class="box-title">
+                    Importer des ingrédients
+                </h4>
+            </div>
+            <form class="js_ingredient_import_box_form" enctype="multipart/form-data" method="POST" action="{{ admin.generateUrl('import') }}">
+                <div class="box-body">
+                    <div class="sonata-ba-collapsed-fields">
+                        <div class="form-group">
+                            <label class="control-label required" for="ingredient_import_file">Fichier CSV</label>
+                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                <input type="file" accept=".csv" name="ingredient_import_file" required="required" class=" form-control">
+                                <div id="" class="help-block sonata-ba-field-help help-text">Votre fichier doit être au format CSV, encodé en UTF-8 sans BOM.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-success js_ingredient_import_block_submit_button" name="btn_update_and_edit"><i class="fas fa-level-up-alt" aria-hidden="true"></i> Importer</button>
+                    <button class="btn btn-default js_ingredient_import_block_close_button">
+                        <i class="fas fa-times-circle" aria-hidden="true"></i> Annuler
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{ parent() }}
+{% endblock %}
