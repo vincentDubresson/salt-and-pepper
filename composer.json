@@ -116,7 +116,7 @@
             "php bin/console lint:twig templates"
         ],
         "twigcs": [
-            "vendor/bin/twigcs templates --ansi"
+            "vendor/bin/twigcs templates --severity error --display blocking --ansi"
         ],
         "phpstan": [
             "vendor/bin/phpstan analyse src -vvv --no-progress --ansi --level=9"

@@ -94,30 +94,4 @@ class Category
     {
         return $this->subcategories;
     }
-
-    /*
-     * Cela ne devrait jamais arriver.
-     * Todo : Supprimer après avoir été sûr.
-     */
-    //    public function addSubcategory(Subcategory $subcategory): static
-    //    {
-    //        if (!$this->subcategories->contains($subcategory)) {
-    //            $this->subcategories->add($subcategory);
-    //            $subcategory->setCategory($this);
-    //        }
-    //
-    //        return $this;
-    //    }
-    //
-    //    public function removeSubcategory(Subcategory $subcategory): static
-    //    {
-    //        if ($this->subcategories->removeElement($subcategory)) {
-    //            // set the owning side to null (unless already changed)
-    //            if ($subcategory->getCategory() === $this) {
-    //                $subcategory->setCategory(null);
-    //            }
-    //        }
-    //
-    //        return $this;
-    //    }
 }

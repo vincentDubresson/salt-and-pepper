@@ -47,6 +47,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_SONATA_ADMIN }
+        - { path: ^/logout, role: PUBLIC_ACCESS }
+        - { path: ^/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
         # - { path: ^/profile, roles: ROLE_USER }
     access_decision_manager:
         strategy: unanimous
@@ -91,6 +93,12 @@ security:
             - ROLE_ADMIN_INGREDIENT_EDIT
             - ROLE_ADMIN_INGREDIENT_DELETE
             - ROLE_ADMIN_INGREDIENT_EXPORT
+
+            - ROLE_ADMIN_RECIPE_LIST
+            - ROLE_ADMIN_RECIPE_CREATE
+            - ROLE_ADMIN_RECIPE_EDIT
+            - ROLE_ADMIN_RECIPE_DELETE
+            - ROLE_ADMIN_RECIPE_EXPORT
 
 when@test:
     security:

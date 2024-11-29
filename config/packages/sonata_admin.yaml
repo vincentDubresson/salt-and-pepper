@@ -18,6 +18,9 @@ sonata_admin:
             common.users:
                 items:
                     - admin.user
+            common.recipes:
+                items:
+                    - admin.recipe
             common.editable_parameters:
                 items:
                     - admin.category

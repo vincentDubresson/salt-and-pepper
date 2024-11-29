@@ -2,6 +2,7 @@ common:
   users: Utilisateurs
   non_editable_parameters: Paramètres non modifiables
   editable_parameters: Paramètres modifiables
+  recipes: Recettes
 
 button:
   ingredient_import: Importer des ingrédients

@@ -86,3 +86,10 @@ services:
             - [setTemplate, ['layout', 'admin/ingredient/layout.html.twig']]
         tags:
             - { name: sonata.admin, model_class: App\Entity\Ingredient, controller: App\Controller\Admin\IngredientAdminCRUDController,  manager_type: orm, label: common.ingredients }
+
+    admin.recipe:
+        class: App\Admin\RecipeAdmin
+#        calls:
+#            - [setTemplate, ['layout', 'admin/ingredient/layout.html.twig']]
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Recipe, controller: App\Controller\Admin\RecipeAdminCRUDController,  manager_type: orm, label: common.recipes }
