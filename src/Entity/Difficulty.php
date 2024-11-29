@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Entity\Trait\SluggableTrait;
 use App\Entity\Trait\TimestampableTrait;
 use App\Repository\DifficultyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -34,6 +36,17 @@ class Difficulty
     #[ORM\Column(type: Types::FLOAT, scale: 2)]
     #[Assert\Positive(message: 'Le tri doit est positif.')]
     private float $sort;
+
+    /**
+     * @var Collection<int, Recipe>
+     */
+    #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'difficulty', orphanRemoval: true)]
+    private Collection $recipes;
+
+    public function __construct()
+    {
+        $this->recipes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -72,5 +85,13 @@ class Difficulty
         $this->sort = $sort;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Recipe>
+     */
+    public function getRecipes(): Collection
+    {
+        return $this->recipes;
     }
 }

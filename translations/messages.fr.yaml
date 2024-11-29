@@ -23,6 +23,7 @@ common:
   parameters: Paramètres
   difficulties: Difficultés
   costs: Budgets
+  cost: Budget
   cooking_types: Types de cuisson
   units: Unités de mesure
   abbreviation: Abréviation
@@ -32,23 +33,29 @@ common:
   subcategory: Sous-catégorie
   ingredients: Ingrédients
   ingredient: Ingrédient
+  recipes: Recettes
+  recipe: Recette
+  author: Auteur
+  difficulty: Difficulté
 
 'User List': Utilisateurs
-'User Create': Création
+'User Create': Nouvel utilisateur
 'Difficulty List': Difficultés
-'Difficulty Create': Création
+'Difficulty Create': Nouvelle difficulté
 'Cost List': Budgets
-'Cost Create': Création
+'Cost Create': Nouveau budget
 'CookingType list': Types de cuisson
-'CookingType Create': Création
+'CookingType Create': Nouveau type de cuisson
 'Unit List': Unités de mesure
-'Unit Create': Création
+'Unit Create': Nouvelle unité
 'Category List': Catégories
-'Category Create': Création
+'Category Create': Nouvelle catégorie
 'Subcategory List': Sous-catégories
-'Subcategory Create': Création
+'Subcategory Create': Nouvelle sous-catégorie
 'Ingredient List': Ingrédients
-'Ingrédient Create': Création
+'Ingrédient Create': Nouvel ingrédient
+'Recipe Create': Recettes
+'Recipe List': Nouvelle recette
 
 Hide: Cacher
 Show: Voir

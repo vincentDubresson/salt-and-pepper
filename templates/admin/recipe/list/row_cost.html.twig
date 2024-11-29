@@ -1,0 +1,8 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    {% set costLevel = object.cost.id %}
+    {% for i in 1..costLevel %}
+        <i class="fas fa-coins" aria-hidden="true"></i>
+    {% endfor %}
+{% endblock %}
