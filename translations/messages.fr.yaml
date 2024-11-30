@@ -37,6 +37,19 @@ common:
   recipe: Recette
   author: Auteur
   difficulty: Difficulté
+  main_feature: Caractéristiques principales
+  secondary_feature: Caractéristiques complémentaires
+  visibility_seo: Visibilité et Référencement
+  recipe_name: Nom de la recette
+  description: Description courte
+  meta_description: Meta description
+  meta_keywords: Meta mots clés
+  in_line: En ligne
+  serving_number: Nombre de parts
+  cooking_type: Type de cuisson
+  preparation_time: Temps de préparation
+  cooking_time: Temps de cuisson
+  resting_time: Temps de repos
 
 'User List': Utilisateurs
 'User Create': Nouvel utilisateur
