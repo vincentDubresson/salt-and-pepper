@@ -44,7 +44,7 @@ class Subcategory
     /**
      * @var Collection<int, Recipe>
      */
-    #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'subCategory', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'subcategory', orphanRemoval: true)]
     private Collection $recipes;
 
     public function __construct()

@@ -1,7 +1,7 @@
 common:
   users: Utilisateurs
-  non_editable_parameters: Paramètres non modifiables
-  editable_parameters: Paramètres modifiables
+  non_editable_parameters: Param. non modifiables
+  editable_parameters: Param. modifiables
   recipes: Recettes
 
 button:

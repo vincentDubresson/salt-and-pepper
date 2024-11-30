@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Trait\SluggableTrait;
 use App\Entity\Trait\TimestampableTrait;
 use App\Repository\RecipeRepository;
+use App\Validator\TimeNotZero;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -44,6 +45,7 @@ class Recipe
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     #[Assert\NotBlank(message: 'La durée de préparation est obligatoire.')]
+    #[TimeNotZero]
     private \DateTimeInterface $preparationTime;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
