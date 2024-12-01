@@ -54,6 +54,8 @@ common:
   add_ingredient: Ajouter un ingrédient
   unit: Unité
   reference: Référence
+  steps: Étapes
+  step: Étape
 
 'User List': Utilisateurs
 'User Create': Nouvel utilisateur

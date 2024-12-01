@@ -104,6 +104,10 @@ security:
             - ROLE_ADMIN_RECIPES_INGREDIENTS_EDIT
             - ROLE_ADMIN_RECIPES_INGREDIENTS_DELETE
 
+            - ROLE_ADMIN_RECIPE_STEP_CREATE
+            - ROLE_ADMIN_RECIPE_STEP_EDIT
+            - ROLE_ADMIN_RECIPE_STEP_DELETE
+
 when@test:
     security:
         password_hashers:

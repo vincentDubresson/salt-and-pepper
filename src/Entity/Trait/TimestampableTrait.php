@@ -36,6 +36,13 @@ trait TimestampableTrait
         return $this->updatedAt;
     }
 
+    public function setUpdatedAt(\DateTime $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
     #[ORM\PrePersist]
     public function _timestampable_prePersist(): void
     {

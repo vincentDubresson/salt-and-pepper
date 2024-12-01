@@ -101,3 +101,8 @@ services:
         class: App\Admin\RecipesIngredientsAdmin
         tags:
             - { name: sonata.admin, model_class: App\Entity\RecipesIngredients, manager_type: orm, label: common.ingredients }
+
+    admin.recipe_step:
+        class: App\Admin\RecipeStepAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\RecipeStep, manager_type: orm, label: common.steps }
