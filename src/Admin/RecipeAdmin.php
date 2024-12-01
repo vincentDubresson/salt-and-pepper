@@ -60,6 +60,16 @@ class RecipeAdmin extends AbstractAdmin
                 ->setReference($reference)
             ;
         }
+        dd($object);
+    }
+
+    protected function preUpdate(object $object): void
+    {
+        if (!$object instanceof Recipe) {
+            throw new \InvalidArgumentException('You must have a Recipe at this point.');
+        }
+
+        $object->setUpdatedAt(new \DateTime());
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -177,6 +187,18 @@ class RecipeAdmin extends AbstractAdmin
                 'label' => false,
                 'by_reference' => true,
                 'btn_add' => 'common.add_ingredient',
+            ], [
+                'edit' => 'inline',
+                'inline' => 'table',
+            ])
+            ->end()
+            ->end()
+            ->tab('Steps', ['label' => 'common.steps'])
+            ->with('Steps', ['label' => 'common.steps'])
+            ->add('recipeSteps', CollectionType::class, [
+                'label' => false,
+                'by_reference' => true,
+                'btn_add' => 'common.add_step',
             ], [
                 'edit' => 'inline',
                 'inline' => 'table',

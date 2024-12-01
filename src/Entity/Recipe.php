@@ -102,9 +102,19 @@ class Recipe
     )]
     private Collection $recipesIngredients;
 
+    /**
+     * @var Collection<int, RecipeStep>
+     */
+    #[ORM\OneToMany(targetEntity: RecipeStep::class, mappedBy: 'recipe', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[Assert\Count(
+        min: 1, minMessage: 'Vous devez renseigner au moins une étape.'
+    )]
+    private Collection $recipeSteps;
+
     public function __construct()
     {
         $this->recipesIngredients = new ArrayCollection();
+        $this->recipeSteps = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -323,6 +333,31 @@ class Recipe
     public function removeRecipesIngredient(RecipesIngredients $recipesIngredient): static
     {
         $this->recipesIngredients->removeElement($recipesIngredient);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RecipeStep>
+     */
+    public function getRecipeSteps(): Collection
+    {
+        return $this->recipeSteps;
+    }
+
+    public function addRecipeStep(RecipeStep $recipeStep): static
+    {
+        if (!$this->recipeSteps->contains($recipeStep)) {
+            $this->recipeSteps->add($recipeStep);
+            $recipeStep->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipeStep(RecipeStep $recipeStep): static
+    {
+        $this->recipeSteps->removeElement($recipeStep);
 
         return $this;
     }

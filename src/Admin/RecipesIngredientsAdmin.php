@@ -22,7 +22,6 @@ class RecipesIngredientsAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $form): void
     {
         $form
-            ->with('common.ingredients', ['class' => 'col-md-6'])
             ->add('quantity', NumberType::class, [
                 'label' => 'common.quantity',
                 'empty_data' => '',
@@ -56,7 +55,6 @@ class RecipesIngredientsAdmin extends AbstractAdmin
                 ],
                 'required' => true,
             ])
-            ->end()
         ;
     }
 
