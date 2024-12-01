@@ -6,12 +6,15 @@ use App\Entity\Trait\SluggableTrait;
 use App\Entity\Trait\TimestampableTrait;
 use App\Repository\RecipeRepository;
 use App\Validator\TimeNotZero;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(name: '`recipe`')]
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_REFERENCE', fields: ['reference'])]
 #[ORM\HasLifecycleCallbacks]
 class Recipe
 {
@@ -22,6 +25,11 @@ class Recipe
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    // Todo : Ajouter une référence de recette (Ref : 'YYMMDD-IDSUBCATEGORY-INITIALESLABEL')
+    // Unique
+    #[ORM\Column(type: Types::STRING, length: 255, unique: true)]
+    private string $reference;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     #[Assert\NotBlank(message: 'Le titre est obligatoire.')]
@@ -68,24 +76,38 @@ class Recipe
     private bool $enabled = false;
 
     #[ORM\ManyToOne(targetEntity: Subcategory::class, inversedBy: 'recipes')]
-    #[ORM\JoinColumn(name: 'subcategory_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(name: 'subcategory_id', referencedColumnName: 'id', nullable: false)]
     private Subcategory $subcategory;
 
     #[ORM\ManyToOne(targetEntity: CookingType::class, inversedBy: 'recipes')]
-    #[ORM\JoinColumn(name: 'cooking_type_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(name: 'cooking_type_id', referencedColumnName: 'id', nullable: false)]
     private CookingType $cookingType;
 
     #[ORM\ManyToOne(targetEntity: Difficulty::class, inversedBy: 'recipes')]
-    #[ORM\JoinColumn(name: 'difficulty_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(name: 'difficulty_id', referencedColumnName: 'id', nullable: false)]
     private Difficulty $difficulty;
 
     #[ORM\ManyToOne(targetEntity: Cost::class, inversedBy: 'recipes')]
-    #[ORM\JoinColumn(name: 'cost_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(name: 'cost_id', referencedColumnName: 'id', nullable: false)]
     private Cost $cost;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'recipes')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
     private ?User $user = null;
+
+    /**
+     * @var Collection<int, RecipesIngredients>
+     */
+    #[ORM\OneToMany(targetEntity: RecipesIngredients::class, mappedBy: 'recipe', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[Assert\Count(
+        min: 1, minMessage: 'Vous devez renseigner au moins un ingrédient.'
+    )]
+    private Collection $recipesIngredients;
+
+    public function __construct()
+    {
+        $this->recipesIngredients = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -110,6 +132,18 @@ class Recipe
     public function setLabel(string $label): static
     {
         $this->label = $label;
+
+        return $this;
+    }
+
+    public function getReference(): string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): static
+    {
+        $this->reference = $reference;
 
         return $this;
     }
@@ -266,6 +300,31 @@ class Recipe
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RecipesIngredients>
+     */
+    public function getRecipesIngredients(): Collection
+    {
+        return $this->recipesIngredients;
+    }
+
+    public function addRecipesIngredient(RecipesIngredients $recipesIngredient): static
+    {
+        if (!$this->recipesIngredients->contains($recipesIngredient)) {
+            $this->recipesIngredients->add($recipesIngredient);
+            $recipesIngredient->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipesIngredient(RecipesIngredients $recipesIngredient): static
+    {
+        $this->recipesIngredients->removeElement($recipesIngredient);
 
         return $this;
     }

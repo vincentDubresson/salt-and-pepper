@@ -38,13 +38,13 @@ class Subcategory
     private float $sort;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'subcategories')]
-    #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false)]
     private Category $category;
 
     /**
      * @var Collection<int, Recipe>
      */
-    #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'subcategory', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'subcategory')]
     private Collection $recipes;
 
     public function __construct()

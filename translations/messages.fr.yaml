@@ -50,6 +50,10 @@ common:
   preparation_time: Temps de préparation
   cooking_time: Temps de cuisson
   resting_time: Temps de repos
+  quantity: Quantité
+  add_ingredient: Ajouter un ingrédient
+  unit: Unité
+  reference: Référence
 
 'User List': Utilisateurs
 'User Create': Nouvel utilisateur
