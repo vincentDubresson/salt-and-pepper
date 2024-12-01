@@ -56,6 +56,9 @@ common:
   reference: Référence
   steps: Étapes
   step: Étape
+  title: Titre
+  images: Images
+  image: Image
 
 'User List': Utilisateurs
 'User Create': Nouvel utilisateur

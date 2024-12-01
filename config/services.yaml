@@ -106,3 +106,8 @@ services:
         class: App\Admin\RecipeStepAdmin
         tags:
             - { name: sonata.admin, model_class: App\Entity\RecipeStep, manager_type: orm, label: common.steps }
+
+    admin.recipe_image:
+        class: App\Admin\RecipeImageAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\RecipeImage, manager_type: orm, label: common.images }

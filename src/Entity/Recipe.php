@@ -111,10 +111,17 @@ class Recipe
     )]
     private Collection $recipeSteps;
 
+    /**
+     * @var Collection<int, RecipeImage>
+     */
+    #[ORM\OneToMany(targetEntity: RecipeImage::class, mappedBy: 'recipe', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $recipeImages;
+
     public function __construct()
     {
         $this->recipesIngredients = new ArrayCollection();
         $this->recipeSteps = new ArrayCollection();
+        $this->recipeImages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -358,6 +365,31 @@ class Recipe
     public function removeRecipeStep(RecipeStep $recipeStep): static
     {
         $this->recipeSteps->removeElement($recipeStep);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RecipeImage>
+     */
+    public function getRecipeImages(): Collection
+    {
+        return $this->recipeImages;
+    }
+
+    public function addRecipeImage(RecipeImage $recipeImage): static
+    {
+        if (!$this->recipeImages->contains($recipeImage)) {
+            $this->recipeImages->add($recipeImage);
+            $recipeImage->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipeImage(RecipeImage $recipeImage): static
+    {
+        $this->recipeImages->removeElement($recipeImage);
 
         return $this;
     }

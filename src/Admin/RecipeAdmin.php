@@ -205,6 +205,18 @@ class RecipeAdmin extends AbstractAdmin
             ])
             ->end()
             ->end()
+            ->tab('Images', ['label' => 'common.images'])
+            ->with('Images', ['label' => 'common.images'])
+            ->add('recipeImages', CollectionType::class, [
+                'label' => false,
+                'by_reference' => true,
+                'btn_add' => 'common.add_image',
+            ], [
+                'edit' => 'inline',
+                'inline' => 'table',
+            ])
+            ->end()
+            ->end()
         ;
     }
 
