@@ -9,6 +9,7 @@ use App\Entity\Difficulty;
 use App\Entity\Recipe;
 use App\Entity\Subcategory;
 use App\Entity\User;
+use App\Service\RecipeService;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -20,31 +21,45 @@ use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
 use Sonata\DoctrineORMAdminBundle\Filter\StringFilter;
 use Sonata\Form\Type\CollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
-use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * @extends AbstractAdmin<Recipe>
  */
 class RecipeAdmin extends AbstractAdmin
 {
-    protected function preValidate(object $object): void
+    public function __construct(
+        private readonly RecipeService $recipeService,
+        private readonly Security $security,
+    ) {
+        parent::__construct(Recipe::class);
+    }
+
+    protected function prePersist(object $object): void
     {
         if (!$object instanceof Recipe) {
             throw new \InvalidArgumentException('You must have a Recipe at this point.');
         }
 
         if ($this->isCurrentRoute('create')) {
-            // Todo : Service Recipe pour générer la référence.
-            $reference = 'TEMP-REF';
+            /** @var TokenInterface $token */
+            $token = $this->security->getToken();
+            /** @var User $user */
+            $user = $token->getUser();
 
-            $object->setReference($reference);
+            $reference = $this->recipeService->generateRecipeReference($object);
+
+            $object
+                ->setUser($user)
+                ->setReference($reference)
+            ;
         }
-        dd($object);
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -54,7 +69,9 @@ class RecipeAdmin extends AbstractAdmin
             ->with('common.main_feature', ['class' => 'col-md-6', 'label' => 'common.main_feature'])
             ->add('reference', TextType::class, [
                 'label' => 'common.reference',
-                'empty_data' => '',
+                'attr' => [
+                    'placeholder' => 'La référence sera autogénérée.',
+                ],
                 'required' => false,
                 'disabled' => true,
             ])
@@ -66,6 +83,9 @@ class RecipeAdmin extends AbstractAdmin
             ->add('slug', TextType::class, [
                 'label' => 'common.slug',
                 'empty_data' => '',
+                'attr' => [
+                    'placeholder' => 'Le slug sera autogénéré.',
+                ],
                 'required' => false,
                 'disabled' => true,
             ])
@@ -77,13 +97,10 @@ class RecipeAdmin extends AbstractAdmin
             ->add('user', EntityType::class, [
                 'label' => 'common.author',
                 'class' => User::class,
-                'placeholder' => 'Choisir un auteur',
+                'placeholder' => 'Vous serez automatiquement assigné à cette recette.',
                 'autocomplete' => true,
-                'required' => true,
-                'constraints' => !$this->isCurrentEditRoute() ? [
-                    new NotNull(),
-                ] : [],
-                'disabled' => $this->isCurrentEditRoute(),
+                'required' => false,
+                'disabled' => true,
             ])
             ->add('metaDescription', TextareaType::class, [
                 'label' => 'common.meta_description',
@@ -275,9 +292,4 @@ class RecipeAdmin extends AbstractAdmin
     }
 
     // TODO : Gérer l'export
-
-    private function isCurrentEditRoute(): bool
-    {
-        return $this->isCurrentRoute('edit');
-    }
 }
