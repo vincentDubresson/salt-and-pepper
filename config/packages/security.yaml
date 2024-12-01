@@ -108,6 +108,10 @@ security:
             - ROLE_ADMIN_RECIPE_STEP_EDIT
             - ROLE_ADMIN_RECIPE_STEP_DELETE
 
+            - ROLE_ADMIN_RECIPE_IMAGE_CREATE
+            - ROLE_ADMIN_RECIPE_IMAGE_EDIT
+            - ROLE_ADMIN_RECIPE_IMAGE_DELETE
+
 when@test:
     security:
         password_hashers:
