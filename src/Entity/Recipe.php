@@ -26,10 +26,8 @@ class Recipe
     #[ORM\Column]
     private ?int $id = null;
 
-    // Todo : Ajouter une référence de recette (Ref : 'YYMMDD-IDSUBCATEGORY-INITIALESLABEL')
-    // Unique
     #[ORM\Column(type: Types::STRING, length: 255, unique: true)]
-    private string $reference;
+    private string $reference = '';
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     #[Assert\NotBlank(message: 'Le titre est obligatoire.')]
