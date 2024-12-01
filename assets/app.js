@@ -7,6 +7,7 @@ import './bootstrap.js';
  */
 import 'jquery';
 import './scripts/components/toast.js';
+import './scripts/components/header.js';
 
 import './styles/app.css';
 import './styles/globals/font.css';

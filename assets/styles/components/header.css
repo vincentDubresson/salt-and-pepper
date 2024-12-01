@@ -1,0 +1,68 @@
+.sap-header {
+    @apply relative bg-white;
+    box-shadow: 0 4px 2px -2px #eee;
+    z-index: 10;
+
+    .sap-header-nav {
+        @apply relative bg-white flex justify-between items-center w-11/12 sm:w-4/5 lg:w-2/3 mx-auto h-[70px] sm:h-[80px] md:h-[88px] lg:h-[98px] xl:h-[108px];
+        z-index: 20;
+
+        .header-nav-button {
+            .header-nav-button-icon {
+                @apply text-primary-600 hover:text-primary-700 transition mx-2 w-5 h-5 md:w-6 md:h-6;
+            }
+        }
+
+        .logo-header {
+            @apply w-24 sm:w-28 md:w-32 lg:w-36 xl:w-40;
+        }
+
+        .header-nav-right-block {
+            @apply flex gap-2;
+        }
+    }
+
+    .sap-header-nav-search-bar {
+        @apply absolute bottom-0 w-full h-[50px] bg-[#1da7ee] w-11/12 sm:w-4/5 lg:w-2/3 mx-auto left-0 right-0;
+        z-index: 5; /* Correction : placé sous `.header-nav` mais au-dessus du reste */
+
+        p { text-align: center; }
+    }
+}
+
+
+
+
+
+
+/* Transition pour l'affichage du menu */
+.transition-enter {
+    transform: scale(0.95);
+    opacity: 0;
+}
+
+.transition-enter-active {
+    transform: scale(1);
+    opacity: 1;
+    transition: transform 100ms ease-out, opacity 100ms ease-out;
+}
+
+.transition-leave {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.transition-leave-active {
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 75ms ease-in, opacity 75ms ease-in;
+}
+
+/* Base styles pour le menu */
+.menu-hidden {
+    display: none;
+}
+
+.menu-visible {
+    display: block;
+}

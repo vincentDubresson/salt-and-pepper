@@ -6,7 +6,7 @@
 
 html {
     font-size: 16px;
-    @apply font-satoshi-regular text-gray-900
+    @apply font-satoshi-regular text-gray-900 bg-white
 }
 
 /**
