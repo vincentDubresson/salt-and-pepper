@@ -10,7 +10,7 @@ module.exports = {
       'success': '#04b34f',
       'caution': '#ff9900',
       'error': '#a6192e',
-      'white': '#ffffff',
+      'white': '#fbfbff',
       'black': '#000000',
 
       transparent: "transparent",

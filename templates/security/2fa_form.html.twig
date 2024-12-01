@@ -9,8 +9,7 @@
     {% endif %}
 
     {# Display current two-factor provider #}
-    <div class="flex flex-col justify-start items-center w-11/12 sm:w-4/5 lg:w-2/3 mx-auto">
-        {{ component('LogoBig') }}
+    <div class="flex flex-col justify-start items-center w-11/12 sm:w-4/5 lg:w-2/3 mx-auto mt-20">
         <h4 class="mb-3">Code de vérification</h4>
         <form class="w-full max-w-lg my-5" action="{{ checkPathUrl ? checkPathUrl : path(checkPathRoute) }}" method="post">
             <div class="flex flex-col justify-center items-center gap-3 mt-5">
