@@ -18,3 +18,5 @@ ssl
 /tmp/phpstan/
 /var/
 /vendor/
+/public/images/
+/public/media/
