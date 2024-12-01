@@ -32,6 +32,11 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\EventListener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, priority: 10 }
+
+
     App\EventListener\UserActivationListener:
         arguments:
             $tokenStorage: '@security.token_storage'
@@ -89,7 +94,10 @@ services:
 
     admin.recipe:
         class: App\Admin\RecipeAdmin
-#        calls:
-#            - [setTemplate, ['layout', 'admin/ingredient/layout.html.twig']]
         tags:
             - { name: sonata.admin, model_class: App\Entity\Recipe, controller: App\Controller\Admin\RecipeAdminCRUDController,  manager_type: orm, label: common.recipes }
+
+    admin.recipes_ingredients:
+        class: App\Admin\RecipesIngredientsAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\RecipesIngredients, manager_type: orm, label: common.ingredients }

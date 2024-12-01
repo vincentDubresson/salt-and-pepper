@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\BooleanFilter;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
 use Sonata\DoctrineORMAdminBundle\Filter\StringFilter;
+use Sonata\Form\Type\CollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -31,11 +32,32 @@ use Symfony\Component\Validator\Constraints\NotNull;
  */
 class RecipeAdmin extends AbstractAdmin
 {
+    protected function preValidate(object $object): void
+    {
+        if (!$object instanceof Recipe) {
+            throw new \InvalidArgumentException('You must have a Recipe at this point.');
+        }
+
+        if ($this->isCurrentRoute('create')) {
+            // Todo : Service Recipe pour générer la référence.
+            $reference = 'TEMP-REF';
+
+            $object->setReference($reference);
+        }
+        dd($object);
+    }
+
     protected function configureFormFields(FormMapper $form): void
     {
         $form
             ->tab('General', ['label' => 'common.infos_1'])
             ->with('common.main_feature', ['class' => 'col-md-6', 'label' => 'common.main_feature'])
+            ->add('reference', TextType::class, [
+                'label' => 'common.reference',
+                'empty_data' => '',
+                'required' => false,
+                'disabled' => true,
+            ])
             ->add('label', TextType::class, [
                 'label' => 'common.recipe_name',
                 'empty_data' => '',
@@ -129,6 +151,18 @@ class RecipeAdmin extends AbstractAdmin
                 'label' => 'common.resting_time',
                 'input' => 'datetime',
                 'by_reference' => false,
+            ])
+            ->end()
+            ->end()
+            ->tab('Ingredients', ['label' => 'common.ingredients'])
+            ->with('Ingredients', ['label' => 'common.ingredients'])
+            ->add('recipesIngredients', CollectionType::class, [
+                'label' => false,
+                'by_reference' => true,
+                'btn_add' => 'common.add_ingredient',
+            ], [
+                'edit' => 'inline',
+                'inline' => 'table',
             ])
             ->end()
             ->end()

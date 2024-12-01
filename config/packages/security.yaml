@@ -100,6 +100,10 @@ security:
             - ROLE_ADMIN_RECIPE_DELETE
             - ROLE_ADMIN_RECIPE_EXPORT
 
+            - ROLE_ADMIN_RECIPES_INGREDIENTS_CREATE
+            - ROLE_ADMIN_RECIPES_INGREDIENTS_EDIT
+            - ROLE_ADMIN_RECIPES_INGREDIENTS_DELETE
+
 when@test:
     security:
         password_hashers:

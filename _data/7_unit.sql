@@ -1,4 +1,4 @@
-INSERT INTO `unit` (`id`, `label`, `abbreviation`, `created_at`, `updated_at`) VALUES
+INSERT IGNORE INTO `unit` (`id`, `label`, `abbreviation`, `created_at`, `updated_at`) VALUES
 (1, 'Milligramme', 'mg', NOW(), NOW()),
 (2, 'Centigramme', 'cg', NOW(), NOW()),
 (3, 'Décigramme', 'dg', NOW(), NOW()),
@@ -59,4 +59,5 @@ INSERT INTO `unit` (`id`, `label`, `abbreviation`, `created_at`, `updated_at`) V
 (58, 'Douzaine', 'dz', NOW(), NOW()),
 (59, 'Demie douzaine', '1/2 dz', NOW(), NOW()),
 (60, 'Filet', 'filet', NOW(), NOW()),
-(61, 'Zeste', 'zeste', NOW(), NOW());
+(61, 'Zeste', 'zeste', NOW(), NOW()),
+(62, 'Tour', 'tour', NOW(), NOW());
