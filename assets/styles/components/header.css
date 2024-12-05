@@ -1,6 +1,6 @@
 .sap-header {
     @apply relative bg-white;
-    box-shadow: 0 4px 2px -2px #eee;
+    box-shadow: 0 4px 2px -2px #e5e5e5;
     z-index: 10;
 
     .sap-header-nav {
@@ -22,47 +22,60 @@
         }
     }
 
-    .sap-header-nav-search-bar {
-        @apply absolute bottom-0 w-full h-[50px] bg-[#1da7ee] w-11/12 sm:w-4/5 lg:w-2/3 mx-auto left-0 right-0;
-        z-index: 5; /* Correction : placé sous `.header-nav` mais au-dessus du reste */
+    .sap-header-nav-search-bar-hidden {
+        @apply absolute bottom-1 w-full h-[50px] w-11/12 sm:w-4/5 lg:w-2/3 max-w-3xl mx-auto left-0 right-0;
+        z-index: 5;
+        transition: 0.3s;
 
-        p { text-align: center; }
+        .sap-header-nav-search-bar-container {
+            @apply relative;
+
+            label {
+                .sap-header-nav-search-bar-input {
+                    @apply relative block w-full h-[51px] ps-3.5 p-2.5 rounded-full font-satoshi-regular font-normal;
+                }
+            }
+
+            .sap-header-nav-search-bar-button {
+                @apply absolute inset-y-0 end-0 flex items-center justify-center w-[90px] h-[49px] mt-[1px] me-[1px] bg-gray-100 border-l rounded-r-full transition;
+
+                .sap-header-nav-search-bar-button-icon {
+                    @apply w-6 h-6 text-gray-500;
+                }
+            }
+        }
+    }
+
+    .sap-header-nav-user-menu-hidden {
+        @apply absolute right-0 top-[60px] mt-2 w-48 md:w-52 lg:w-56 bg-white shadow-lg ring-1 ring-black/5 focus:outline-none;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 5;
+        transition: 0.3s;
+    }
+
+    .sap-header-nav-recipe-menu-hidden {
+        @apply absolute left-0 top-[60px] mt-2 w-48 md:w-52 lg:w-56 bg-white shadow-lg ring-1 ring-black/5 focus:outline-none;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 5;
+        transition: 0.3s;
     }
 }
 
-
-
-
-
-
-/* Transition pour l'affichage du menu */
-.transition-enter {
-    transform: scale(0.95);
-    opacity: 0;
+.sap-header-nav-search-bar-collapse {
+    bottom: -60px !important;
+    transition: 0.3s;
 }
 
-.transition-enter-active {
-    transform: scale(1);
-    opacity: 1;
-    transition: transform 100ms ease-out, opacity 100ms ease-out;
+.sap-header-nav-user-menu-collapse {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: 0.3s;
 }
 
-.transition-leave {
-    transform: scale(1);
-    opacity: 1;
-}
-
-.transition-leave-active {
-    transform: scale(0.95);
-    opacity: 0;
-    transition: transform 75ms ease-in, opacity 75ms ease-in;
-}
-
-/* Base styles pour le menu */
-.menu-hidden {
-    display: none;
-}
-
-.menu-visible {
-    display: block;
+.sap-header-nav-recipe-menu-collapse {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: 0.3s;
 }

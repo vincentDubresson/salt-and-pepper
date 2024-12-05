@@ -1,5 +1,4 @@
-{# Todo : Ajouter la route de souscription #}
-
+{# TODO : Ajouter la route de souscription au tableau ci-dessous #}
 {% set hiddenIconsRoutes = [
     'app_security_login',
     'app_forgot_password_request',
@@ -8,24 +7,105 @@
     '2fa_login'
     ] %}
 
+{# TODO : Ajouter les routes sur les liens #}
+{% set recipeMenu = {
+    styleClass: 'sap-header-nav-recipe-menu-hidden',
+    scriptClass: 'js_header_recipe_menu',
+    role: 'recipe',
+    content: [
+        {
+            label: 'Menu 1',
+            href: '#'
+        },
+        {
+            label: 'Menu 2',
+            href: '#'
+        },
+        {
+            label: 'Menu 3',
+            href: '#'
+        },
+        {
+            label: 'Menu 4',
+            href: '#'
+        },
+        {
+            label: 'Menu 5',
+            href: '#'
+        }
+    ]
+} %}
+
+{# TODO : Ajouter les routes sur les liens #}
+{% set publicUserMenu = {
+    styleClass: 'sap-header-nav-user-menu-hidden',
+    scriptClass: 'js_header_user_menu',
+    role: 'user',
+    content: [
+        {
+            label: 'Se connecter',
+            href: path('app_security_login')
+        },
+        {
+            label: 'Créer son compte',
+            href: '#'
+        }
+    ]
+} %}
+
+{# TODO : Ajouter les routes sur les liens #}
+{% set content = [
+    {
+        label: 'Gérer mon compte',
+        href: path('app_security_login')
+    },
+    {
+        label: 'Gérer mes recettes',
+        href: '#'
+    },
+    {
+        label: 'Déconnexion',
+        href: path('app_security_logout')
+    }
+] %}
+
+{% set adminContent = {
+    label: 'Espace administrateur',
+    href: path('sonata_admin_dashboard')
+} %}
+
+{% if is_granted('ROLE_SONATA_ADMIN') %}
+    {% set content = [adminContent]|merge(content) %}
+{% endif %}
+
+{% set privateUserMenu = {
+    styleClass: 'sap-header-nav-user-menu-hidden',
+    scriptClass: 'js_header_user_menu',
+    role: 'user',
+    content: content
+} %}
+
 <header class="sap-header">
     <nav class="sap-header-nav">
 
         {% if app.current_route not in hiddenIconsRoutes %}
             {{ component('IconButton', {
                 styleButtonClass: 'header-nav-button',
-                scriptButtonClass: 'js_header_dropdown_recipe_button',
+                scriptButtonClass: 'js_header_recipe_button',
                 styleIconClass: 'header-nav-button-icon',
                 iconName: 'lucide:menu',
                 ariaLabel: 'menu'
             }) }}
+
+            {{ component('Includes/HeaderMenu', {
+                styleClass: recipeMenu.styleClass,
+                scriptClass: recipeMenu.scriptClass,
+                role: recipeMenu.role,
+                content: recipeMenu.content
+            }) }}
         {% endif %}
 
-        <img
-                class="logo-header absolute left-1/2 transform -translate-x-1/2"
-                src="{{ asset('images/logos/salt_and_pepper_logo.png') }}"
-                alt="logo salt and pepper"
-        />
+        {{ component('Includes/HeaderLogo') }}
 
         {% if app.current_route not in hiddenIconsRoutes %}
             <div class="header-nav-right-block">
@@ -46,41 +126,29 @@
                     ariaLabel: 'user'
                 }) }}
 
+                {% if app.user is empty %}
+                    {{ component('Includes/HeaderMenu', {
+                        styleClass: publicUserMenu.styleClass,
+                        scriptClass: publicUserMenu.scriptClass,
+                        role: publicUserMenu.role,
+                        content: publicUserMenu.content
+                    }) }}
+                {% else %}
+                    {{ component('Includes/HeaderMenu', {
+                        styleClass: privateUserMenu.styleClass,
+                        scriptClass: privateUserMenu.scriptClass,
+                        role: privateUserMenu.role,
+                        content: privateUserMenu.content
+                    }) }}
+                {% endif %}
+
             </div>
         {% endif %}
-        {#    <div>#}
-        {#        <button type="button" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="false" aria-haspopup="true">#}
-        {#            Options#}
-        {#            <svg class="-mr-1 size-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">#}
-        {#                <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />#}
-        {#            </svg>#}
-        {#        </button>#}
-        {#    </div>#}
 
-        {#    <!--#}
-        {#      Dropdown menu, show/hide based on menu state.#}
-
-        {#      Entering: "transition ease-out duration-100"#}
-        {#        From: "transform opacity-0 scale-95"#}
-        {#        To: "transform opacity-100 scale-100"#}
-        {#      Leaving: "transition ease-in duration-75"#}
-        {#        From: "transform opacity-100 scale-100"#}
-        {#        To: "transform opacity-0 scale-95"#}
-        {#    -->#}
-        {#    <div class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">#}
-        {#        <div class="py-1" role="none">#}
-        {#            <!-- Active: "bg-gray-100 text-gray-900 outline-none", Not Active: "text-gray-700" -->#}
-        {#            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-0">Account settings</a>#}
-        {#            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-1">Support</a>#}
-        {#            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-2">License</a>#}
-        {#            <form method="POST" action="#" role="none">#}
-        {#                <button type="submit" class="block w-full px-4 py-2 text-left text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>#}
-        {#            </form>#}
-        {#        </div>#}
-        {#    </div>#}
     </nav>
-    <div class="sap-header-nav-search-bar">
-        <p>blabla</p>
-    </div>
+
+    {% if app.current_route not in hiddenIconsRoutes %}
+        {{ component('Includes/HeaderSearchBar') }}
+    {% endif %}
 
 </header>

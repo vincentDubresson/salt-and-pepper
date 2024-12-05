@@ -7,6 +7,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -91,7 +92,13 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator implements A
             return new RedirectResponse($target);
         }
 
-        // Todo : Changer la redirection une fois que la page sera développée.
+        /** @var Session $session */
+        $session = $request->getSession();
+
+        $flashBag = $session->getFlashBag();
+
+        $flashBag->add('success', 'Authentification réussie.');
+
         return new RedirectResponse($this->router->generate('app_home'));
     }
 

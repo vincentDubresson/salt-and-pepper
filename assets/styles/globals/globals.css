@@ -4,7 +4,7 @@
 @tailwind utilities;
 /* stylelint-enable */
 
-html {
+body {
     font-size: 16px;
     @apply font-satoshi-regular text-gray-900 bg-white
 }
