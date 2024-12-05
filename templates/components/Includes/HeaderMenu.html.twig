@@ -1,0 +1,13 @@
+<div class="{{ styleClass }} {{ scriptClass }}" role="{{ role }}" aria-expanded="false">
+    <div class="py-1" role="none">
+        {% for data in content %}
+            {% if is_granted('ROLE_SONATA_ADMIN') and data.label is same as 'Espace administrateur' %}
+                <a href="{{ data.href }}" class="block px-4 py-2 text-red-500 hover:text-red-600">{{ data.label }}</a>
+            {% elseif app.user is defined and app.user is not empty and data.label is same as 'Déconnexion' %}
+                <a href="{{ data.href }}" class="block px-4 py-2 font-normal text-gray-700">{{ data.label }}</a>
+            {% else %}
+                <a href="{{ data.href }}" class="block px-4 py-2 text-gray-700">{{ data.label }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
