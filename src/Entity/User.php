@@ -237,7 +237,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return $this;
     }
 
-
     public function getRawPassword(): ?string
     {
         return $this->rawPassword;

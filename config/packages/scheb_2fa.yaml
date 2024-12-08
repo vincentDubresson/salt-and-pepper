@@ -19,3 +19,4 @@ scheb_two_factor:
     security_tokens:
         - Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
         - Symfony\Component\Security\Http\Authenticator\Token\PostAuthenticationToken
+    two_factor_condition: App\Security\Condition\OAuthCondition

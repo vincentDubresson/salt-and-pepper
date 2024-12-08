@@ -11,6 +11,7 @@ parameters:
     site_name: '%env(SITE_NAME)%'
     site_url: '%env(SITE_URL)%'
     site_logo_path: '%env(SITE_LOGO_PATH)%'
+    google_auth_redirect_uri: '%env(GOOGLE_REDIRECT_URI)%'
 
 imports:
     - { resource: '../vendor/ice/vich-uploader-bundle/Resources/config/config.yml' }
@@ -21,7 +22,8 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
-            $projectDir: '%kernel.project_dir%'
+            string $projectDir: '%kernel.project_dir%'
+            string $googleAuthRedirectUri: '%google_auth_redirect_uri%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -42,6 +44,10 @@ services:
             $tokenStorage: '@security.token_storage'
         tags:
             - { name: kernel.event_listener, event: kernel.request, priority: 0 }
+
+    App\Security\Condition\OAuthCondition:
+        arguments:
+            $trustedDeviceManager: '@scheb_two_factor.default_trusted_device_manager'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

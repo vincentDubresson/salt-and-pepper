@@ -17,6 +17,8 @@ class Button
     {
         return match ($this->action) {
             'log-in' => 'lucide:log-in',
+            'google-sign-in' => 'logos:google-icon',
+            'facebook-sign-in' => 'logos:facebook',
             'sign-in' => 'lucide:user-round-plus',
             'send' => 'lucide:send',
             'update' => 'radix-icons:update',
