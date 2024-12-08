@@ -1,16 +1,17 @@
 <div class="mb-3">
-    <label class="block" for="{{ data.vars.id }}">{{ label }}</label>
+    <label class="block" for="{{ data.vars.id }}">{{ label ?? data.vars.label }}</label>
     <div class="relative">
         <input
                 type="text"
                 name="{{ data.vars.full_name }}"
                 required="{{ data.vars.required }}"
                 id="{{ data.vars.id }}"
+                value="{{ data.vars.value }}"
                 class="block w-full ps-3.5 p-2.5"
-                placeholder="{{ placeholder }}"
-                inputmode="{{ inputmode }}"
-                pattern="{{ pattern }}"
-                autofocus="{{ autofocus }}"
+                {% if placeholder is defined and placeholder is not empty %}placeholder="{{ placeholder }}"{% endif %}
+                {% if inputmode is defined and inputmode is not empty %}inputmode="{{ inputmode }}"{% endif %}
+                {% if pattern is defined and pattern is not empty %}pattern="{{ pattern }}"{% endif %}
+                {% if autofocus is defined and autofocus is not empty %}autofocus="{{ autofocus }}"{% endif %}
         >
     </div>
     {% if data.vars.help is defined and data.vars.help is not empty %}
