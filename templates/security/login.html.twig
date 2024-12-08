@@ -34,7 +34,7 @@
             >
             <div class="flex flex-col justify-center items-center gap-3 mt-5">
                 {{ component('Button', {type: 'button', action: 'log-in', style: 'primary', content: 'Se connecter'}) }}
-                <p>Je n'ai pas de compte, <a href="{{ path('app_home') }}">je m'inscris</a></p>
+                <p>Je n'ai pas de compte, <a href="{{ path('app_security_register') }}">je m'inscris</a></p>
             </div>
 
         {{ form_end(form, {'render_rest': false}) }}

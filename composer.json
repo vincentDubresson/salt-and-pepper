@@ -9,6 +9,7 @@
         "ext-dom": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
+        "ext-http": "*",
         "amphp/http-client": "^4.2.1",
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.13",
