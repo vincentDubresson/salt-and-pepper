@@ -17,6 +17,11 @@ class SecurityController extends AbstractController
         'google' => [],
     ];
 
+    public function __construct(
+        private readonly string $googleAuthRedirectUri,
+    ) {
+    }
+
     #[Route(path: '/se-connecter', name: 'app_security_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -55,8 +60,9 @@ class SecurityController extends AbstractController
 
         return $clientRegistry
             ->getClient($service)
-            ->redirect(self::SCOPES[$service])
+            ->redirect(self::SCOPES[$service], ['redirect_uri' => $this->googleAuthRedirectUri])
         ;
+
     }
 
     #[Route('/oauth/check/{service}', name: 'auth_oauth_check', methods: ['GET', 'POST'])]

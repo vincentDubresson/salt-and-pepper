@@ -12,7 +12,7 @@
     <a class="
         {% if style == 'primary' %} button-primary {% endif %}
         {% if style == 'secondary' %} button-secondary {% endif %}
-    " href="{{ path(route) }}">
+    " href="{{ route }}">
         <twig:ux:icon name="{{ this.getIcon() }}" class="mr-2 h-5 w-5" />
         <span>{{ content }}</span>
     </a>

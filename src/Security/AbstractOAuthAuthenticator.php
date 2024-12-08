@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\OAuth2Authenticator;
+use League\OAuth2\Client\Provider\GoogleUser;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken;
 use Scheb\TwoFactorBundle\Security\Http\Authenticator\TwoFactorAuthenticator;
@@ -21,9 +22,6 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
-
-
 
 abstract class AbstractOAuthAuthenticator extends OAuth2Authenticator
 {
@@ -68,6 +66,7 @@ abstract class AbstractOAuthAuthenticator extends OAuth2Authenticator
     public function authenticate(Request $request): SelfValidatingPassport
     {
         $credentials = $this->fetchAccessToken($this->getClient());
+        /** @var GoogleUser $resourceOwner */
         $resourceOwner = $this->getResourceOwnerFromCredentials($credentials);
         $user = $this->getUserFromResourceOwner($resourceOwner, $this->repository);
 

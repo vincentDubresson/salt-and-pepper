@@ -14,12 +14,15 @@ final readonly class OAuthRegistrationService
      */
     public function persist(ResourceOwnerInterface $resourceOwner, UserRepository $repository): User
     {
+        /** @var string $googleUserId */
+        $googleUserId = $resourceOwner->getId();
+
         $user = (new User())
-            ->setFirstname($resourceOwner->getFirstname())
-            ->setLastname($resourceOwner->getLastname())
-            ->setEmail($resourceOwner->getEmail())
+            ->setFirstname((string) $resourceOwner->getFirstname())
+            ->setLastname((string) $resourceOwner->getLastname())
+            ->setEmail((string) $resourceOwner->getEmail())
             ->setRoles(['ROLE_USER'])
-            ->setGoogleAuthId($resourceOwner->getId())
+            ->setGoogleAuthId($googleUserId)
             ->setEnabled(true)
         ;
 
@@ -30,7 +33,10 @@ final readonly class OAuthRegistrationService
 
     public function update(ResourceOwnerInterface $resourceOwner, UserRepository $repository, User $user): User
     {
-        $user->setGoogleAuthId($resourceOwner->getId());
+        /** @var string $googleUserId */
+        $googleUserId = $resourceOwner->getId();
+
+        $user->setGoogleAuthId($googleUserId);
 
         $repository->add($user, true);
 

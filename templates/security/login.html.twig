@@ -10,14 +10,17 @@
         </div>
     {% endif %}
 
-    <div class="flex flex-col justify-start items-center w-11/12 sm:w-4/5 lg:w-2/3 mx-auto mt-20">
+    <div class="flex flex-col justify-start items-center w-11/12 sm:w-4/5 lg:w-2/3 mx-auto mt-10">
         <h4 class="mb-3">Se connecter</h4>
 
         {{ form_start(form, {'attr': {'class': 'w-full max-w-lg my-5'}}) }}
-        <p>
-            <a href="{{ path('auth_oauth_connect', {service: 'google'}) }}">Se connecter avec GitHub</a>
-        </p>
-            {{ component('Form/Email', {data: form._username}) }}
+
+        <div class="flex flex-col justify-center items-center gap-3 mt-5">
+            {{ component('Button', {type: 'link', action: 'google-sign-in', style: 'secondary', content: 'Se connecter avec Google', route: path('auth_oauth_connect', {service: 'google'})}) }}
+            <span>ou</span>
+        </div>
+
+        {{ component('Form/Email', {data: form._username}) }}
             {{ component('Form/Password', {data: form._password}) }}
             <div class="flex justify-between">
                 <div class="checkbox mb-3">
@@ -31,9 +34,7 @@
             >
             <div class="flex flex-col justify-center items-center gap-3 mt-5">
                 {{ component('Button', {type: 'button', action: 'log-in', style: 'primary', content: 'Se connecter'}) }}
-                <span>ou</span>
-                {# Todo : Modifier le lien vers création de compte #}
-                {{ component('Button', {type: 'link', action: 'sign-in', style: 'secondary', content: 'Créer un compte', route: 'app_home'}) }}
+                <p>Je n'ai pas de compte, <a href="{{ path('app_home') }}">je m'inscris</a></p>
             </div>
 
         {{ form_end(form, {'render_rest': false}) }}
