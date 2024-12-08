@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Bienvenue{% endblock %}
+
+{% block body %}
+
+    <div class="flex flex-col justify-start w-11/12 sm:w-4/5 lg:w-2/3 mx-auto mt-10">
+        <h4 class="mb-3 text-center">Conditions Générales d'Utilisation</h4>
+
+        <h5 class="mt-5 mb-2">1. Présentation du site</h5>
+        <p class="text-justify">
+            Le site Salt and Pepper (ci-après le "Site") est une plateforme en ligne permettant aux utilisateurs de consulter, partager et commenter des recettes de cuisine. Le Site est accessible via l'adresse <a href="{{ path('app_home') }}">https://salt-and-pepper.vdub-dev.com</a>.
+            <br>
+            L’utilisation du Site implique l’acceptation pleine et entière des présentes Conditions Générales d'Utilisation (CGU). Les utilisateurs sont invités à les lire attentivement avant toute navigation sur le Site.
+        </p>
+
+        <h5 class="mt-5 mb-2">2. Accès au site</h5>
+        <p class="text-justify">
+            Le Site est accessible gratuitement à tout utilisateur disposant d'un accès à Internet. Cependant, certaines fonctionnalités peuvent nécessiter la création d’un compte utilisateur.
+            <br>
+            L'éditeur du Site se réserve le droit de modifier, suspendre ou interrompre l'accès à tout ou partie du Site, à tout moment et sans préavis, notamment pour des raisons de maintenance ou de mise à jour.
+        </p>
+
+        <h5 class="mt-5 mb-2">3. Création de compte</h5>
+        <h6 class="mb2 font-bold">3.1 Inscription</h6>
+        <p class="text-justify">
+            Pour accéder à certaines fonctionnalités (ajout de recettes, commentaires, etc.), l'utilisateur doit créer un compte en fournissant des informations exactes, complètes et à jour.
+            <br>
+            Lors de l’inscription, l’utilisateur doit :
+        </p>
+        <ul class="mb-2">
+            <li class="ps-3">- Renseigner son nom et prénom.</li>
+            <li class="ps-3">- Fournir une adresse e-mail valide.</li>
+            <li class="ps-3">- Renseigner un mot de passe sécurisé.</li>
+        </ul>
+        <h6 class="mb2 font-bold">3.2 Responsabilité de l'utilisateur</h6>
+        <p class="text-justify">
+            L’utilisateur est seul responsable de la confidentialité de ses identifiants de connexion et de l’utilisation de son compte. En cas d’accès non autorisé, il doit en informer immédiatement l’équipe du Site.
+            <br>
+            Le Site ne saurait être tenu responsable des pertes ou dommages résultant de l’utilisation non autorisée du compte.
+        </p>
+
+        <h5 class="mt-5 mb-2">4. Services proposés</h5>
+        <p class="text-justify">
+            Le Site propose les services suivants :
+        </p>
+        <ul>
+            <li class="ps-3">- <b>Consultation des recettes</b> : Les utilisateurs peuvent naviguer parmi des recettes de cuisine classées par catégories.</li>
+            <li class="ps-3">- <b>Publication de recettes</b> : Les utilisateurs inscrits peuvent publier leurs propres recettes en respectant les consignes d'originalité et de clarté.</li>
+            <li class="ps-3">- <b>Commentaires et avis</b> : Les utilisateurs peuvent commenter et évaluer les recettes.</li>
+        </ul>
+        <p class="text-justify">L'éditeur du Site se réserve le droit de supprimer, sans préavis, toute recette ou commentaire jugé inapproprié, illégal ou contraire aux présentes CGU.</p>
+
+        <h5 class="mt-5 mb-2">5. Propriété intellectuelle</h5>
+        <h6 class="mb2 font-bold">5.1 Contenu du site</h6>
+        <p class="text-justify">
+            Tous les éléments présents sur le Site (textes, images, vidéos, logo, design) sont protégés par les lois relatives à la propriété intellectuelle.
+            Toute reproduction, modification, distribution ou exploitation, sans autorisation écrite préalable, est strictement interdite.
+        </p>
+        <h6 class="mb2 font-bold">5.2 Contenu des utilisateurs</h6>
+        <p class="text-justify">
+            Les recettes publiées par les utilisateurs restent leur propriété. En publiant du contenu sur le Site, l'utilisateur accorde à l'éditeur une licence non exclusive,
+            gratuite et mondiale permettant de reproduire, modifier, et diffuser ce contenu sur le Site.
+        </p>
+
+        <h5 class="mt-5 mb-2">6. Comportement des utilisateurs</h5>
+        <p class="text-justify">
+            En utilisant le Site, l'utilisateur s'engage à :
+        </p>
+        <ul>
+            <li class="ps-3">- <b>Respecter les autres utilisateurs</b> (pas d’insultes, de propos discriminatoires, etc.).</li>
+            <li class="ps-3">- <b>Ne pas publier de contenu illicite</b> (recettes ou commentaires à caractère violent, raciste, pornographique, etc.).</li>
+            <li class="ps-3">- <b>Ne pas utiliser le Site à des fins frauduleuses</b> (tentative de piratage, diffusion de logiciels malveillants, etc.).</li>
+        </ul>
+        <p class="text-justify">En cas de non-respect de ces règles, l’éditeur se réserve le droit de suspendre ou supprimer le compte de l'utilisateur, voire d'engager des poursuites judiciaires.</p>
+
+        <h5 class="mt-5 mb-2">7. Limitation de responsabilité</h5>
+        <p class="text-justify">
+            Le Site s'efforce de garantir l'exactitude des informations publiées, mais ne peut être tenu responsable des éventuelles erreurs, omissions ou inexactitudes dans les recettes ou les commentaires des utilisateurs.
+            <br>
+            Le Site ne saurait non plus être tenu responsable des conséquences liées à l’utilisation des recettes (erreurs culinaires, allergies, etc.). Il appartient à chaque utilisateur de vérifier les ingrédients et les consignes avant de les appliquer.
+            <br>
+            En cas de problème technique, l’éditeur mettra tout en œuvre pour rétablir l’accès au Site, mais ne peut être tenu responsable des interruptions ou bugs.
+        </p>
+
+        <h5 class="mt-5 mb-2">8. Liens hypertextes</h5>
+        <p class="text-justify">
+            Le Site peut contenir des liens hypertextes pointant vers des sites tiers. Ces liens sont fournis à titre informatif. L’éditeur du Site ne contrôle pas ces sites et ne peut être tenu responsable de leur contenu, de leurs services ou de leur politique de confidentialité.
+        </p>
+
+        <h5 class="mt-5 mb-2">9. Protection des données personnelles</h5>
+        <p class="text-justify">
+            Le Site respecte la législation en vigueur relative à la protection des données personnelles (RGPD).
+            <br>
+            {# Todo : Mettre le lien vers la page de politique de protection des données #}
+            Merci de vous référer à la <a href="#">Politique de Protection des Données</a>.
+        </p>
+
+        <h5 class="mt-5 mb-2">10. Modification des CGU</h5>
+        <p class="text-justify">
+            Le Site se réserve le droit de modifier les présentes CGU à tout moment. Les utilisateurs seront informés des modifications par le biais d’une notification sur le Site ou par e-mail.
+            <br>
+            L’utilisation continue du Site après la mise à jour des CGU vaut acceptation des nouvelles conditions.
+        </p>
+
+        <h5 class="mt-5 mb-2">11. Durée et résiliation</h5>
+        <p class="text-justify">
+            Les présentes CGU s’appliquent à chaque utilisateur pour toute la durée de son utilisation du Site.
+            <br>
+            L’utilisateur peut à tout moment supprimer son compte en contactant le support à l’adresse <a href="mailto:contact@vdub-dev.com">contact@vdub-dev.com</a>. L’éditeur se réserve également le droit de résilier le compte d’un utilisateur en cas de non-respect des CGU.
+        </p>
+
+        <h5 class="mt-5 mb-2">12. Droit applicable et juridiction compétente</h5>
+        <p class="text-justify">
+            Les présentes CGU sont soumises au droit français. En cas de litige relatif à l’interprétation ou l’exécution des CGU, la juridiction compétente sera celle du tribunal du ressort du siège social de l’éditeur.
+        </p>
+
+        <h5 class="mt-5 mb-2">13. Contact</h5>
+        <p class="text-justify">
+            Pour toute question relative aux Conditions Générales d'Utilisation (CGU) ou pour exercer vos droits relatifs à vos données personnelles, veuillez contacter l'éditeur du Site à l'adresse suivante :
+            <br>
+            <b>E-mail</b> : <a href="mailto:contact@vdub-dev.com">contact@vdub-dev.com</a>
+        </p>
+    </div>
+
+{% endblock %}
