@@ -30,10 +30,8 @@
         .sap-header-nav-search-bar-container {
             @apply relative;
 
-            label {
-                .sap-header-nav-search-bar-input {
-                    @apply relative block w-full h-[51px] ps-3.5 p-2.5 rounded-full font-satoshi-regular font-normal;
-                }
+            .sap-header-nav-search-bar-input {
+                @apply relative block w-full h-[51px] ps-3.5 p-2.5 rounded-full font-satoshi-regular font-normal;
             }
 
             .sap-header-nav-search-bar-button {

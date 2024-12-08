@@ -25,6 +25,13 @@
             {% endfor %}
         </div>
 
-        {% block body %}{% endblock %}
+        <div class="flex-grow">
+            {% block body %}
+            {% endblock %}
+        </div>
+
+
+        {# Footer #}
+        {{ component('Footer') }}
     </body>
 </html>

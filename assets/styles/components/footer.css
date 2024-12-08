@@ -1,0 +1,11 @@
+.sap-footer {
+    @apply relative flex flex-col gap-y-6 justify-center items-center bg-primary-400 mt-10;
+
+    .sap-footer-content {
+        @apply w-5/6 sm:w-3/4 lg:w-3/5 xl:w-2/5 flex flex-col py-2;
+
+        .sap-footer-text {
+            @apply text-xs text-center;
+        }
+    }
+}
