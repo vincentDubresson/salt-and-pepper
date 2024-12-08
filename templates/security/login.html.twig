@@ -14,7 +14,9 @@
         <h4 class="mb-3">Se connecter</h4>
 
         {{ form_start(form, {'attr': {'class': 'w-full max-w-lg my-5'}}) }}
-
+        <p>
+            <a href="{{ path('auth_oauth_connect', {service: 'google'}) }}">Se connecter avec GitHub</a>
+        </p>
             {{ component('Form/Email', {data: form._username}) }}
             {{ component('Form/Password', {data: form._password}) }}
             <div class="flex justify-between">

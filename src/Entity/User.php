@@ -65,17 +65,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column(type: Types::INTEGER)]
     private int $trustedVersion = 0;
 
-    /**
-     * @var string The hashed password
-     */
-    #[ORM\Column(type: Types::STRING)]
-    private string $password;
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private ?string $password = null;
 
     #[PasswordStrength([
         'minScore' => PasswordStrength::STRENGTH_MEDIUM,
         'message' => 'Le mot de passe est trop simple. Veuillez saisir un mot de passe plus sécurisé.',
     ])]
     protected ?string $rawPassword = null;
+
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private ?string $googleAuthId = null;
 
     /**
      * @var list<string> The user roles
@@ -218,12 +218,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(?string $password): static
     {
         $this->password = $password;
 
         return $this;
     }
+
+    public function getGoogleAuthId(): ?string
+    {
+        return $this->googleAuthId;
+    }
+
+    public function setGoogleAuthId(?string $googleAuthId): static
+    {
+        $this->googleAuthId = $googleAuthId;
+
+        return $this;
+    }
+
 
     public function getRawPassword(): ?string
     {

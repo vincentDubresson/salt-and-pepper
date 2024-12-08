@@ -8,6 +8,8 @@ nelmio_security:
     external_redirects:
         abort: true
         log: true
+        allow_list:
+            - 'https://accounts.google.com'
 
     # prevents inline scripts, unsafe eval, external scripts/images/styles/frames, etc
     csp:
