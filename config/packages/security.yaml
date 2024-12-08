@@ -23,8 +23,10 @@ security:
                 interval: '5 minutes'
             lazy: true
             provider: app_user_provider
+            entry_point: App\Security\LoginFormAuthenticator
             custom_authenticators:
                 - App\Security\LoginFormAuthenticator
+                - App\Security\GoogleAuthenticator
             logout:
                 path: app_security_logout
                 # where to redirect after logout
