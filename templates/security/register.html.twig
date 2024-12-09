@@ -4,12 +4,6 @@
 
 {% block body %}
 
-{#    {% if error %}
-        <div class="fixed bottom-4 right-4 flex flex-col space-y-4 max-w-[500px]">
-                {{ component('Alert', {type: 'error', message: error.messageKey|trans(error.messageData, 'security')}) }}
-        </div>
-    {% endif %}#}
-
     <div class="flex flex-col justify-start items-center w-11/12 sm:w-4/5 lg:w-2/3 mx-auto mt-10">
         <h4 class="mb-3">Créer mon compte</h4>
 
@@ -28,7 +22,7 @@
                 En créant votre compte, vous acceptez les
                 <a class="text-sm" href="{{ path('app_legal_cgu') }}">Conditions Générales d'Utilisation</a>
                 et reconnaissez que vos données personnelles seront traitées conformément à notre
-                <a class="text-sm" href="#">Politique de Protection des Données Personnelles</a>.
+                <a class="text-sm" href="{{ path('app_legal_rgpd') }}">Politique de Protection des Données Personnelles</a>.
             </p>
             {{ component('Button', {type: 'button', action: 'sign-in', style: 'primary', content: 'Créer mon compte'}) }}
         </div>
