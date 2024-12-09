@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Bienvenue{% endblock %}
+
+{% block body %}
+
+    <div class="flex flex-col justify-start w-11/12 sm:w-4/5 lg:w-2/3 mx-auto mt-10">
+        <h4 class="mb-3 text-center">Politique de Protection des Données Personnelles</h4>
+        <h4 class="mb-3 text-center">Dernière mise à jour : le 09 Décembre 2024</h4>
+
+        <h5 class="mt-5 mb-2">1. Introduction</h5>
+        <p class="text-justify">
+            La protection de vos données personnelles est une priorité pour Salt and Pepper (ci-après "le Site"). Cette politique explique comment nous collectons, utilisons et protégeons vos données personnelles. En accédant au Site, vous acceptez les conditions de cette politique.
+        </p>
+
+        <h5 class="mt-5 mb-2">2. Responsable du traitement des données</h5>
+        <p class="text-justify">
+            Le responsable du traitement des données est Salt & Pepper, représenté par Vincent Dubresson. Pour toute question relative à la protection de vos données, vous pouvez nous contacter à l'adresse e-mail suivante : <a href="mailto:contact@vdub-dev.com">contact@vdub-dev.com</a>.
+        </p>
+
+        <h5 class="mt-5 mb-2">3. Données collectées</h5>
+        <p class="text-justify">
+            Dans le cadre de l'utilisation du Site, nous collectons et traitons les catégories de données suivantes :
+        </p>
+        <h6 class="font-bold">Données collectées automatiquement</h6>
+        <ul class="mb-2">
+            <li class="ps-3">- <b>Addresse IP</b> : pour assurer la sécurité et prévenir les abus.</li>
+            <li class="ps-3">- <b>User Agent</b> : pour des raisons de compatibilité et de sécurité.</li>
+        </ul>
+        <h6 class="font-bold">Données fournies lors de l’inscription</h6>
+        <ul class="mb-2">
+            <li class="ps-3">- <b>Nom</b> (obligatoire).</li>
+            <li class="ps-3">- <b>Prénom</b> (obligatoire).</li>
+            <li class="ps-3">- <b>E-mail</b> (obligatoire).</li>
+        </ul>
+        <h6 class="font-bold">Données fournies dans le compte utilisateur</h6>
+        <ul class="mb-2">
+            <li class="ps-3">- <b>Adresse postale</b> (optionnelle).</li>
+        </ul>
+        <h6 class="font-bold">Données collectées lors de l'utilisation</h6>
+        <ul class="mb-2">
+            <li class="ps-3">- <b>Contenu des recettes publiées par l'utilisateur</b>.</li>
+            <li class="ps-3">- <b>vis et commentaires sur les recettes des autres utilisateurs</b>.</li>
+        </ul>
+        <p class="text-justify">
+            Aucune donnée sensible (comme des données de santé ou des informations financières) n'est collectée.
+        </p>
+
+        <h5 class="mt-5 mb-2">4. Données collectées</h5>
+        <p class="text-justify">
+            Les données collectées sont utilisées pour les finalités suivantes :
+        </p>
+        <ul class="mb-2">
+            <li class="ps-3">- <b>Gestion des comptes utilisateurs</b> : création, accès et modification des comptes.</li>
+            <li class="ps-3">- <b>Publication et gestion des recettes</b> : permettre aux utilisateurs de publier, consulter et commenter des recettes.</li>
+            <li class="ps-3">- <b>Sécurité et prévention des fraudes</b> : identification des accès suspects et prévention des abus.</li>
+            <li class="ps-3">- <b>mélioration de l'expérience utilisateur</b> : optimisation de l'affichage et de la compatibilité du Site.</li>
+        </ul>
+
+        <h5 class="mt-5 mb-2">5. Base légale du traitement des données</h5>
+        <p class="text-justify">
+            Les traitements de vos données reposent sur les bases légales suivantes :
+        </p>
+        <ul class="mb-2">
+            <li class="ps-3">- <b>L'exécution du contrat</b> : la collecte des données est nécessaire pour l'utilisation du Site et de ses fonctionnalités (création de compte, dépôt de recettes, etc.).</li>
+            <li class="ps-3">- <b>L'intérêt légitime</b> : assurer la sécurité du Site et prévenir les fraudes.</li>
+            <li class="ps-3">- <b>Le respect des obligations légales</b> : dans le cadre de la sécurité et des obligations légales de conservation des journaux de connexion.</li>
+        </ul>
+
+        <h5 class="mt-5 mb-2">6. Durée de conservation des données</h5>
+        <p class="text-justify">
+            Les durées de conservation des données dépendent de la nature des informations :
+        </p>
+        <ul class="mb-2">
+            <li class="ps-3">- <b>Données de compte utilisateur (nom, prénom, email, adresse) </b> : conservées tant que le compte est actif. Elles sont supprimées à la demande de l'utilisateur ou après 12 mois d'inactivité.</li>
+            <li class="ps-3">- <b>Adresse IP et user agent</b> : conservés pendant 30 jours à des fins de sécurité.</li>
+            <li class="ps-3">- <b>Données de recettes et avis publiés</b> : conservées aussi longtemps que les recettes et commentaires sont affichés sur le Site.</li>
+        </ul>
+        <p class="text-justify">
+            Les cookies ont une durée de vie conforme aux standards légaux. Les cookies de session expirent à la fermeture du navigateur.
+        </p>
+
+        <h5 class="mt-5 mb-2">7. Utilisation des cookies</h5>
+        <p class="text-justify">
+            Le Site utilise des cookies strictement nécessaires à son bon fonctionnement. Ces cookies ne nécessitent pas de consentement conformément à la législation en vigueur.
+        </p>
+        <h6 class="font-bold">Cookies utilisés</h6>
+        <ul class="mb-2">
+            <li class="ps-3">- <b>__SAP-SESSID</b> : Cookie de session - Durée : 3 jours.</li>
+            <li class="ps-3">- <b>__SAP-REMEMBERME</b> : Cookie de persistance - Durée : 7 jours.</li>
+            <li class="ps-3">- <b>__SAP-TRUSTED</b> : Cookie de confiance (après double authentification) - Durée : 3 mois.</li>
+        </ul>
+        <p class="text-justify">
+            Les cookies listés ci-dessus ne nécessitent aucun consentement.
+        </p>
+        <p class="text-justify">
+            À ce jour, aucun cookie publicitaire ou de profilage n'est utilisé.
+        </p>
+
+        <h5 class="mt-5 mb-2">8. Partage et destinataires des données</h5>
+        <p class="text-justify">
+            Les données collectées ne sont <b>ni vendues</b>, <b>ni louées</b>, <b>ni partagées avec des tiers</b>.
+            Elles peuvent toutefois être transmises aux autorités en cas de demande légale ou de réquisition judiciaire.
+        </p>
+
+        <h5 class="mt-5 mb-2">9. Vos droits</h5>
+        <p class="text-justify">
+            Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :
+        </p>
+        <ul class="mb-2">
+            <li class="ps-3">- <b>Droit d'accès</b> : obtenir la confirmation que vos données sont traitées et y accéder.</li>
+            <li class="ps-3">- <b>Droit de rectification</b> : corriger les données inexactes ou incomplètes.</li>
+            <li class="ps-3">- <b>Droit de suppression</b> : demander la suppression de vos données, notamment en cas de suppression de votre compte.</li>
+            <li class="ps-3">- <b>Droit d'opposition</b> : s'opposer au traitement de vos données, notamment à des fins de sécurité (sauf obligation légale).</li>
+            <li class="ps-3">- <b>Droit à la limitation</b> : demander la suspension du traitement de vos données dans certains cas.</li>
+            <li class="ps-3">- <b>Droit à la portabilité</b> : recevoir vos données dans un format structuré et lisible, ou les transférer à un autre service.</li>
+        </ul>
+        <p class="text-justify">
+            Pour exercer ces droits, veuillez nous contacter à l'adresse suivante : <a href="mailto:contact@vdub-dev.com">contact@vdub-dev.com</a>. Une réponse vous sera apportée dans un délai de 30 jours.
+        </p>
+
+        <h5 class="mt-5 mb-2">10. Sécurité des données</h5>
+        <p class="text-justify">
+            Nous mettons en œuvre des mesures techniques et organisationnelles pour assurer la protection de vos données personnelles contre tout accès, divulgation, altération ou destruction non autorisés.
+        </p>
+        <p class="text-justify">
+            Ces mesures comprennent notamment :
+        </p>
+        <ul class="mb-2">
+            <li class="ps-3">- L'accès restreint aux données personnelles.</li>
+            <li class="ps-3">- La surveillance des accès pour détecter les activités suspectes.</li>
+        </ul>
+
+        <h5 class="mt-5 mb-2">12. Droits des utilisateurs mineurs</h5>
+        <p class="text-justify">
+            Le Site ne collecte pas intentionnellement de données de mineurs de moins de 15 ans. Les parents ou tuteurs peuvent demander la suppression des données relatives à un mineur en contactant <a href="mailto:contact@vdub-dev.com">contact@vdub-dev.com</a>.
+        </p>
+
+        <h5 class="mt-5 mb-2">13. Contact</h5>
+        <p class="text-justify">
+            Pour toute question relative à la présente politique de protection des données ou pour exercer vos droits, vous pouvez nous contacter à l'adresse suivante :
+        </p>
+        <p class="text-justify font-bold">Salt and Pepper</p>
+        <p class="text-justify">Adresse e-mail : <a href="mailto:contact@vdub-dev.com">contact@vdub-dev.com</a></p>
+
+
+
+    </div>
+
+{% endblock %}

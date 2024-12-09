@@ -106,6 +106,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     private bool $admin = false;
 
+    // Todo : Ajouter date de connexion pour RGPD
+
     /**
      * @var Collection<int, Recipe>
      */
