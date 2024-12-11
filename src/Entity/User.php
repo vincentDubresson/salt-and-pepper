@@ -101,6 +101,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\JoinColumn(name: 'country_id', referencedColumnName: 'id')]
     private ?Country $country = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $lastConnectionAt = null;
+
     #[ORM\Column(type: Types::BOOLEAN, nullable: false)]
     private bool $enabled = false;
 
@@ -399,6 +402,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
                 $recipe->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLastConnectionAt(): ?\DateTimeInterface
+    {
+        return $this->lastConnectionAt;
+    }
+
+    public function setLastConnectionAt(?\DateTimeInterface $lastConnectionAt): static
+    {
+        $this->lastConnectionAt = $lastConnectionAt;
 
         return $this;
     }

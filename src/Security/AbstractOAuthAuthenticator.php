@@ -4,6 +4,7 @@ namespace App\Security;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\OAuth2Authenticator;
@@ -33,6 +34,7 @@ abstract class AbstractOAuthAuthenticator extends OAuth2Authenticator
         private readonly RouterInterface $router,
         private readonly UserRepository $repository,
         private readonly OAuthRegistrationService $registrationService,
+        private readonly EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -44,6 +46,8 @@ abstract class AbstractOAuthAuthenticator extends OAuth2Authenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        $this->updateLastConnectionAt($token);
+
         /** @var Session $session */
         $session = $request->getSession();
 
@@ -99,5 +103,16 @@ abstract class AbstractOAuthAuthenticator extends OAuth2Authenticator
     private function getClient(): OAuth2ClientInterface
     {
         return $this->clientRegistry->getClient($this->serviceName);
+    }
+
+    private function updateLastConnectionAt(TokenInterface $token): void
+    {
+        /** @var User $user */
+        $user = $token->getUser();
+
+        $user->setLastConnectionAt(new \DateTime());
+
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 }

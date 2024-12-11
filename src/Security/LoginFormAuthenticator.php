@@ -2,7 +2,9 @@
 
 namespace App\Security;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +14,6 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
@@ -20,6 +21,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class LoginFormAuthenticator extends AbstractLoginFormAuthenticator implements AuthenticationEntryPointInterface
@@ -32,6 +34,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator implements A
         private readonly UserRepository $userRepository,
         private readonly RouterInterface $router,
         private readonly LoggerInterface $loginLogger,
+        private readonly EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -88,6 +91,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator implements A
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        $this->updateLastConnectionAt($token);
+
         if ($target = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($target);
         }
@@ -104,7 +109,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator implements A
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
-        $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
+        $request->getSession()->set(SecurityRequestAttributes::AUTHENTICATION_ERROR, $exception);
 
         return new RedirectResponse(
             $this->router->generate('app_security_login')
@@ -114,5 +119,16 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator implements A
     protected function getLoginUrl(Request $request): string
     {
         return $this->router->generate('app_security_login');
+    }
+
+    private function updateLastConnectionAt(TokenInterface $token): void
+    {
+        /** @var User $user */
+        $user = $token->getUser();
+
+        $user->setLastConnectionAt(new \DateTime());
+
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 }
