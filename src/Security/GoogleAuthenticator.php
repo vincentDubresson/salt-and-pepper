@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use League\OAuth2\Client\Provider\GoogleUser;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class GoogleAuthenticator extends AbstractOAuthAuthenticator
@@ -22,8 +23,19 @@ class GoogleAuthenticator extends AbstractOAuthAuthenticator
             throw new AuthenticationException('email not verified');
         }
 
+        $passwordHasherFactory = new PasswordHasherFactory([
+            'common' => ['algorithm' => 'bcrypt'],
+        ]);
+
+        /** @var string $resourceOwnerGoogleId */
+        $resourceOwnerGoogleId = $resourceOwner->getId();
+
+        $hasher = $passwordHasherFactory->getPasswordHasher('common');
+
+        $hashedGoogleUserId = $hasher->hash($resourceOwnerGoogleId);
+
         return $repository->findOneBy([
-            'googleAuthId' => $resourceOwner->getId(),
+            'googleAuthId' => $hashedGoogleUserId,
             'email' => $resourceOwner->getEmail(),
         ]);
     }

@@ -1,0 +1,24 @@
+{% extends 'base_email.html.twig' %}
+
+{% block email_content %}
+
+    <h4>Bonjour {{ firstname }} {{ lastname }},</h4>
+
+    <p>Faisant suite à notre précédente communication, nous procédons aujourd'hui à la suppression définitive de votre compte, conformément à nos Conditions Générales d'Utilisation.</p>
+
+    <p>Votre compte a été supprimé en date du {{ "now"|date("m/d/Y") }}.</p>
+
+    <p>Cette suppression est irrévocable et intervient suite à une période d'inactivité de 12 mois consécutifs.</p>
+
+    <p>Conformément à notre Politique de Protection des Données Personnelles, vos commentaires sont supprimés. Les recettes quant à elles sont conservées aussi longtemps qu'elles seront affichées sur le site.</p>
+
+    <p>Cordialement,</p>
+
+    <h4>Salt & Pepper</h4>
+
+{% endblock %}
+
+{% block email_footer %}
+    <p>Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</p>
+    {{ parent() }}
+{% endblock %}

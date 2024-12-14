@@ -6,9 +6,14 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use League\OAuth2\Client\Provider\GoogleUser;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final readonly class OAuthRegistrationService
 {
+    public function __construct(private UserPasswordHasherInterface $passwordHasher)
+    {
+    }
+
     /**
      * @param GoogleUser $resourceOwner
      */
@@ -17,12 +22,16 @@ final readonly class OAuthRegistrationService
         /** @var string $googleUserId */
         $googleUserId = $resourceOwner->getId();
 
-        $user = (new User())
+        $user = new User();
+
+        $hashedGoogleUserId = $this->passwordHasher->hashPassword($user, $googleUserId);
+
+        $user
             ->setFirstname((string) $resourceOwner->getFirstname())
             ->setLastname((string) $resourceOwner->getLastname())
             ->setEmail((string) $resourceOwner->getEmail())
             ->setRoles(['ROLE_USER'])
-            ->setGoogleAuthId($googleUserId)
+            ->setGoogleAuthId($hashedGoogleUserId)
             ->setEnabled(true)
         ;
 
@@ -35,8 +44,9 @@ final readonly class OAuthRegistrationService
     {
         /** @var string $googleUserId */
         $googleUserId = $resourceOwner->getId();
+        $hashedGoogleUserId = $this->passwordHasher->hashPassword($user, $googleUserId);
 
-        $user->setGoogleAuthId($googleUserId);
+        $user->setGoogleAuthId($hashedGoogleUserId);
 
         $repository->add($user, true);
 

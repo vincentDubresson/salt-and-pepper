@@ -20,6 +20,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
+     * @return array<User>
+     */
+    public function getAllInactiveWithoutAdminsSinceXMonths(int $months): array
+    {
+        $date = (new \DateTimeImmutable("-$months months"))->format('Y-m-d');
+        $adminRole = '["ROLE_ADMIN"]';
+
+        return $this->getEntityManager()->createQuery(
+            'SELECT u 
+             FROM App\Entity\User u 
+             WHERE JSON_CONTAINS(u.roles, :role) = 0
+             AND DATE(u.lastConnectionAt) < :date'
+        )
+            ->setParameter('date', $date)
+            ->setParameter('role', $adminRole)
+            ->getResult()
+        ;
+    }
+
+    /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
@@ -36,6 +56,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function add(User $user, bool $flush = false): void
     {
         $this->getEntityManager()->persist($user);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(User $user, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($user);
 
         if ($flush) {
             $this->getEntityManager()->flush();
