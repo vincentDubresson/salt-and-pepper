@@ -24,17 +24,17 @@ return [
         'path' => './assets/error.js',
         'entrypoint' => true,
     ],
-    'jquery' => [
-        'version' => '3.7.1',
-    ],
-    '@hotwired/stimulus' => [
-        'version' => '3.2.2',
-    ],
     '@symfony/stimulus-bundle' => [
         'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
     ],
     '@symfony/ux-live-component' => [
         'path' => './vendor/symfony/ux-live-component/assets/dist/live_controller.js',
+    ],
+    'jquery' => [
+        'version' => '3.7.1',
+    ],
+    '@hotwired/stimulus' => [
+        'version' => '3.2.2',
     ],
     'tom-select' => [
         'version' => '2.4.1',
