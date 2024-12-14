@@ -53,4 +53,35 @@ return [
         'version' => '2.4.1',
         'type' => 'css',
     ],
+    'flowbite/plugin' => [
+        'version' => '2.5.2',
+    ],
+    'mini-svg-data-uri' => [
+        'version' => '1.4.4',
+    ],
+    'tailwindcss/plugin' => [
+        'version' => '3.4.13',
+    ],
+    'tailwindcss/defaultTheme' => [
+        'version' => '3.4.13',
+    ],
+    'tailwindcss/colors' => [
+        'version' => '3.4.13',
+    ],
+    'picocolors' => [
+        'version' => '1.1.0',
+    ],
+    'flowbite' => [
+        'version' => '2.5.2',
+    ],
+    '@popperjs/core' => [
+        'version' => '2.11.8',
+    ],
+    'flowbite-datepicker' => [
+        'version' => '1.3.0',
+    ],
+    'flowbite/dist/flowbite.min.css' => [
+        'version' => '2.5.2',
+        'type' => 'css',
+    ],
 ];

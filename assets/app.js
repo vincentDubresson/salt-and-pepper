@@ -6,6 +6,7 @@ import './bootstrap.js';
  * which should already be in your base.html.twig.
  */
 import 'jquery';
+import 'flowbite';
 import './scripts/components/toast.js';
 import './scripts/components/header.js';
 

@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Recipe;
+use App\Repository\Trait\RepositoryTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -11,33 +13,53 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class RecipeRepository extends ServiceEntityRepository
 {
+    use RepositoryTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Recipe::class);
     }
 
-    //    /**
-    //     * @return Recipe[] Returns an array of Recipe objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('r.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * @return ?Recipe
+     */
+    public function getRandomRecipe(): mixed
+    {
+        return $this
+            ->getActiveOptimisedQb()
+            ->addOrderBy('RAND()')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 
-    //    public function findOneBySomeField($value): ?Recipe
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    private function getOptimisedQb(): QueryBuilder
+    {
+        // Todo : Ajouter Commentaires
+        // Todo : Ajouter Likes
+
+        return $this
+            ->createQueryBuilder('e')
+            ->addSelect(
+                'sc',
+                'scc',
+                'ct',
+                'd',
+                'c',
+                'u',
+                'rin',
+                'rs',
+                'rim'
+            )
+            ->innerJoin('e.subcategory', 'sc')
+            ->innerJoin('sc.category', 'scc')
+            ->innerJoin('e.cookingType', 'ct')
+            ->innerJoin('e.difficulty', 'd')
+            ->innerJoin('e.cost', 'c')
+            ->innerJoin('e.user', 'u')
+            ->innerJoin('e.recipesIngredients', 'rin')
+            ->innerJoin('e.recipeSteps', 'rs')
+            ->innerJoin('e.recipeImages', 'rim')
+        ;
+    }
 }
