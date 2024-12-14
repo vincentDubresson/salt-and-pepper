@@ -11,6 +11,7 @@ use KnpU\OAuth2ClientBundle\Security\Authenticator\OAuth2Authenticator;
 use League\OAuth2\Client\Provider\GoogleUser;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken;
+use Psr\Log\LoggerInterface;
 use Scheb\TwoFactorBundle\Security\Http\Authenticator\TwoFactorAuthenticator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,6 +36,8 @@ abstract class AbstractOAuthAuthenticator extends OAuth2Authenticator
         private readonly UserRepository $repository,
         private readonly OAuthRegistrationService $registrationService,
         private readonly EntityManagerInterface $entityManager,
+        private readonly LoggerInterface $loginLogger,
+
     ) {
     }
 
@@ -82,6 +85,17 @@ abstract class AbstractOAuthAuthenticator extends OAuth2Authenticator
                 $user = $this->registrationService->persist($resourceOwner, $this->repository);
             }
         }
+
+        $userEmail = $user->getEmail();
+
+        $ip = $request->getClientIp();
+        $userAgent = $request->headers->get('User-Agent');
+
+        $this->loginLogger->info('Authentication attempt', [
+            'ip' => $ip,
+            'email' => $userEmail,
+            'user_agent' => $userAgent,
+        ]);
 
         return new SelfValidatingPassport(
             userBadge: new UserBadge($user->getUserIdentifier(), fn () => $user),
