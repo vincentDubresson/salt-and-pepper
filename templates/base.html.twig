@@ -4,7 +4,8 @@
         <meta charset="UTF-8">
         <title>{% block title %}Salt & Pepper -{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Salt & Pepper">
+        <meta name="description" content="{% block meta_description %}Salt & Pepper - Épicez votre quotidien avec Salt and Pepper : des recettes qui réveillent les papilles et enchantent les assiettes !{% endblock %}" />
+        <meta name="keywords" content="salt, pepper, {% block meta_keywords %}{% endblock %}" />
         <link rel="icon" href="{{ asset('images/favicon.png') }}">
 
 

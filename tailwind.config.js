@@ -3,7 +3,9 @@ module.exports = {
   important: false,
   content: [
     "./assets/**/*.{css,js}",
-    "./templates/**/*.html.twig"
+    "./templates/**/*.html.twig",
+    "./assets/vendor/flowbite/**/*.js",
+    "./assets/vendor/mini-svg-data-uri/*.js"
   ],
   theme: {
     colors: {
@@ -174,5 +176,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('./assets/vendor/flowbite/plugin')
+  ],
 }

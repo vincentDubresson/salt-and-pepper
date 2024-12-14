@@ -13,6 +13,7 @@ doctrine:
             string_functions:
                 JSON_CONTAINS: DoctrineExtensions\Query\Mysql\JsonContains
                 DATE: DoctrineExtensions\Query\Mysql\Date
+                RAND: DoctrineExtensions\Query\Mysql\Rand
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         mappings:
             App:
