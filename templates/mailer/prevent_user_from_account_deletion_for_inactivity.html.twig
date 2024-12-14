@@ -1,0 +1,30 @@
+{% extends 'base_email.html.twig' %}
+
+{% block email_content %}
+
+    <h4>Bonjour {{ firstname }} {{ lastname }},</h4>
+
+    <p>Nous avons remarqué que vous n'avez pas utilisé votre compte sur Salt & Pepper depuis un certain temps. Conformément à notre politique de gestion des comptes inactifs, votre compte sera automatiquement supprimé dans 30 jours si aucune activité n'est détectée d'ici là.</p>
+
+    <h4>Pourquoi cette suppression ?</h4>
+
+    <p>Pour garantir la sécurité de vos données et maintenir notre base d'utilisateurs à jour, nous supprimons les comptes inactifs depuis 12 mois.</p>
+
+    <h4>Que pouvez-vous faire ?</h4>
+
+    <p>Pour conserver votre compte, il vous suffit de vous connecter à votre espace personnel à l'adresse suivante : {{ absolute_url(path('app_security_login')) }}.</p>
+
+    <p>Si vous souhaitez continuer à partager vos recettes favorites, assurez-vous de vous reconnecter dans le mois qui vient.</p>
+
+    <p>Nous espérons vous revoir bientôt sur Salt & Pepper !</p>
+
+    <p>Cordialement,</p>
+
+    <h4>Salt & Pepper</h4>
+
+{% endblock %}
+
+{% block email_footer %}
+    <p>Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</p>
+    {{ parent() }}
+{% endblock %}
