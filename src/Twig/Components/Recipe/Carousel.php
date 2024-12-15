@@ -11,6 +11,8 @@ class Carousel
 {
     /**
      * @var Collection<RecipeImage>
+     *
+     * @phpstan-ignore-next-line
      */
     private Collection $pictures;
 }
