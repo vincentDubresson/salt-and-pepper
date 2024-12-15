@@ -9,6 +9,7 @@ import 'jquery';
 import 'flowbite';
 import './scripts/components/toast.js';
 import './scripts/components/header.js';
+import './scripts/recipe/recipe_detail.js';
 
 import './styles/app.css';
 import './styles/globals/font.css';

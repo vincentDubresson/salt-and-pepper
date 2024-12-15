@@ -12,4 +12,6 @@ class IconButton
     public string $styleIconClass;
     public string $iconName;
     public string $ariaLabel;
+    public ?string $title = null;
+    public ?string $attributes = null;
 }

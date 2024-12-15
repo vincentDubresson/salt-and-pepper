@@ -11,11 +11,36 @@
         {# Breadcumb #}
         {{ component('Recipe/Breadcrumb', {subcategory: recipe.subcategory, recipeTitle: recipe.label}) }}
 
+        {# Title + Like #}
+        <div class="flex justify-between align-center mb-5">
+            <h4 class="flex-grow leading-tight">{{ recipe.label }}</h4>
+            {% if app.user is defined and app.user is not empty %}
+                {{ component('IconButton', {
+                    styleButtonClass: recipe.recipeUserFavorites is empty ? '' : 'hidden',
+                    scriptButtonClass: 'js_recipe_unliked_icon self-end',
+                    styleIconClass: 'w-5 h-5 md:w-6 md:h-6 mx-1 text-primary-500',
+                    iconName: 'fa6-regular:heart',
+                    ariaLabel: 'like',
+                    title: 'Ajouter aux favoris',
+                    attributes: 'data-user=' ~ recipe.user.id ~ ' data-recipe=' ~ recipe.id
+                }) }}
+
+                {{ component('IconButton', {
+                    styleButtonClass: recipe.recipeUserFavorites is empty ? 'hidden' : '',
+                    scriptButtonClass: 'js_recipe_liked_icon self-end',
+                    styleIconClass: 'w-5 h-5 md:w-6 md:h-6 mx-1 text-primary-500',
+                    iconName: 'fa6-solid:heart',
+                    ariaLabel: 'like',
+                    title: 'Retirer des favoris',
+                    attributes: 'data-user=' ~ recipe.user.id ~ ' data-recipe=' ~ recipe.id
+                }) }}
+            {% endif %}
+
+        </div>
 
         {# Image #}
         {{ component('Recipe/Carousel', {images: recipe.recipeImages}) }}
 
     </div>
-    {% dump(recipe) %}
 
 {% endblock %}

@@ -1,15 +1,15 @@
 <div class="
     min-w-[300px] max-w-[500px] p-4 rounded-md  shadow-lg fade-in
-    {% if type == 'information' %} bg-information {% endif %}
-    {% if type == 'success' %} bg-success {% endif %}
-    {% if type == 'caution' %} bg-caution {% endif %}
-    {% if type == 'error' %} bg-error {% endif %}
+    {% if type == 'information' %} bg-information border border-blue-300 {% endif %}
+    {% if type == 'success' %} bg-success border border-green-300 {% endif %}
+    {% if type == 'caution' %} bg-caution border border-yellow-300 {% endif %}
+    {% if type == 'error' %} bg-error border border-red-300 {% endif %}
 " role="alert">
     <div class="flex items-center font-satoshi-regular text-p sm:text-p-sm md:text-p-md lg:text-p-lg xl:text-p-xl font-semibold
-    {% if type == 'information' %} text-white {% endif %}
-    {% if type == 'success' %} text-black {% endif %}
-    {% if type == 'caution' %} text-black {% endif %}
-    {% if type == 'error' %} text-white {% endif %}
+    {% if type == 'information' %} text-alert-information {% endif %}
+    {% if type == 'success' %} text-alert-success {% endif %}
+    {% if type == 'caution' %} text-alert-caution {% endif %}
+    {% if type == 'error' %} text-alert-error {% endif %}
 ">
         <twig:ux:icon name="{{ this.getIcon() }}" class="mr-2 h-5 w-5" />
         <span>{{ message }}</span>

@@ -9,10 +9,14 @@ module.exports = {
   ],
   theme: {
     colors: {
-      'information': '#0057b8',
-      'success': '#04b34f',
-      'caution': '#ff9900',
-      'error': '#a6192e',
+      'information': '#ebf5ff',
+      'success': '#f4faf8',
+      'caution': '#fefde9',
+      'error': '#fcf2f1',
+      'alert-information': '#1E40AF',
+      'alert-success': '#065F46',
+      'alert-caution': '#92400E',
+      'alert-error': '#991B1B',
       'white': '#fbfbff',
       'black': '#000000',
 

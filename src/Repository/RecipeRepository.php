@@ -46,7 +46,8 @@ class RecipeRepository extends ServiceEntityRepository
                 'u',
                 'rin',
                 'rs',
-                'rim'
+                'rim',
+                'ruf'
             )
             ->innerJoin('e.subcategory', 'sc')
             ->innerJoin('sc.category', 'scc')
@@ -57,6 +58,7 @@ class RecipeRepository extends ServiceEntityRepository
             ->innerJoin('e.recipesIngredients', 'rin')
             ->innerJoin('e.recipeSteps', 'rs')
             ->innerJoin('e.recipeImages', 'rim')
+            ->leftJoin('e.recipeUserFavorites', 'ruf')
         ;
     }
 }
