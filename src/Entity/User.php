@@ -117,9 +117,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'user')]
     private Collection $recipes;
 
+    /**
+     * @var Collection<int, RecipeUserFavorites>
+     */
+    #[ORM\OneToMany(targetEntity: RecipeUserFavorites::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $recipeUserFavorites;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
+        $this->recipeUserFavorites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -414,6 +421,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function setLastConnectionAt(?\DateTimeInterface $lastConnectionAt): static
     {
         $this->lastConnectionAt = $lastConnectionAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RecipeUserFavorites>
+     */
+    public function getRecipeUserFavorites(): Collection
+    {
+        return $this->recipeUserFavorites;
+    }
+
+    public function addRecipeUserFavorite(RecipeUserFavorites $recipeUserFavorite): static
+    {
+        if (!$this->recipeUserFavorites->contains($recipeUserFavorite)) {
+            $this->recipeUserFavorites->add($recipeUserFavorite);
+            $recipeUserFavorite->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipeUserFavorite(RecipeUserFavorites $recipeUserFavorite): static
+    {
+        if ($this->recipeUserFavorites->removeElement($recipeUserFavorite)) {
+            // set the owning side to null (unless already changed)
+            if ($recipeUserFavorite->getUser() === $this) {
+                $recipeUserFavorite->setUser(null);
+            }
+        }
 
         return $this;
     }

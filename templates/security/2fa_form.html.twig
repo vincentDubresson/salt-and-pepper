@@ -3,7 +3,7 @@
 {% block body %}
     {# Authentication errors #}
     {% if authenticationError %}
-        <div class="fixed bottom-4 right-4 flex flex-col space-y-4 max-w-[500px]">
+        <div class="fixed top-[130px] right-4 flex flex-col space-y-4 max-w-[500px]">
             {{ component('Alert', {type: 'error', message: authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle')}) }}
         </div>
     {% endif %}
