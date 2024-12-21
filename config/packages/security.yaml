@@ -114,6 +114,10 @@ security:
             - ROLE_ADMIN_RECIPE_IMAGE_EDIT
             - ROLE_ADMIN_RECIPE_IMAGE_DELETE
 
+            - ROLE_ADMIN_RECIPES_COMMENTS_LIST
+            - ROLE_ADMIN_RECIPES_COMMENTS_EDIT
+            - ROLE_ADMIN_RECIPES_COMMENTS_DELETE
+
 when@test:
     security:
         password_hashers:

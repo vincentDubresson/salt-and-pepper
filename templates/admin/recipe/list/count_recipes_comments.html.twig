@@ -1,0 +1,13 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    {% if value > 0 %}
+    <a href="{{ path('admin_app_recipescomments_list', {
+        'filter[recipe][value]': object.id
+    }) }}">
+        <p class="label label-primary">{{ value }}</p>
+    </a>
+    {% else %}
+        <p class="label label-primary">{{ value }}</p>
+    {% endif %}
+{% endblock %}

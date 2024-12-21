@@ -121,3 +121,8 @@ services:
         class: App\Admin\RecipeImageAdmin
         tags:
             - { name: sonata.admin, model_class: App\Entity\RecipeImage, manager_type: orm, label: common.images }
+
+    admin.recipes_comments:
+        class: App\Admin\RecipesCommentsAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\RecipesComments, manager_type: orm, label: common.recipes_comments }

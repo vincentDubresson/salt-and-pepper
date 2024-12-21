@@ -109,8 +109,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     private bool $admin = false;
 
-    // Todo : Ajouter date de connexion pour RGPD
-
     /**
      * @var Collection<int, Recipe>
      */
@@ -120,13 +118,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     /**
      * @var Collection<int, RecipeUserFavorites>
      */
-    #[ORM\OneToMany(targetEntity: RecipeUserFavorites::class, mappedBy: 'user', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: RecipeUserFavorites::class, mappedBy: 'user', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $recipeUserFavorites;
+
+    /**
+     * @var Collection<int, RecipesComments>
+     */
+    #[ORM\OneToMany(targetEntity: RecipesComments::class, mappedBy: 'user', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $recipesComments;
 
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
         $this->recipeUserFavorites = new ArrayCollection();
+        $this->recipesComments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -446,6 +451,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function removeRecipeUserFavorite(RecipeUserFavorites $recipeUserFavorite): static
     {
         $this->recipeUserFavorites->removeElement($recipeUserFavorite);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RecipesComments>
+     */
+    public function getRecipesComments(): Collection
+    {
+        return $this->recipesComments;
+    }
+
+    public function addRecipesComment(RecipesComments $recipesComment): static
+    {
+        if (!$this->recipesComments->contains($recipesComment)) {
+            $this->recipesComments->add($recipesComment);
+            $recipesComment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipesComment(RecipesComments $recipesComment): static
+    {
+        $this->recipesComments->removeElement($recipesComment);
 
         return $this;
     }

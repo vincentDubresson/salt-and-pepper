@@ -10,7 +10,9 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
+use Sonata\DoctrineORMAdminBundle\Filter\BooleanFilter;
 use Sonata\DoctrineORMAdminBundle\Filter\StringFilter;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
@@ -38,6 +40,10 @@ class UnitAdmin extends AbstractAdmin
                 'empty_data' => '',
                 'required' => true,
             ])
+            ->add('pluralizable', CheckboxType::class, [
+                'label' => 'common.pluralizable',
+                'required' => false,
+            ])
             ->end()
         ;
     }
@@ -53,6 +59,10 @@ class UnitAdmin extends AbstractAdmin
                 'label' => 'common.abbreviation',
                 'show_filter' => true,
             ])
+            ->add('pluralizable', BooleanFilter::class, [
+                'label' => 'common.pluralizable',
+                'show_filter' => true,
+            ])
         ;
     }
 
@@ -64,6 +74,9 @@ class UnitAdmin extends AbstractAdmin
             ])
             ->add('abbreviation', FieldDescriptionInterface::TYPE_STRING, [
                 'label' => 'common.abbreviation',
+            ])
+            ->add('pluralizable', FieldDescriptionInterface::TYPE_BOOLEAN, [
+                'label' => 'common.pluralizable',
             ])
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'label' => 'common.actions',

@@ -264,7 +264,7 @@ class RecipeAdmin extends AbstractAdmin
                 'show_filter' => true,
             ])
             ->add('user', ModelFilter::class, [
-                'label' => 'common.cost',
+                'label' => 'common.author',
                 'field_type' => EntityType::class,
                 'field_options' => [
                     'class' => User::class,
@@ -302,6 +302,14 @@ class RecipeAdmin extends AbstractAdmin
                 'label' => 'common.cost',
                 'associated_property' => 'id',
                 'template' => 'admin/recipe/list/row_cost.html.twig',
+            ])
+            ->add('countRecipeUserFavorites', FieldDescriptionInterface::TYPE_STRING, [
+                'label' => 'common.recipe_user_favorites',
+                'template' => 'admin/recipe/list/count_recipe_user_favorites.html.twig',
+            ])
+            ->add('countRecipesComments', FieldDescriptionInterface::TYPE_STRING, [
+                'label' => 'common.recipes_comments',
+                'template' => 'admin/recipe/list/count_recipes_comments.html.twig',
             ])
             ->add('enabled', FieldDescriptionInterface::TYPE_BOOLEAN, [
                 'label' => 'common.enabled',
