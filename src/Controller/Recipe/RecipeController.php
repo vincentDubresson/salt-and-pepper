@@ -36,7 +36,8 @@ class RecipeController extends AbstractController
      */
     #[Route('/gestion-recette-favorites', name: 'sap_recipe_favorites', options: ['expose' => true], methods: ['POST'])]
     #[IsGranted(new Expression('is_granted("ROLE_USER")'))]
-    public function manageFavorites(Request $request, EntityManagerInterface $em, RecipeUserFavoritesRepository $recipeUserFavoritesRepository): JsonResponse {
+    public function manageFavorites(Request $request, EntityManagerInterface $em, RecipeUserFavoritesRepository $recipeUserFavoritesRepository): JsonResponse
+    {
 
         $userId = $request->get('userId');
         $recipeId = $request->get('recipeId');
@@ -63,6 +64,10 @@ class RecipeController extends AbstractController
             $recipeUserFavoritesRepository->addNew($user, $recipe);
 
             return new JsonResponse('Recette enregistrée dans vos favoris', Response::HTTP_OK);
+        }
+
+        if (!$recipeFavorite instanceof RecipeUserFavorites) {
+            return new JsonResponse(false, Response::HTTP_BAD_REQUEST);
         }
 
         $recipeUserFavoritesRepository->remove($recipeFavorite);

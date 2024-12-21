@@ -445,12 +445,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     public function removeRecipeUserFavorite(RecipeUserFavorites $recipeUserFavorite): static
     {
-        if ($this->recipeUserFavorites->removeElement($recipeUserFavorite)) {
-            // set the owning side to null (unless already changed)
-            if ($recipeUserFavorite->getUser() === $this) {
-                $recipeUserFavorite->setUser(null);
-            }
-        }
+        $this->recipeUserFavorites->removeElement($recipeUserFavorite);
 
         return $this;
     }

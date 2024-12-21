@@ -97,7 +97,7 @@
                 ariaLabel: 'menu'
             }) }}
 
-            {{ component('Includes/HeaderMenu', {
+            {{ component('Includes:HeaderMenu', {
                 styleClass: recipeMenu.styleClass,
                 scriptClass: recipeMenu.scriptClass,
                 role: recipeMenu.role,
@@ -105,7 +105,7 @@
             }) }}
         {% endif %}
 
-        {{ component('Includes/HeaderLogo') }}
+        {{ component('Includes:HeaderLogo') }}
 
         {% if app.current_route not in hiddenIconsRoutes %}
             <div class="header-nav-right-block">
@@ -127,14 +127,14 @@
                 }) }}
 
                 {% if app.user is empty %}
-                    {{ component('Includes/HeaderMenu', {
+                    {{ component('Includes:HeaderMenu', {
                         styleClass: publicUserMenu.styleClass,
                         scriptClass: publicUserMenu.scriptClass,
                         role: publicUserMenu.role,
                         content: publicUserMenu.content
                     }) }}
                 {% else %}
-                    {{ component('Includes/HeaderMenu', {
+                    {{ component('Includes:HeaderMenu', {
                         styleClass: privateUserMenu.styleClass,
                         scriptClass: privateUserMenu.scriptClass,
                         role: privateUserMenu.role,
@@ -148,7 +148,7 @@
     </nav>
 
     {% if app.current_route not in hiddenIconsRoutes %}
-        {{ component('Includes/HeaderSearchBar') }}
+        {{ component('Includes:HeaderSearchBar') }}
     {% endif %}
 
 </header>

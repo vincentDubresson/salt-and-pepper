@@ -424,12 +424,7 @@ class Recipe
 
     public function removeRecipeUserFavorite(RecipeUserFavorites $recipeUserFavorite): static
     {
-        if ($this->recipeUserFavorites->removeElement($recipeUserFavorite)) {
-            // set the owning side to null (unless already changed)
-            if ($recipeUserFavorite->getRecipe() === $this) {
-                $recipeUserFavorite->setRecipe(null);
-            }
-        }
+        $this->recipeUserFavorites->removeElement($recipeUserFavorite);
 
         return $this;
     }

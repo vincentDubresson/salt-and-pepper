@@ -1,7 +1,31 @@
 import $ from 'jquery';
 import AlertComponent from '../components/AlertComponent.js';
 
+
+function updatePlural(plural, number) {
+    plural.text(number > 1 ? 's' : '');
+}
+
+function updateIngredientQuantities(ingredientRows, servingNumber) {
+    ingredientRows.each(function () {
+        const $row = $(this);
+        const baseQuantity = parseFloat($row.data('quantity')); // Quantité de base depuis data-quantity
+        const unit = $row.data('unit'); // Récupérer l'unité depuis l'attribut data-unit
+        const pluralizableUnit = $row.data('pluralizable');
+        const newQuantity = Math.ceil(baseQuantity * servingNumber); // Mise à jour proportionnelle et arrondi supérieur
+        $row.find('.js_recipe_ingredient_quantity').text(newQuantity); // Mise à jour dans le DOM
+
+        if (unit && pluralizableUnit) {
+            const unitElement = $row.find('.js_recipe_ingredient_unit');
+            unitElement.text(newQuantity > 1 ? unit + 's' : unit);
+        }
+    });
+}
+
 $(document).ready(() => {
+    /**
+     * Gestion des likes
+     */
     const recipeLikeButton = $('.js_recipe_like_icon');
     const recipeUnlikeButton = $('.js_recipe_unlike_icon');
 
@@ -21,6 +45,7 @@ $(document).ready(() => {
             const isLikedRecipe = isLikeButton ? 1 : 0;
 
             $.ajax({
+                // eslint-disable-next-line
                 url: Routing.generate('sap_recipe_favorites'), // Remplacez par la bonne route
                 method: 'POST',
                 data: {
@@ -35,11 +60,10 @@ $(document).ready(() => {
                         AlertComponent.create('success', response);
                     }
                 },
-                error: function(xhr) {
+                error: function() {
                     AlertComponent.create('error', 'Impossible de traiter votre demande pour le moment.');
                 },
                 complete: function() {
-                    // Réactiver le bouton après la requête
                     clickedButton.prop('disabled', false);
                     if (isLikedRecipe) {
                         unlikedIcon.addClass('hidden');
@@ -52,4 +76,30 @@ $(document).ready(() => {
             });
         });
     }
+
+    /**
+     * Gestion des quantités
+     */
+    const servingNumber = $('.js_recipe_ingredient_serving_number');
+    const plural = $('.js_recipe_ingredient_plural');
+    const ingredientRows = $('.js_recipe_ingredient_row');
+
+
+    $('.js_recipe_ingredient_plus_icon').on('click', function () {
+        let currentNumber = parseInt(servingNumber.text(), 10);
+        // eslint-disable-next-line
+        servingNumber.text(++currentNumber);
+        updatePlural(plural, currentNumber);
+        updateIngredientQuantities(ingredientRows, currentNumber);
+    });
+
+    $('.js_recipe_ingredient_minus_icon').on('click', function () {
+        let currentNumber = parseInt(servingNumber.text(), 10);
+        if (currentNumber > 1) {
+            // eslint-disable-next-line
+            servingNumber.text(--currentNumber);
+            updatePlural(plural, currentNumber);
+            updateIngredientQuantities(ingredientRows, currentNumber);
+        }
+    });
 });
