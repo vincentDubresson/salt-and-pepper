@@ -126,12 +126,23 @@ class Recipe
     #[ORM\OneToMany(targetEntity: RecipeUserFavorites::class, mappedBy: 'recipe', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $recipeUserFavorites;
 
+    private int $countRecipeUserFavorites = 0;
+
+    /**
+     * @var Collection<int, RecipesComments>
+     */
+    #[ORM\OneToMany(targetEntity: RecipesComments::class, mappedBy: 'recipe', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $recipesComments;
+
+    private int $countRecipesComments = 0;
+
     public function __construct()
     {
         $this->recipesIngredients = new ArrayCollection();
         $this->recipeSteps = new ArrayCollection();
         $this->recipeImages = new ArrayCollection();
         $this->recipeUserFavorites = new ArrayCollection();
+        $this->recipesComments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -427,5 +438,40 @@ class Recipe
         $this->recipeUserFavorites->removeElement($recipeUserFavorite);
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, RecipesComments>
+     */
+    public function getRecipesComments(): Collection
+    {
+        return $this->recipesComments;
+    }
+
+    public function addRecipesComment(RecipesComments $recipesComment): static
+    {
+        if (!$this->recipesComments->contains($recipesComment)) {
+            $this->recipesComments->add($recipesComment);
+            $recipesComment->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipesComment(RecipesComments $recipesComment): static
+    {
+        $this->recipesComments->removeElement($recipesComment);
+
+        return $this;
+    }
+
+    public function getCountRecipeUserFavorites(): int
+    {
+        return count($this->recipeUserFavorites);
+    }
+
+    public function getCountRecipesComments(): int
+    {
+        return count($this->recipesComments);
     }
 }

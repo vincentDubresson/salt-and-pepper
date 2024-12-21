@@ -21,6 +21,7 @@ sonata_admin:
             common.recipes:
                 items:
                     - admin.recipe
+                    - admin.recipes_comments
             common.editable_parameters:
                 items:
                     - admin.category

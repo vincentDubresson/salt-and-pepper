@@ -59,6 +59,10 @@ common:
   title: Titre
   images: Images
   image: Image
+  pluralizable: Pluralisable
+  recipes_comments: Commentaires
+  recipes_comment: Commentaire
+  recipe_user_favorites: Likes
 
 'User List': Utilisateurs
 'User Create': Nouvel utilisateur
@@ -78,6 +82,8 @@ common:
 'Ingrédient Create': Nouvel ingrédient
 'Recipe Create': Recettes
 'Recipe List': Nouvelle recette
+'Recipes Comments List': Commentaires
+'Recipes Comments Create': Nouveau commentaire
 
 Hide: Cacher
 Show: Voir
