@@ -38,6 +38,9 @@ class Unit
     #[Assert\NoSuspiciousCharacters]
     private string $abbreviation;
 
+    #[ORM\Column(type: Types::BOOLEAN, nullable: false)]
+    private bool $pluralizable = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +71,18 @@ class Unit
     public function setAbbreviation(string $abbreviation): static
     {
         $this->abbreviation = $abbreviation;
+
+        return $this;
+    }
+
+    public function isPluralizable(): bool
+    {
+        return $this->pluralizable;
+    }
+
+    public function setPluralizable(bool $pluralizable): static
+    {
+        $this->pluralizable = $pluralizable;
 
         return $this;
     }

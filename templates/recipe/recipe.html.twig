@@ -7,39 +7,51 @@
 
 {% block body %}
     <div class="flex flex-col justify-start w-11/12 sm:w-4/5 lg:w-2/3 mx-auto mt-20">
-        {% dump(recipe) %}
-        {# Breadcumb #}
-        {{ component('Recipe/Breadcrumb', {subcategory: recipe.subcategory, recipeTitle: recipe.label}) }}
 
-        {# Title + Like #}
-        <div class="flex justify-between align-center mb-5">
-            <h4 class="flex-grow leading-tight">{{ recipe.label }}</h4>
-            {% if app.user is defined and app.user is not empty %}
-                {{ component('IconButton', {
-                    styleButtonClass: recipe.recipeUserFavorites is empty ? '' : 'hidden',
-                    scriptButtonClass: 'js_recipe_unliked_icon self-end',
-                    styleIconClass: 'w-5 h-5 md:w-6 md:h-6 mx-1 text-primary-500',
-                    iconName: 'fa6-regular:heart',
-                    ariaLabel: 'like',
-                    title: 'Ajouter aux favoris',
-                    attributes: 'data-user=' ~ recipe.user.id ~ ' data-recipe=' ~ recipe.id
+        {{ component('Recipe:Breadcrumb', {subcategory: recipe.subcategory, recipeTitle: recipe.label}) }}
+
+        {{ component('Recipe:Title', {recipe: recipe, user: app.user}) }}
+
+        <div class="flex flex-col xl:flex-row-reverse xl:gap-3">
+            {{ component('Recipe:Carousel', {images: recipe.recipeImages}) }}
+            <div class="flex flex-col xl:flex-col xl:w-full">
+                {{ component('Recipe:Resume', {
+                    preparationTime: recipe.preparationTime,
+                    cookingTime: recipe.cookingTime,
+                    restingTime: recipe.restingTime,
+                    costId: recipe.cost.id,
+                    difficultyId: recipe.difficulty.id
                 }) }}
-
-                {{ component('IconButton', {
-                    styleButtonClass: recipe.recipeUserFavorites is empty ? 'hidden' : '',
-                    scriptButtonClass: 'js_recipe_liked_icon self-end',
-                    styleIconClass: 'w-5 h-5 md:w-6 md:h-6 mx-1 text-primary-500',
-                    iconName: 'fa6-solid:heart',
-                    ariaLabel: 'like',
-                    title: 'Retirer des favoris',
-                    attributes: 'data-user=' ~ recipe.user.id ~ ' data-recipe=' ~ recipe.id
-                }) }}
-            {% endif %}
-
+                <div>
+                    {{ component('Recipe:Includes:Separator', {title: 'Note de l\'auteur'}) }}
+                    <p class="text-justify">{{ recipe.description }}</p>
+                </div>
+            </div>
         </div>
 
-        {# Image #}
-        {{ component('Recipe/Carousel', {images: recipe.recipeImages}) }}
+        <div class="flex flex-col w-full">
+            {{ component('Recipe:Includes:Separator', {title: 'Durées en détail'}) }}
+
+            {{ component('Recipe:Duration', {
+                preparationTime: recipe.preparationTime,
+                cookingTime: recipe.cookingTime,
+                restingTime: recipe.restingTime
+            }) }}
+        </div>
+
+        <div class="flex flex-col xl:flex-row xl:gap-3 w-full">
+            <div class="w-full">
+                {{ component('Recipe:Includes:Separator', {title: 'Ingrédients'}) }}
+                {{ component('Recipe:Ingredient', {
+                    servingNumber: recipe.servingNumber,
+                    recipeIngredients: recipe.recipesIngredients
+                }) }}
+            </div>
+            <div class="w-full">
+                {{ component('Recipe:Includes:Separator', {title: 'Étapes'}) }}
+                {{ component('Recipe:Step', {recipeSteps: recipe.recipeSteps}) }}
+            </div>
+        </div>
 
     </div>
 

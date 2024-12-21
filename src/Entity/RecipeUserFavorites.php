@@ -18,35 +18,35 @@ class RecipeUserFavorites
 
     #[ORM\ManyToOne(inversedBy: 'recipeUserFavorites')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Recipe $recipe = null;
+    private Recipe $recipe;
 
     #[ORM\ManyToOne(inversedBy: 'recipeUserFavorites')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    private User $user;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getRecipe(): ?Recipe
+    public function getRecipe(): Recipe
     {
         return $this->recipe;
     }
 
-    public function setRecipe(?Recipe $recipe): static
+    public function setRecipe(Recipe $recipe): static
     {
         $this->recipe = $recipe;
 
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): static
+    public function setUser(User $user): static
     {
         $this->user = $user;
 

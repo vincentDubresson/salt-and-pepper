@@ -45,6 +45,8 @@ class RecipeRepository extends ServiceEntityRepository
                 'c',
                 'u',
                 'rin',
+                'rins',
+                'rinu',
                 'rs',
                 'rim',
                 'ruf'
@@ -56,9 +58,13 @@ class RecipeRepository extends ServiceEntityRepository
             ->innerJoin('e.cost', 'c')
             ->innerJoin('e.user', 'u')
             ->innerJoin('e.recipesIngredients', 'rin')
+            ->innerJoin('rin.ingredient', 'rins')
+            ->leftJoin('rin.unit', 'rinu')
             ->innerJoin('e.recipeSteps', 'rs')
             ->innerJoin('e.recipeImages', 'rim')
             ->leftJoin('e.recipeUserFavorites', 'ruf')
+            ->addOrderBy('rin.sort', 'ASC')
+            ->addOrderBy('rs.step', 'ASC')
         ;
     }
 }
