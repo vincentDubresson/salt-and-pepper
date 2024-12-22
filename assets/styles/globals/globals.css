@@ -44,6 +44,8 @@ a,
 button,
 label,
 input,
+textarea,
+span,
 li {
     @apply text-p-sm md:text-p-md lg:text-p-lg xl:text-p-xl;
 }
@@ -73,6 +75,7 @@ input {
 
 input[type='text'],
 input[type='email'],
+textarea,
 input[type='password'] {
     @apply bg-gray-50 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 transition
 }

@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import AlertComponent from '../components/AlertComponent.js';
 
-
 function updatePlural(plural, number) {
     plural.text(number > 1 ? 's' : '');
 }
@@ -102,4 +101,54 @@ $(document).ready(() => {
             updateIngredientQuantities(ingredientRows, currentNumber);
         }
     });
+
+    /**
+     * Gestion des commentaires
+     */
+    const addrecipeCommentButton = $('.js_recipe_add_comment');
+    const recipeCommentErrorElement = $('.js_recipe_comment_error');
+
+    addrecipeCommentButton.on('click', function (e) {
+        e.preventDefault();
+
+        recipeCommentErrorElement.text('');
+
+        const recipeComment = $('.js_recipe_comment');
+        const comment = $.trim(recipeComment.val());
+
+        if (!comment) {
+            recipeCommentErrorElement.text('Merci de renseigner un commentaire.');
+        } else {
+            const loadingSpinner = $(this).find('.js_button_hidden_loading_spinner');
+
+            loadingSpinner.removeClass('hidden');
+
+            const recipeId = recipeComment.data('recipe');
+
+            $.ajax({
+                // eslint-disable-next-line
+                url: Routing.generate('sap_recipe_add_comment'), // Remplacez par la bonne route
+                method: 'POST',
+                data: {
+                    recipeId: recipeId,
+                    recipeComment: comment
+                },
+                success: function(response) {
+                    if (response === false) {
+                        AlertComponent.create('error', 'Impossible de traiter votre demande pour le moment.');
+                    } else {
+                        AlertComponent.create('success', 'Votre commentaire a été pris en compte. Il sera affiché une fois validé par l\'administrateur du site.');
+                        recipeComment.val('');
+                    }
+                },
+                error: function() {
+                    AlertComponent.create('error', 'Impossible de traiter votre demande pour le moment.');
+                },
+                complete: function() {
+                    loadingSpinner.addClass('hidden');
+                }
+            });
+
+        }
+    })
 });

@@ -29,7 +29,7 @@ export default class AlertComponent {
         alertElement.innerHTML = `
             <div class="flex items-center font-satoshi-regular text-p sm:text-p-sm md:text-p-md lg:text-p-lg xl:text-p-xl font-semibold">
                 ${typeIcones[type]}
-                <span>${message}</span>
+                <span class="w-11/12">${message}</span>
             </div>
         `;
 

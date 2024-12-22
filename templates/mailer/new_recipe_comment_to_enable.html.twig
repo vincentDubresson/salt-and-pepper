@@ -1,0 +1,22 @@
+{% extends 'base_email.html.twig' %}
+
+{% block email_content %}
+
+    <h4>Bonjour,</h4>
+
+    <p>Un nouveau commentaire a été ajouté.</p>
+
+    <p>Pour l'activer, merci de vous rendre sur la pages "Commentaires" de votre espace administrateur :</p>
+
+    <a href="{{ url('admin_app_recipescomments_list') }}">{{ url('admin_app_recipescomments_list') }}</a>
+
+    <p>Cordialement,</p>
+
+    <h4>Salt & Pepper</h4>
+
+{% endblock %}
+
+{% block email_footer %}
+    <p>Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</p>
+    {{ parent() }}
+{% endblock %}

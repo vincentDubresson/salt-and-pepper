@@ -4,7 +4,7 @@
     z-index: 10;
 
     .sap-header-nav {
-        @apply relative bg-white flex justify-between items-center w-11/12 sm:w-4/5 lg:w-2/3 mx-auto h-[70px] sm:h-[80px] md:h-[88px] lg:h-[98px] xl:h-[108px];
+        @apply relative bg-white flex justify-between items-center w-11/12 sm:w-4/5 lg:w-2/3 max-w-screen-2xl mx-auto h-[70px] sm:h-[80px] md:h-[88px] lg:h-[98px] xl:h-[108px];
         z-index: 20;
 
         .header-nav-button {
@@ -23,7 +23,7 @@
     }
 
     .sap-header-nav-search-bar-hidden {
-        @apply absolute bottom-1 w-full h-[50px] w-11/12 sm:w-4/5 lg:w-2/3 max-w-3xl mx-auto left-0 right-0;
+        @apply absolute bottom-1 w-full h-[50px] w-11/12 sm:w-4/5 lg:w-2/3 max-w-screen-2xl mx-auto left-0 right-0;
         z-index: 5;
         transition: 0.3s;
 

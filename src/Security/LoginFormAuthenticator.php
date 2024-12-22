@@ -104,6 +104,15 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator implements A
 
         $flashBag->add('success', 'Authentification réussie.');
 
+        /** @var ?string $redirectTo */
+        $redirectTo = $session->get('redirect_to');
+
+        if (!empty($redirectTo)) {
+            $session->remove('redirect_to');
+
+            return new RedirectResponse((string) $redirectTo);
+        }
+
         return new RedirectResponse($this->router->generate('app_home'));
     }
 

@@ -29,7 +29,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/se-connecter', name: 'app_security_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
         $user = $this->getUser();
 
@@ -43,6 +43,13 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         $form = $this->createForm(LoginFormType::class);
+
+        /** @var ?string $referer */
+        $referer = $request->headers->get('referer');
+
+        if (!empty($referer)) {
+            $request->getSession()->set('redirect_to', parse_url((string) $referer, PHP_URL_PATH));
+        }
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
@@ -80,6 +87,10 @@ class SecurityController extends AbstractController
     #[Route(path: '/creer-mon-compte', name: 'app_security_register', methods: ['GET', 'POST'])]
     public function register(Request $request, SecurityService $securityService): Response
     {
+        if ($this->getUser() instanceof User) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $form = $this->createForm(RegisterFormType::class);
         $form->handleRequest($request);
 
