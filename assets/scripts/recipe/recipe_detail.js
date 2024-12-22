@@ -5,13 +5,14 @@ function updatePlural(plural, number) {
     plural.text(number > 1 ? 's' : '');
 }
 
-function updateIngredientQuantities(ingredientRows, servingNumber) {
+function updateIngredientQuantities(ingredientRows, servingNumber, baseNumber) {
     ingredientRows.each(function () {
         const $row = $(this);
         const baseQuantity = parseFloat($row.data('quantity')); // Quantité de base depuis data-quantity
+        console.log(baseQuantity, servingNumber)
         const unit = $row.data('unit'); // Récupérer l'unité depuis l'attribut data-unit
         const pluralizableUnit = $row.data('pluralizable');
-        const newQuantity = Math.ceil(baseQuantity * servingNumber); // Mise à jour proportionnelle et arrondi supérieur
+        const newQuantity = (baseQuantity * (servingNumber / baseNumber)).toFixed(1); // Mise à jour proportionnelle et arrondi supérieur
         $row.find('.js_recipe_ingredient_quantity').text(newQuantity); // Mise à jour dans le DOM
 
         if (unit && pluralizableUnit) {
@@ -86,19 +87,21 @@ $(document).ready(() => {
 
     $('.js_recipe_ingredient_plus_icon').on('click', function () {
         let currentNumber = parseInt(servingNumber.text(), 10);
+        const baseNumber = parseInt(servingNumber.text(), 10);
         // eslint-disable-next-line
         servingNumber.text(++currentNumber);
         updatePlural(plural, currentNumber);
-        updateIngredientQuantities(ingredientRows, currentNumber);
+        updateIngredientQuantities(ingredientRows, currentNumber, baseNumber);
     });
 
     $('.js_recipe_ingredient_minus_icon').on('click', function () {
         let currentNumber = parseInt(servingNumber.text(), 10);
+        const baseNumber = parseInt(servingNumber.text(), 10);
         if (currentNumber > 1) {
             // eslint-disable-next-line
             servingNumber.text(--currentNumber);
             updatePlural(plural, currentNumber);
-            updateIngredientQuantities(ingredientRows, currentNumber);
+            updateIngredientQuantities(ingredientRows, currentNumber, baseNumber);
         }
     });
 

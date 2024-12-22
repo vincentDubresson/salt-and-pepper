@@ -41,6 +41,16 @@ class RecipeAdmin extends AbstractAdmin
         parent::__construct(Recipe::class);
     }
 
+    protected function preValidate(object $object): void
+    {
+        if (!$object instanceof Recipe) {
+            throw new \InvalidArgumentException('You must have a Recipe at this point.');
+        }
+
+        $object
+            ->setUpdatedAt(new \DateTime('now'));
+    }
+
     protected function prePersist(object $object): void
     {
         if (!$object instanceof Recipe) {
@@ -60,7 +70,6 @@ class RecipeAdmin extends AbstractAdmin
                 ->setReference($reference)
             ;
         }
-        dd($object);
     }
 
     protected function preUpdate(object $object): void
