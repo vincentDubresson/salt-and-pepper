@@ -1,7 +1,10 @@
+{% set countEnabledTitles = [
+    'Commentaires',
+] %}
 <div class="flex items-center gap-5 my-5 w-full">
     <div class="flex-auto border-b-2 border-primary-300"></div>
     <h5 class="font-semibold">
-        {{ title }}
+        {{ title }} {% if title in countEnabledTitles and count >= 0 %}({{ count }}){% endif %}
     </h5>
     <div class="flex-auto border-b-2 border-primary-300"></div>
 </div>
