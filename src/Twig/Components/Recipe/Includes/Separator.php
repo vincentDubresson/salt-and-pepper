@@ -8,4 +8,5 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class Separator
 {
     public string $title;
+    public ?int $count = null;
 }
