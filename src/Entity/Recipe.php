@@ -136,6 +136,9 @@ class Recipe
 
     private int $countRecipesComments = 0;
 
+    #[ORM\Column(type: Types::INTEGER)]
+    private int $views = 0;
+
     public function __construct()
     {
         $this->recipesIngredients = new ArrayCollection();
@@ -473,5 +476,17 @@ class Recipe
     public function getCountRecipesComments(): int
     {
         return count($this->recipesComments);
+    }
+
+    public function getViews(): int
+    {
+        return $this->views;
+    }
+
+    public function setViews(int $views): static
+    {
+        $this->views = $views;
+
+        return $this;
     }
 }

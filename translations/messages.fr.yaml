@@ -63,6 +63,7 @@ common:
   recipes_comments: Commentaires
   recipes_comment: Commentaire
   recipe_user_favorites: Likes
+  views: Vues
 
 'User List': Utilisateurs
 'User Create': Nouvel utilisateur

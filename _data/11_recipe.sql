@@ -18,7 +18,8 @@ INSERT INTO recipe
  enabled,
  created_at,
  updated_at,
- slug
+ slug,
+ views
 )
 VALUES
 (
@@ -40,5 +41,6 @@ VALUES
  0,
  NOW(),
  NOW(),
- 'oeufs-brouilles'
+ 'oeufs-brouilles',
+ 0
 );

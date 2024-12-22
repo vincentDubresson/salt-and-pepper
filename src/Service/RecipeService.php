@@ -3,9 +3,15 @@
 namespace App\Service;
 
 use App\Entity\Recipe;
+use Doctrine\ORM\EntityManagerInterface;
 
 class RecipeService
 {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+    ) {
+    }
+
     public function generateRecipeReference(Recipe $recipe): string
     {
         $date = new \DateTime();
@@ -30,5 +36,13 @@ class RecipeService
         }, $words);
 
         return implode('', $initials);
+    }
+
+    public function incrementViews(Recipe $recipe): void
+    {
+        $recipe->setViews($recipe->getViews() + 1);
+
+        $this->entityManager->persist($recipe);
+        $this->entityManager->flush();
     }
 }
