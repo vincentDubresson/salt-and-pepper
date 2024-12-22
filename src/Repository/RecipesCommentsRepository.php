@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Recipe;
 use App\Entity\RecipesComments;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,28 +18,16 @@ class RecipesCommentsRepository extends ServiceEntityRepository
         parent::__construct($registry, RecipesComments::class);
     }
 
-    //    /**
-    //     * @return RecipesComments[] Returns an array of RecipesComments objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('r.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function addRecipeComment(Recipe $recipe, User $user, string $comment): void
+    {
+        $recipeComment = (new RecipesComments())
+            ->setRecipe($recipe)
+            ->setUser($user)
+            ->setComment($comment)
+            ->setEnabled(false)
+        ;
 
-    //    public function findOneBySomeField($value): ?RecipesComments
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        $this->getEntityManager()->persist($recipeComment);
+        $this->getEntityManager()->flush();
+    }
 }

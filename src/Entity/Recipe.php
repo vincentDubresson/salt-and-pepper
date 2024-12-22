@@ -12,9 +12,6 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-// Todo : Ajouter Commentaires
-// Todo : Ajouter Likes
-
 #[ORM\Table(name: '`recipe`')]
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_REFERENCE', fields: ['reference'])]
@@ -475,7 +472,15 @@ class Recipe
 
     public function getCountRecipesComments(): int
     {
-        return count($this->recipesComments);
+        $count = 0;
+
+        foreach ($this->recipesComments as $recipeComment) {
+            if ($recipeComment->isEnabled()) {
+                ++$count;
+            }
+        }
+
+        return $count;
     }
 
     public function getViews(): int

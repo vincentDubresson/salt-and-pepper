@@ -7,7 +7,7 @@
         {{ component('IconButton', {
             styleButtonClass: recipe.recipeUserFavorites is empty ? '' : 'hidden',
             scriptButtonClass: 'js_recipe_unliked_icon self-end',
-            styleIconClass: 'w-5 h-5 md:w-6 md:h-6 mx-1 text-primary-500',
+            styleIconClass: 'w-5 h-5 md:w-6 md:h-6 mx-1 text-primary-600',
             iconName: 'fa6-regular:heart',
             ariaLabel: 'like',
             title: 'Ajouter aux favoris',
@@ -17,7 +17,7 @@
         {{ component('IconButton', {
             styleButtonClass: recipe.recipeUserFavorites is empty ? 'hidden' : '',
             scriptButtonClass: 'js_recipe_liked_icon self-end',
-            styleIconClass: 'w-5 h-5 md:w-6 md:h-6 mx-1 text-primary-500',
+            styleIconClass: 'w-5 h-5 md:w-6 md:h-6 mx-1 text-primary-600',
             iconName: 'fa6-solid:heart',
             ariaLabel: 'like',
             title: 'Retirer des favoris',

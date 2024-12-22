@@ -1,12 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{# Todo : Ajouter recette au titre #}
 {% block title %}{{ parent() }} {{ recipe.label }}{% endblock %}
 {% block meta_description %}{{ recipe.metaDescription }}{% endblock %}
 {% block meta_keywords %}{{ recipe.metaKeywords }}{% endblock %}
 
 {% block body %}
-    <div class="flex flex-col justify-start w-11/12 sm:w-4/5 lg:w-2/3 mx-auto mt-20">
+    <div class="flex flex-col justify-start w-11/12 sm:w-4/5 lg:w-2/3 max-w-screen-2xl mx-auto mt-20">
 
         {{ component('Recipe:Breadcrumb', {subcategory: recipe.subcategory, recipeTitle: recipe.label}) }}
 
@@ -53,8 +52,48 @@
             </div>
         </div>
 
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full items-center">
             {{ component('Recipe:Includes:Separator', {title: 'Commentaires', count: recipe.countRecipesComments}) }}
+            {% if app.user is not empty %}
+                <div class="w-full max-w-lg my-5">
+                    <div class="py-2 px-4 mb-4 bg-gray-50 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 transition ">
+                        <label for="comment" class="sr-only">Your comment</label>
+                        <textarea id="comment" rows="6"
+                                  class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none js_recipe_comment"
+                                  placeholder="Écrire votre commentaire..."
+                                  data-recipe="{{ recipe.id }}" required></textarea>
+                        <small class="text-alert-error js_recipe_comment_error"></small>
+                    </div>
+                    <div class="">
+                        {{ component('Button', {type: 'button', action: 'write', style: 'primary', content: 'Ajouter votre commentaire', route: path('app_security_login'), jsClass: 'js_recipe_add_comment'}) }}
+                    </div>
+
+                </div>
+            {% else %}
+                <div class="my-5 max-w-lg">
+                    {{ component('Button', {type: 'link', action: 'log-in', style: 'primary', content: 'Se connecter pour commenter', route: path('app_security_login')}) }}
+                </div>
+            {% endif %}
+            {% for comment in recipe.recipesComments %}
+                {% if comment.enabled %}
+                    <article class="w-full max-w-lg mb-6">
+                        <footer class="flex justify-between items-center mb-2">
+                            <div class="flex items-center">
+                                <p class="inline-flex items-center text-gray-900 font-semibold">
+                                    <div class="relative inline-flex items-center justify-center w-7 h-7 md:w-8 md:h-8 me-2 overflow-hidden bg-primary-600 rounded-full">
+                                        <span class="text-gray-50">{{ comment.user.firstname|first }}{{ comment.user.lastname|first }}</span>
+                                    </div>
+                                    <span class="me-2">{{ comment.user }}</span>
+                                </p>
+                                <p class="text-gray-600">
+                                    {{ comment.createdAt|date('d/m/Y H:i') }}
+                                </p>
+                            </div>
+                        </footer>
+                        <p class="text-justify text-gray-500">{{ comment.comment|nl2br }}</p>
+                    </article>
+                {% endif %}
+            {% endfor %}
         </div>
 
     </div>

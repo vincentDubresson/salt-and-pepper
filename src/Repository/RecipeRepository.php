@@ -20,6 +20,17 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
+    public function findOneById(int $id): mixed
+    {
+        return $this
+            ->getActiveOptimisedQb()
+            ->andWhere('e.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     public function getRandomRecipe(): mixed
     {
         return $this
@@ -32,9 +43,6 @@ class RecipeRepository extends ServiceEntityRepository
 
     private function getOptimisedQb(): QueryBuilder
     {
-        // Todo : Ajouter Commentaires
-        // Todo : Ajouter Likes
-
         return $this
             ->createQueryBuilder('e')
             ->addSelect(
@@ -45,11 +53,13 @@ class RecipeRepository extends ServiceEntityRepository
                 'c',
                 'u',
                 'rin',
-                'rins',
+                'rini',
                 'rinu',
                 'rs',
                 'rim',
-                'ruf'
+                'ruf',
+                'rc',
+                'rcu'
             )
             ->innerJoin('e.subcategory', 'sc')
             ->innerJoin('sc.category', 'scc')
@@ -58,13 +68,16 @@ class RecipeRepository extends ServiceEntityRepository
             ->innerJoin('e.cost', 'c')
             ->innerJoin('e.user', 'u')
             ->innerJoin('e.recipesIngredients', 'rin')
-            ->innerJoin('rin.ingredient', 'rins')
+            ->innerJoin('rin.ingredient', 'rini')
             ->leftJoin('rin.unit', 'rinu')
             ->innerJoin('e.recipeSteps', 'rs')
             ->innerJoin('e.recipeImages', 'rim')
             ->leftJoin('e.recipeUserFavorites', 'ruf')
+            ->leftJoin('e.recipesComments', 'rc')
+            ->innerJoin('rc.user', 'rcu')
             ->addOrderBy('rin.sort', 'ASC')
             ->addOrderBy('rs.step', 'ASC')
+            ->addOrderBy('rc.createdAt', 'ASC')
         ;
     }
 }

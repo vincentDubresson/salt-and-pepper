@@ -12,6 +12,7 @@ class Button
     public string $style;
     public string $content;
     public ?string $route = null;
+    public ?string $jsClass = null;
 
     public function getIcon(): string
     {
@@ -23,6 +24,7 @@ class Button
             'send' => 'lucide:send',
             'update' => 'radix-icons:update',
             'log-out' => 'lucide:log-out',
+            'write' => 'lucide:pen-line',
             default => 'lucide:circle',
         };
     }
