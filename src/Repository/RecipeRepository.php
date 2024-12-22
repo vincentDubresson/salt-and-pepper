@@ -35,10 +35,11 @@ class RecipeRepository extends ServiceEntityRepository
     {
         return $this
             ->getActiveOptimisedQb()
-            ->addOrderBy('RAND()')
+            ->addSelect('RAND() AS HIDDEN rand')
+            ->orderBy('rand')
+            ->setMaxResults(1)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
     }
 
     private function getOptimisedQb(): QueryBuilder

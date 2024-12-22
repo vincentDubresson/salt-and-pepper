@@ -48,7 +48,8 @@ class RecipeAdmin extends AbstractAdmin
         }
 
         $object
-            ->setUpdatedAt(new \DateTime('now'));
+            ->setUpdatedAt(new \DateTime('now'))
+        ;
     }
 
     protected function prePersist(object $object): void
