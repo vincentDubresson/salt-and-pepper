@@ -7,6 +7,7 @@ use App\Entity\RecipeUserFavorites;
 use App\Entity\User;
 use App\Repository\RecipeRepository;
 use App\Repository\RecipeUserFavoritesRepository;
+use App\Service\RecipeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,10 +24,12 @@ class RecipeController extends AbstractController
     #[IsGranted(new Expression('is_granted("PUBLIC_ACCESS")'))]
     public function random(
         RecipeRepository $recipeRepository,
+        RecipeService $recipeService,
     ): Response {
+        /** @var Recipe $randomRecipe */
         $randomRecipe = $recipeRepository->getRandomRecipe();
 
-        // Todo: BreadCrumb
+        $recipeService->incrementViews($randomRecipe);
 
         return $this->render('recipe/recipe.html.twig', ['recipe' => $randomRecipe]);
     }

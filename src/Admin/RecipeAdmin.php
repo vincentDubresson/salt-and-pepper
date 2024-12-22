@@ -303,6 +303,10 @@ class RecipeAdmin extends AbstractAdmin
                 'associated_property' => 'id',
                 'template' => 'admin/recipe/list/row_cost.html.twig',
             ])
+            ->add('views', FieldDescriptionInterface::TYPE_STRING, [
+                'label' => 'common.views',
+                'template' => 'admin/recipe/list/count_recipe_user_favorites.html.twig',
+            ])
             ->add('countRecipeUserFavorites', FieldDescriptionInterface::TYPE_STRING, [
                 'label' => 'common.recipe_user_favorites',
                 'template' => 'admin/recipe/list/count_recipe_user_favorites.html.twig',
