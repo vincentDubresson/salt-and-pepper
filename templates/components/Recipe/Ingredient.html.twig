@@ -3,7 +3,7 @@
         <div class="flex justify-center items-center gap-5">
             <twig:ux:icon name="lucide:minus" class="js_recipe_ingredient_minus_icon w-5 h-5 mx-1 text-primary-600 cursor-pointer" />
             <p>
-                <span class="js_recipe_ingredient_serving_number">{{ servingNumber }}</span> personne<span class="js_recipe_ingredient_plural">{% if servingNumber > 1 %}s{% endif %}</span>
+                <span class="js_recipe_ingredient_serving_number" data-serving-number="{{ servingNumber }}">{{ servingNumber }}</span> personne<span class="js_recipe_ingredient_plural">{% if servingNumber > 1 %}s{% endif %}</span>
             </p>
             <twig:ux:icon name="lucide:plus" class="js_recipe_ingredient_plus_icon w-5 h-5 mx-1 text-primary-600 cursor-pointer" />
         </div>
@@ -11,7 +11,7 @@
     {% for ingredient in recipeIngredients %}
         <p class="flex gap-1 js_recipe_ingredient_row" data-quantity="{{ ingredient.quantity }}" data-unit="{{ ingredient.unit.abbreviation ?? '' }}" data-pluralizable="{{ ingredient.unit.pluralizable ?? false }}">
             <twig:ux:icon name="lucide:dot" class="w-5 h-5 mx-1 text-primary-600" />
-            <span class="font-semibold">{{ ingredient.ingredient.label }} :</span>
+            <span class="font-semibold">{{ ingredient.ingredient.label|capitalize }} :</span>
             <span class="js_recipe_ingredient_quantity">{{ ingredient.quantity }}</span>
             {% if ingredient.unit is defined and ingredient.unit is not empty %}
                 <span class="js_recipe_ingredient_unit">{{ ingredient.unit.abbreviation }}</span>
