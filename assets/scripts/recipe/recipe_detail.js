@@ -8,16 +8,25 @@ function updatePlural(plural, number) {
 function updateIngredientQuantities(ingredientRows, servingNumber, baseNumber) {
     ingredientRows.each(function () {
         const $row = $(this);
-        const baseQuantity = parseFloat($row.data('quantity')); // Quantité de base depuis data-quantity
-        const unit = $row.data('unit'); // Récupérer l'unité depuis l'attribut data-unit
-        const pluralizableUnit = $row.data('pluralizable');
-        console.log(servingNumber, baseNumber, (servingNumber === baseNumber))
-        const newQuantity = (servingNumber === baseNumber) ? baseQuantity : (baseQuantity * (servingNumber / baseNumber)).toFixed(1); // Mise à jour proportionnelle et arrondi supérieur
-        $row.find('.js_recipe_ingredient_quantity').text(newQuantity); // Mise à jour dans le DOM
 
-        if (unit && pluralizableUnit) {
+        const baseQuantity = parseFloat($row.data('quantity'));
+
+        const newQuantityRaw = baseQuantity * (servingNumber / baseNumber);
+
+        const newQuantity = Number.isInteger(newQuantityRaw) ? newQuantityRaw : parseFloat(newQuantityRaw.toFixed(1));
+
+        $row.find('.js_recipe_ingredient_quantity').text(newQuantity);
+
+        const unit = $row.data('unit');
+        const pluralizableUnit = $row.data('pluralizable');
+
+        if (unit) {
             const unitElement = $row.find('.js_recipe_ingredient_unit');
-            unitElement.text(newQuantity > 1 ? unit + 's' : unit);
+            if (pluralizableUnit) {
+                unitElement.text(newQuantity > 1 ? unit + 's' : unit);
+            } else {
+                unitElement.text(unit);
+            }
         }
     });
 }
@@ -81,7 +90,7 @@ $(document).ready(() => {
      * Gestion des quantités
      */
     const servingNumber = $('.js_recipe_ingredient_serving_number');
-    const baseNumber = parseInt(servingNumber.text(), 10);
+    const baseNumber = parseInt(servingNumber.data('serving-number'), 10);
     const plural = $('.js_recipe_ingredient_plural');
     const ingredientRows = $('.js_recipe_ingredient_row');
 
@@ -97,7 +106,7 @@ $(document).ready(() => {
 
     $('.js_recipe_ingredient_minus_icon').on('click', function () {
         let currentNumber = parseInt(servingNumber.text(), 10);
-        const baseNumber = parseInt(servingNumber.text(), 10);
+
         if (currentNumber > 1) {
             // eslint-disable-next-line
             servingNumber.text(--currentNumber);

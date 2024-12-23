@@ -39,7 +39,8 @@ class RecipeRepository extends ServiceEntityRepository
             ->orderBy('rand')
             ->setMaxResults(1)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     private function getOptimisedQb(): QueryBuilder
