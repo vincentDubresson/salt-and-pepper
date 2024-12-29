@@ -23,6 +23,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
  */
 class RecipesCommentsAdmin extends AbstractAdmin
 {
+    protected function preValidate(object $object): void
+    {
+        if (!$object instanceof RecipesComments) {
+            throw new \InvalidArgumentException('You must have a RecipeComment at this point.');
+        }
+
+        $object
+            ->setUpdatedAt(new \DateTime('now'))
+        ;
+    }
+
     protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
     {
         /* @phpstan-ignore-next-line */

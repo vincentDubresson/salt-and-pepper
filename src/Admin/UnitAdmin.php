@@ -20,6 +20,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  */
 class UnitAdmin extends AbstractAdmin
 {
+    protected function preValidate(object $object): void
+    {
+        if (!$object instanceof Unit) {
+            throw new \InvalidArgumentException('You must have a Unit at this point.');
+        }
+
+        $object
+            ->setUpdatedAt(new \DateTime('now'))
+        ;
+    }
+
     protected function configureDefaultSortValues(array &$sortValues): void
     {
         $sortValues[DatagridInterface::SORT_BY] = 'sort';

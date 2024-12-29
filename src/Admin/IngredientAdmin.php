@@ -18,6 +18,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  */
 class IngredientAdmin extends AbstractAdmin
 {
+    protected function preValidate(object $object): void
+    {
+        if (!$object instanceof Ingredient) {
+            throw new \InvalidArgumentException('You must have an Ingredient at this point.');
+        }
+
+        $object
+            ->setUpdatedAt(new \DateTime('now'))
+        ;
+    }
+
     protected function configureDefaultSortValues(array &$sortValues): void
     {
         $sortValues[DatagridInterface::SORT_BY] = 'label';

@@ -7,6 +7,7 @@ use App\Entity\RecipesIngredients;
 use App\Entity\Unit;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -38,13 +39,22 @@ class RecipesIngredientsAdmin extends AbstractAdmin
                 'autocomplete' => true,
                 'required' => false,
             ])
-            ->add('ingredient', EntityType::class, [
+/*            ->add('ingredient', EntityType::class, [
                 'label' => 'common.ingredient',
                 'class' => Ingredient::class,
                 'placeholder' => 'Choisir un ingrédient',
                 'autocomplete' => true,
                 'constraints' => [new NotNull()],
                 'required' => true,
+            ])*/
+            ->add('ingredient', ModelAutocompleteType::class, [
+                'label' => 'common.ingredient',
+                'placeholder' => 'Choisir un ingredient',
+                'property' => 'label',
+                'minimum_input_length' => 2,
+                'required' => true,
+                'btn_add' => true,
+                'template' => 'admin/recipe/edit/ingredient_model_autocomplete.html.twig',
             ])
             ->add('sort', NumberType::class, [
                 'label' => 'common.sort',

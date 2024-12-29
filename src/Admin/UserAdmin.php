@@ -23,6 +23,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  */
 class UserAdmin extends AbstractAdmin
 {
+    protected function preValidate(object $object): void
+    {
+        if (!$object instanceof User) {
+            throw new \InvalidArgumentException('You must have a User at this point.');
+        }
+
+        $object
+            ->setUpdatedAt(new \DateTime('now'))
+        ;
+    }
+
     protected function configureFormFields(FormMapper $form): void
     {
         /** @var User $user */
