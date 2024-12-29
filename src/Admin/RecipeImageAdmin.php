@@ -19,6 +19,17 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
  */
 class RecipeImageAdmin extends AbstractAdmin
 {
+    protected function preValidate(object $object): void
+    {
+        if (!$object instanceof RecipeImage) {
+            throw new \InvalidArgumentException('You must have a RecipeImage at this point.');
+        }
+
+        $object
+            ->setUpdatedAt(new \DateTime('now'))
+        ;
+    }
+
     protected function configureFormFields(FormMapper $form): void
     {
         $subject = $this->getSubject();

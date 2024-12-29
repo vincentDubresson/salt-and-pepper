@@ -3,6 +3,7 @@
 namespace App\Admin;
 
 use App\Entity\Category;
+use App\Entity\Subcategory;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -18,10 +19,21 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * @extends AbstractAdmin<Category>
+ * @extends AbstractAdmin<Subcategory>
  */
 class SubcategoryAdmin extends AbstractAdmin
 {
+    protected function preValidate(object $object): void
+    {
+        if (!$object instanceof Subcategory) {
+            throw new \InvalidArgumentException('You must have a Subcategory at this point.');
+        }
+
+        $object
+            ->setUpdatedAt(new \DateTime('now'))
+        ;
+    }
+
     protected function configureDefaultSortValues(array &$sortValues): void
     {
         $sortValues[DatagridInterface::SORT_BY] = 'category';

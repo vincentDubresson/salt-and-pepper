@@ -20,6 +20,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  */
 class CategoryAdmin extends AbstractAdmin
 {
+    protected function preValidate(object $object): void
+    {
+        if (!$object instanceof Category) {
+            throw new \InvalidArgumentException('You must have a Category at this point.');
+        }
+
+        $object
+            ->setUpdatedAt(new \DateTime('now'))
+        ;
+    }
+
     protected function configureDefaultSortValues(array &$sortValues): void
     {
         $sortValues[DatagridInterface::SORT_BY] = 'sort';
