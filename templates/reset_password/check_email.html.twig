@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="flex flex-col justify-start items-center w-11/12 sm:w-4/5 lg:w-2/3 max-w-screen-2xl mx-auto mt-10">
-        <h4 class="mb-3">Email envoyé !</h4>
+        {{ component('Includes:Separator', {title: 'Email envoyé'}) }}
         <div class="w-full max-w-lg my-5">
             <p>
                 Si un compte correspondant à votre adresse email existe, un email vient de vous être envoyé contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.

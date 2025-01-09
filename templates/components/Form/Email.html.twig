@@ -7,7 +7,7 @@
         <input
                 type="email"
                 name="{{ data.vars.full_name }}"
-                required="{{ data.vars.required }}"
+                {% if data.vars.required is same as true %}required{% endif %}
                 id="{{ data.vars.id }}"
                 value="{{ data.vars.value }}"
                 class="block w-full ps-10 p-2.5"

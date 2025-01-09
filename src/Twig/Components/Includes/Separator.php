@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Twig\Components\Recipe\Includes;
+namespace App\Twig\Components\Includes;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 

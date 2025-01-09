@@ -80,8 +80,19 @@ input[type='password'] {
     @apply bg-gray-50 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 transition
 }
 
+.sap-component-select {
+    .ts-control {
+        border-color: #D1D5DB !important;
+        @apply flex items-center rounded-md h-[46px] ps-4;
+
+        .item {
+            @apply text-p-sm md:text-p-md lg:text-p-lg xl:text-p-xl;
+        }
+    }
+}
+
 input[type='checkbox'] {
-    @apply accent-primary-500 transition
+    @apply accent-primary-500 transition;
 }
 
 /**

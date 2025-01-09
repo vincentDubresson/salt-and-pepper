@@ -1,0 +1,37 @@
+{% extends 'customer_area/_layout.html.twig' %}
+
+{% block title %}{{ parent() }} Mon compte{% endblock %}
+
+{% block content %}
+    <div class="flex flex-col justify-start items-center w-full mx-auto mt-10">
+
+        {{ component('Includes:Separator', {title: 'Mes informations'}) }}
+
+        {{ form_start(myAccountForm, {'action': path('app_customer_area_my_account'), 'attr': {
+            'class': 'w-full my-5',
+        }}) }}
+        <div class="flex flex-col lg:flex-row lg:gap-5 w-full">
+            <div class="w-full">
+                {{ component('Form/Text', {data: myAccountForm.firstname}) }}
+                {{ component('Form/Text', {data: myAccountForm.lastname}) }}
+                {{ component('Form/Email', {data: myAccountForm.email}) }}
+            </div>
+
+            <div class="w-full">
+                {{ component('Form/Text', {data: myAccountForm.address1}) }}
+                {{ component('Form/Text', {data: myAccountForm.address2}) }}
+                {{ component('Form/Select', {data: myAccountForm.city}) }}
+                {{ component('Form/Select', {data: myAccountForm.country}) }}
+            </div>
+        </div>
+        <div class="flex justify-center mt-5">
+            {{ component('Button', {type: 'button', action: 'update', style: 'primary', content: 'Mettre à jour'}) }}
+        </div>
+
+        {{ form(myAccountForm._token) }}
+        {{ form_end(myAccountForm, {'render_rest': false}) }}
+
+        {{ component('Includes:Separator', {title: 'Modifier mon mot de passe'}) }}
+
+    </div>
+{% endblock %}

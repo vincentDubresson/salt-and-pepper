@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="flex flex-col justify-start w-11/12 sm:w-4/5 lg:w-2/3 max-w-screen-2xl mx-auto mt-20">
+
+        {% set menuItems = [
+            {'label': 'Compte', 'route': 'app_customer_area_my_account'},
+            {'label': 'Recettes', 'route': 'app_customer_area_my_recipes'},
+            {'label': 'Favoris', 'route': 'app_customer_area_my_favorites'},
+            {'label': 'Commentaires', 'route': 'app_customer_area_my_comments'}
+        ] %}
+
+        {{ component('CustomerArea:CustomerAreaMenu', {menuItems: menuItems, currentRoute: app.request.attributes.get('_route')}) }}
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+{% endblock %}

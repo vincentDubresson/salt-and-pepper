@@ -1,0 +1,9 @@
+<div class="flex w-full">
+    {% for item in menuItems %}
+        <a class="flex justify-center items-center w-full h-[50px] px-2 rounded-md text-center
+            {{ this.isActive(item.route) ? 'bg-primary-600 text-white hover:text-white' : 'hover:bg-primary-100' }}"
+           href="{{ path(item.route) }}">
+            {{ item.label }}
+        </a>
+    {% endfor %}
+</div>

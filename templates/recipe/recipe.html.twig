@@ -22,14 +22,14 @@
                     difficultyId: recipe.difficulty.id
                 }) }}
                 <div>
-                    {{ component('Recipe:Includes:Separator', {title: 'Note de l\'auteur'}) }}
+                    {{ component('Includes:Separator', {title: 'Note de l\'auteur'}) }}
                     <p class="text-justify">{{ recipe.description }}</p>
                 </div>
             </div>
         </div>
 
         <div class="flex flex-col w-full">
-            {{ component('Recipe:Includes:Separator', {title: 'Durées en détail'}) }}
+            {{ component('Includes:Separator', {title: 'Durées en détail'}) }}
 
             {{ component('Recipe:Duration', {
                 preparationTime: recipe.preparationTime,
@@ -40,20 +40,20 @@
 
         <div class="flex flex-col xl:flex-row xl:gap-3 w-full">
             <div class="w-full">
-                {{ component('Recipe:Includes:Separator', {title: 'Ingrédients'}) }}
+                {{ component('Includes:Separator', {title: 'Ingrédients'}) }}
                 {{ component('Recipe:Ingredient', {
                     servingNumber: recipe.servingNumber,
                     recipeIngredients: recipe.recipesIngredients
                 }) }}
             </div>
             <div class="w-full">
-                {{ component('Recipe:Includes:Separator', {title: 'Étapes'}) }}
+                {{ component('Includes:Separator', {title: 'Étapes'}) }}
                 {{ component('Recipe:Step', {recipeSteps: recipe.recipeSteps}) }}
             </div>
         </div>
 
         <div class="flex flex-col w-full items-center">
-            {{ component('Recipe:Includes:Separator', {title: 'Commentaires', count: recipe.countRecipesComments}) }}
+            {{ component('Includes:Separator', {title: 'Commentaires', count: recipe.countRecipesComments}) }}
             {% if app.user is not empty %}
                 <div class="w-full max-w-lg my-5">
                     <div class="py-2 px-4 mb-4 bg-gray-50 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 transition ">
