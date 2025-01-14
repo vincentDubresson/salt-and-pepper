@@ -26,11 +26,19 @@ class CustomerAreaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var User $user */
-            $user = $form->getData();
-            $userRepository->update($user);
+            /** @var array<string, string> $formData */
+            $formData = $request->get('account_form');
+            $csrfToken = $formData['_token'];
 
-            $this->addFlash('success', 'Votre compte a été mis à jour.');
+            if ($this->isCsrfTokenValid('my_account_form', $csrfToken)) {
+                /** @var User $user */
+                $user = $form->getData();
+                $userRepository->update($user, true);
+
+                $this->addFlash('success', 'Votre compte a été mis à jour.');
+            } else {
+                throw $this->createAccessDeniedException('Accès refusé.');
+            }
         }
 
         return $this->render('customer_area/my_account.html.twig', [
